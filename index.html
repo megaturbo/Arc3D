@@ -32,7 +32,7 @@
 
 		<script src="js/three.min.js"></script>
 		<script src="js/loaders/OBJLoader.js"></script>
-		<script src="js/controls/TrackballControls.js"></script>
+		<script src="js/controls/FlyControls.js"></script>
 		<script src="js/Detector.js"></script>
 		<script src="js/libs/stats.min.js"></script>
 
@@ -46,6 +46,8 @@
 
             var cross;
 
+			var clock = new THREE.Clock();
+
 			init();
 			animate();
 
@@ -54,25 +56,42 @@
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
 
-                // Camera
-				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
+                /*	PerspectiveCamera( fov, aspect, near, far )
+				*
+				*	fov — Camera frustum vertical field of view.
+				*	aspect — Camera frustum aspect ratio.
+				*	near — Camera frustum near plane.
+				*	far — Camera frustum far plane.
+				*/
+
+				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 2000 );
 				camera.position.z = 250;
 
                 // Controls
-				controls = new THREE.TrackballControls( camera );
-				controls.rotateSpeed = 1.0;
-				controls.zoomSpeed = 1.2;
-				controls.panSpeed = 0.8;
+				// controls = new THREE.TrackballControls( camera );
+				// controls.rotateSpeed = 1.0;
+				// controls.zoomSpeed = 1.2;
+				// controls.panSpeed = 0.8;
+				//
+				// controls.noZoom = false;
+				// controls.noPan = false;
+				//
+				// controls.staticMoving = true;
+				// controls.dynamicDampingFactor = 0.3;
+				//
+				// controls.keys = [ 65, 83, 68 ];
+				//
+				// controls.addEventListener( 'change', render );
 
-				controls.noZoom = false;
-				controls.noPan = false;
 
-				controls.staticMoving = true;
-				controls.dynamicDampingFactor = 0.3;
+				controls = new THREE.FlyControls( camera );
 
-				controls.keys = [ 65, 83, 68 ];
+				controls.movementSpeed = 1000;
+				controls.domElement = container;
+				controls.rollSpeed = Math.PI / 24;
+				controls.autoForward = false;
+				controls.dragToLook = true;
 
-				controls.addEventListener( 'change', render );
 
 				// scene
 
@@ -118,9 +137,9 @@
 				// model
 
 				var loader = new THREE.OBJLoader( manager );
-				loader.load( 'models/PalmTrees.obj', function ( object ) {
+				loader.load( 'models/he-arc_v_1.obj', function ( building ) {
 
-					object.traverse( function ( child ) {
+					building.traverse( function ( child ) {
 
 						if ( child instanceof THREE.Mesh ) {
 
@@ -130,8 +149,7 @@
 
 					} );
 
-					object.position.y = - 95;
-					scene.add( object );
+					scene.add( building );
 
 				}, onProgress, onError );
 
@@ -160,9 +178,6 @@
 				camera.updateProjectionMatrix();
 
 				renderer.setSize( window.innerWidth, window.innerHeight );
-
-				controls.handleResize();
-                render();
 			}
 
 			//
@@ -170,13 +185,20 @@
 			function animate() {
 
 				requestAnimationFrame( animate );
-				controls.update();
 
+                render();
+				stats.update();
 			}
 
 			function render() {
+				var delta = clock.getDelta();
+
+				var dBuilding = camera.position.length();
+
+				controls.movementSpeed = dBuilding;
+				controls.update( delta );
+
 				renderer.render( scene, camera );
-                stats.update();
 			}
 
 		</script>
