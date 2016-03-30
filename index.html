@@ -1,207 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>three.js webgl - loaders - OBJ loader</title>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-		<style>
-			body {
-				font-family: Monospace;
-				background-color: #000;
-				color: #fff;
-				margin: 0px;
-				overflow: hidden;
-			}
-			#info {
-				color: #fff;
-				position: absolute;
-				top: 10px;
-				width: 100%;
-				text-align: center;
-				z-index: 100;
-				display:block;
-			}
-			#info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
-		</style>
-	</head>
+<head>
+	<title>three.js webgl - loaders - OBJ loader</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+	<style>
+	body {
+		font-family: Monospace;
+		background-color: #000;
+		color: #fff;
+		margin: 0px;
+		overflow: hidden;
+	}
+	#info {
+		color: #fff;
+		position: absolute;
+		top: 10px;
+		width: 100%;
+		text-align: center;
+		z-index: 100;
+		display:block;
+	}
+	#info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
+	</style>
+</head>
 
-	<body>
-		<div id="info">
+<body>
+	<div id="info">
 		<a href="http://threejs.org" target="_blank">three.js</a> - OBJLoader test
-		</div>
+	</div>
 
-		<script src="js/three.min.js"></script>
-		<script src="js/loaders/OBJLoader.js"></script>
-		<script src="js/controls/FlyControls.js"></script>
-		<script src="js/Detector.js"></script>
-		<script src="js/libs/stats.min.js"></script>
+	<script src="js/three.min.js"></script>
+	<script src="js/loaders/OBJLoader.js"></script>
+	<script src="js/controls/FlyControls.js"></script>
+	<script src="js/Detector.js"></script>
+	<script src="js/libs/stats.min.js"></script>
 
-		<script>
+	<script>
 
-			if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+	if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
-			var container, stats;
+	var container, stats;
 
-			var camera, controls, scene, renderer;
+	var camera, controls, scene, renderer;
 
-            var cross;
+	var cross;
 
-			var clock = new THREE.Clock();
+	var clock = new THREE.Clock();
 
-			init();
-			animate();
+	init();
+	animate();
 
-			function init() {
-                // Create container
-				container = document.createElement( 'div' );
-				document.body.appendChild( container );
+	function init() {
+		// Create container
+		container = document.createElement( 'div' );
+		document.body.appendChild( container );
+		document.onkeydown = checkKey;
 
-                /*	PerspectiveCamera( fov, aspect, near, far )
-				*
-				*	fov — Camera frustum vertical field of view.
-				*	aspect — Camera frustum aspect ratio.
-				*	near — Camera frustum near plane.
-				*	far — Camera frustum far plane.
-				*/
+		/*	PerspectiveCamera( fov, aspect, near, far )
+		*
+		*	fov — Camera frustum vertical field of view.
+		*	aspect — Camera frustum aspect ratio.
+		*	near — Camera frustum near plane.
+		*	far — Camera frustum far plane.
+		*/
+		camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 2000 );
+		camera.position.z = 0;
 
-				camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 2000 );
-				camera.position.z = 250;
-
-                // Controls
-				// controls = new THREE.TrackballControls( camera );
-				// controls.rotateSpeed = 1.0;
-				// controls.zoomSpeed = 1.2;
-				// controls.panSpeed = 0.8;
-				//
-				// controls.noZoom = false;
-				// controls.noPan = false;
-				//
-				// controls.staticMoving = true;
-				// controls.dynamicDampingFactor = 0.3;
-				//
-				// controls.keys = [ 65, 83, 68 ];
-				//
-				// controls.addEventListener( 'change', render );
+		// Controls
+		controls = new THREE.FlyControls( camera );
+		controls.movementSpeed = 1;
+		controls.domElement = container;
+		controls.rollSpeed = Math.PI / 24;
+		controls.autoForward = false;
+		controls.dragToLook = true;
 
 
-				controls = new THREE.FlyControls( camera );
+		// scene
+		scene = new THREE.Scene();
 
-				controls.movementSpeed = 1000;
-				controls.domElement = container;
-				controls.rollSpeed = Math.PI / 24;
-				controls.autoForward = false;
-				controls.dragToLook = true;
+		var ambient = new THREE.AmbientLight( 0x101030 );
+		scene.add( ambient );
 
+		var directionalLight = new THREE.DirectionalLight( 0xffeedd );
+		directionalLight.position.set( 0, 0, 1 );
+		scene.add( directionalLight );
 
-				// scene
+		// texture
 
-				scene = new THREE.Scene();
+		var manager = new THREE.LoadingManager();
+		manager.onProgress = function ( item, loaded, total ) {
 
-				var ambient = new THREE.AmbientLight( 0x101030 );
-				scene.add( ambient );
+			console.log( item, loaded, total );
 
-				var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-				directionalLight.position.set( 0, 0, 1 );
-				scene.add( directionalLight );
+		};
 
-				// texture
+		var texture = new THREE.Texture();
 
-				var manager = new THREE.LoadingManager();
-				manager.onProgress = function ( item, loaded, total ) {
-
-					console.log( item, loaded, total );
-
-				};
-
-				var texture = new THREE.Texture();
-
-				var onProgress = function ( xhr ) {
-					if ( xhr.lengthComputable ) {
-						var percentComplete = xhr.loaded / xhr.total * 100;
-						console.log( Math.round(percentComplete, 2) + '% downloaded' );
-					}
-				};
-
-				var onError = function ( xhr ) {
-				};
-
-
-				var loader = new THREE.ImageLoader( manager );
-				loader.load( 'models/textures/mur-orange.png', function ( image ) {
-
-					texture.image = image;
-					texture.needsUpdate = true;
-
-				} );
-
-				// model
-
-				var loader = new THREE.OBJLoader( manager );
-				loader.load( 'models/he-arc_v_1.obj', function ( building ) {
-
-					building.traverse( function ( child ) {
-
-						if ( child instanceof THREE.Mesh ) {
-
-							child.material.map = texture;
-
-						}
-
-					} );
-
-					scene.add( building );
-
-				}, onProgress, onError );
-
-				// renderer
-
-				renderer = new THREE.WebGLRenderer();
-				renderer.setPixelRatio( window.devicePixelRatio );
-				renderer.setSize( window.innerWidth, window.innerHeight );
-				container.appendChild( renderer.domElement );
-
-				stats = new Stats();
-				stats.domElement.style.position = 'absolute';
-				stats.domElement.style.top = '0px';
-				stats.domElement.style.zIndex = 100;
-				container.appendChild( stats.domElement );
-
-                //
-				window.addEventListener( 'resize', onWindowResize, false );
-
-                render();
+		var onProgress = function ( xhr ) {
+			if ( xhr.lengthComputable ) {
+				var percentComplete = xhr.loaded / xhr.total * 100;
+				console.log( Math.round(percentComplete, 2) + '% downloaded' );
 			}
+		};
 
-			function onWindowResize() {
+		var onError = function ( xhr ) {
+		};
 
-				camera.aspect = window.innerWidth / window.innerHeight;
-				camera.updateProjectionMatrix();
 
-				renderer.setSize( window.innerWidth, window.innerHeight );
-			}
+		var loader = new THREE.ImageLoader( manager );
+		loader.load( 'models/textures/mur-orange.png', function ( image ) {
 
-			//
+			texture.image = image;
+			texture.needsUpdate = true;
 
-			function animate() {
+		} );
 
-				requestAnimationFrame( animate );
+		// model
 
-                render();
-				stats.update();
-			}
+		var loader = new THREE.OBJLoader( manager );
+		loader.load( 'models/he-arc_v_1.obj', function ( building ) {
 
-			function render() {
-				var delta = clock.getDelta();
+			building.traverse( function ( child ) {
 
-				var dBuilding = camera.position.length();
+				if ( child instanceof THREE.Mesh ) {
 
-				controls.movementSpeed = dBuilding;
-				controls.update( delta );
+					child.material.map = texture;
 
-				renderer.render( scene, camera );
-			}
+				}
 
-		</script>
+			} );
 
-	</body>
+			scene.add( building );
+
+		}, onProgress, onError );
+
+		// renderer
+
+		renderer = new THREE.WebGLRenderer();
+		renderer.setPixelRatio( window.devicePixelRatio );
+		renderer.setSize( window.innerWidth, window.innerHeight );
+		container.appendChild( renderer.domElement );
+
+		stats = new Stats();
+		stats.domElement.style.position = 'absolute';
+		stats.domElement.style.top = '0px';
+        stats.domElement.style.zIndex = 100;
+		container.appendChild( stats.domElement );
+
+		//
+		window.addEventListener( 'resize', onWindowResize, false );
+
+		render();
+    }
+
+	function checkKey(e) {
+		var event = window.event ? window.event : e;
+		if(event.keyCode == 32){
+			console.log(camera.position);
+		}
+	}
+
+	function onWindowResize() {
+
+		camera.aspect = window.innerWidth / window.innerHeight;
+		camera.updateProjectionMatrix();
+
+		renderer.setSize( window.innerWidth, window.innerHeight );
+	}
+
+	//
+
+	function animate() {
+
+		requestAnimationFrame( animate );
+
+		render();
+		stats.update();
+	}
+
+	function render() {
+		var delta = clock.getDelta();
+
+		controls.update( delta );
+
+		renderer.render( scene, camera );
+	}
+
+	</script>
+
+</body>
 </html>
