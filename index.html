@@ -32,6 +32,8 @@
 
 	<script src="js/three.min.js"></script>
 	<script src="js/loaders/OBJLoader.js"></script>
+	<script src="js/loaders/MTLLoader.js"></script>
+	<script src="js/loaders/DDSLoader.js"></script>
 	<script src="js/controls/FlyControls.js"></script>
 	<script src="js/Detector.js"></script>
 	<script src="js/libs/stats.min.js"></script>
@@ -69,9 +71,9 @@
 
 		// Controls
 		controls = new THREE.FlyControls( camera );
-		controls.movementSpeed = 1;
+		controls.movementSpeed = 100;
 		controls.domElement = container;
-		controls.rollSpeed = Math.PI / 24;
+		controls.rollSpeed = Math.PI / 12;
 		controls.autoForward = false;
 		controls.dragToLook = true;
 
@@ -79,11 +81,12 @@
 		// scene
 		scene = new THREE.Scene();
 
-		var ambient = new THREE.AmbientLight( 0x101030 );
+		var ambient = new THREE.AmbientLight( 0x404040 );
 		scene.add( ambient );
 
 		var directionalLight = new THREE.DirectionalLight( 0xffeedd );
 		directionalLight.position.set( 0, 0, 1 );
+
 		scene.add( directionalLight );
 
 		// texture
@@ -108,32 +111,20 @@
 		};
 
 
-		var loader = new THREE.ImageLoader( manager );
-		loader.load( 'models/textures/mur-orange.png', function ( image ) {
-
-			texture.image = image;
-			texture.needsUpdate = true;
-
-		} );
-
-		// model
-
-		var loader = new THREE.OBJLoader( manager );
-		loader.load( 'models/he-arc_v_1.obj', function ( building ) {
-
-			building.traverse( function ( child ) {
-
-				if ( child instanceof THREE.Mesh ) {
-
-					child.material.map = texture;
-
-				}
-
-			} );
-
-			scene.add( building );
-
-		}, onProgress, onError );
+		THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+		var mtlLoader = new THREE.MTLLoader();
+		mtlLoader.setBaseUrl( 'models/' );
+		mtlLoader.setPath( 'models/' );
+		mtlLoader.load( 'hearc_0.mtl', function( materials ) {
+			materials.preload();
+			var objLoader = new THREE.OBJLoader();
+			objLoader.setMaterials( materials );
+			objLoader.setPath( 'models/' );
+			objLoader.load( 'hearc_0.obj', function ( object ) {
+				object.position.y = - 95;
+				scene.add( object );
+			}, onProgress, onError );
+		});
 
 		// renderer
 
@@ -145,14 +136,14 @@
 		stats = new Stats();
 		stats.domElement.style.position = 'absolute';
 		stats.domElement.style.top = '0px';
-        stats.domElement.style.zIndex = 100;
+		stats.domElement.style.zIndex = 100;
 		container.appendChild( stats.domElement );
 
 		//
 		window.addEventListener( 'resize', onWindowResize, false );
 
 		render();
-    }
+	}
 
 	function checkKey(e) {
 		var event = window.event ? window.event : e;
