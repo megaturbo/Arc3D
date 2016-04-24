@@ -111,20 +111,33 @@
 		};
 
 
-		THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
-		var mtlLoader = new THREE.MTLLoader();
-		mtlLoader.setBaseUrl( 'models/' );
-		mtlLoader.setPath( 'models/' );
-		mtlLoader.load( 'hearc_0.mtl', function( materials ) {
-			materials.preload();
-			var objLoader = new THREE.OBJLoader();
-			objLoader.setMaterials( materials );
-			objLoader.setPath( 'models/' );
-			objLoader.load( 'hearc_0.obj', function ( object ) {
-				object.position.y = - 95;
-				scene.add( object );
-			}, onProgress, onError );
-		});
+		// THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+		// var mtlLoader = new THREE.MTLLoader();
+		// mtlLoader.setBaseUrl( 'models/' );
+		// mtlLoader.setPath( 'models/' );
+		// mtlLoader.load( 'hearc_0.mtl', function( materials ) {
+		// 	materials.preload();
+		// 	// var objLoader = new THREE.OBJLoader();
+		// 	// objLoader.setMaterials( materials );
+		// 	// objLoader.setPath( 'models/' );
+		// 	// objLoader.load( 'hearc_0.obj', function ( object ) {
+		// 	// 	object.position.y = - 95;
+		// 	// 	scene.add( object );
+		// 	// }, onProgress, onError );
+		//
+		// });
+
+
+		var jsonLoader = new THREE.JSONLoader();
+		var createMesh = function( geometry )
+		{
+			var zmesh = new THREE.Mesh( geometry, new THREE.MeshFaceMaterial() );
+			zmesh.position.set( 0, 0, 0 );
+			zmesh.scale.set( 3, 3, 3 );
+			zmesh.overdraw = true;
+			scene.add( zmesh );
+		};
+		jsonLoader.load( "models/hearc_1.js", createMesh );
 
 		// renderer
 
