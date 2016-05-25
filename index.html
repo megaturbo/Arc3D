@@ -37,8 +37,24 @@
 	<script src="js/controls/FlyControls.js"></script>
 	<script src="js/Detector.js"></script>
 	<script src="js/libs/stats.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
 	<script>
+
+    $.getJSON("example.json", function(nodes) {
+        initNodes(nodes);
+    });
+
+    function initNodes(nodes)
+    {
+        nodes.nodes.forEach(function(node){
+            var geometry = new THREE.BoxGeometry( 2, 1, 1 );
+            var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+            var mesh = new THREE.Mesh( geometry, material );
+            mesh.position.set(node.position.x, node.position.y, node.position.z);
+            scene.add(mesh);
+        });
+    }
 
 	if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
@@ -49,6 +65,9 @@
 	var cross;
 
 	var clock = new THREE.Clock();
+
+    var points = [];
+
 
 	init();
 	animate();
@@ -77,28 +96,12 @@
 		controls.autoForward = false;
 		controls.dragToLook = true;
 
-
 		// scene
 		scene = new THREE.Scene();
 
-		var ambient = new THREE.AmbientLight( 0x404040 );
+        // Lights
+		var ambient = new THREE.AmbientLight( 0xffffff );
 		scene.add( ambient );
-
-		var directionalLight = new THREE.DirectionalLight( 0xffeedd );
-		directionalLight.position.set( 0, 0, 1 );
-
-		scene.add( directionalLight );
-
-		// texture
-
-		var manager = new THREE.LoadingManager();
-		manager.onProgress = function ( item, loaded, total ) {
-
-			console.log( item, loaded, total );
-
-		};
-
-		var texture = new THREE.Texture();
 
 		var onProgress = function ( xhr ) {
 			if ( xhr.lengthComputable ) {
@@ -110,8 +113,9 @@
 		var onError = function ( xhr ) {
 		};
 
+
 		var m_name = 'hearc'
-		var m_version = '3'
+		var m_version = 'pathfinding'
 		var m_path = m_name + '_' + m_version
 
 		THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
@@ -132,8 +136,9 @@
 
 
 		// renderer
+        // mtlLoader.needsUpdate = true;
 
-		renderer = new THREE.WebGLRenderer();
+		renderer = new THREE.WebGLRenderer({antialias: true});
 		renderer.setPixelRatio( window.devicePixelRatio );
 		renderer.setSize( window.innerWidth, window.innerHeight );
 		container.appendChild( renderer.domElement );
@@ -150,10 +155,18 @@
 		render();
 	}
 
+    // Used to create points on scene
 	function checkKey(e) {
 		var event = window.event ? window.event : e;
 		if(event.keyCode == 32){
-			console.log(camera.position);
+            // var geometry = new THREE.BoxGeometry( 2, 1, 1 );
+            // var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+            // var mesh = new THREE.Mesh( geometry, material );
+            // mesh.position.set(camera.position.x, camera.position.y, camera.position.z);
+            // var point = {id:points.length, position:{x:camera.position.x, y:camera.position.y, z:camera.position.z}, neighbors:[]};
+            // points.push(point);
+            // console.log(JSON.stringify(points));
+            // scene.add( mesh );
 		}
 	}
 
@@ -164,6 +177,8 @@
 
 		renderer.setSize( window.innerWidth, window.innerHeight );
 	}
+
+
 
 	//
 
