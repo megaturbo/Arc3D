@@ -1,33 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>three.js webgl - loaders - OBJ loader</title>
+	<title>Arc3D</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<style>
-	body {
-		font-family: Monospace;
-		background-color: #000;
-		color: #fff;
-		margin: 0px;
-		overflow: hidden;
-	}
-	#info {
-		color: #fff;
-		position: absolute;
-		top: 10px;
-		width: 100%;
-		text-align: center;
-		z-index: 100;
-		display:block;
-	}
-	#info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
-	</style>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+	<link href="./arc3d.css" rel='stylesheet' type='text/css'>
 </head>
 
 <body>
 	<div id="info">
-		<a href="http://threejs.org" target="_blank">three.js</a> - OBJLoader test
+        Arc3D
 	</div>
 
 	<script src="js/three.min.js"></script>
@@ -41,20 +24,11 @@
 
 	<script>
 
-    $.getJSON("example.json", function(nodes) {
-        initNodes(nodes);
+    // Request JSON Async w/ JQuery
+    $.getJSON("example.json", function(json) {
+        initNodes(json.nodes);
+        astar(0, 12, json.nodes);
     });
-
-    function initNodes(nodes)
-    {
-        nodes.nodes.forEach(function(node){
-            var geometry = new THREE.BoxGeometry( 2, 1, 1 );
-            var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-            var mesh = new THREE.Mesh( geometry, material );
-            mesh.position.set(node.position.x, node.position.y, node.position.z);
-            scene.add(mesh);
-        });
-    }
 
 	if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
@@ -92,7 +66,7 @@
 		controls = new THREE.FlyControls( camera );
 		controls.movementSpeed = 100;
 		controls.domElement = container;
-		controls.rollSpeed = Math.PI / 12;
+		controls.rollSpeed = 1;
 		controls.autoForward = false;
 		controls.dragToLook = true;
 
@@ -155,21 +129,6 @@
 		render();
 	}
 
-    // Used to create points on scene
-	function checkKey(e) {
-		var event = window.event ? window.event : e;
-		if(event.keyCode == 32){
-            // var geometry = new THREE.BoxGeometry( 2, 1, 1 );
-            // var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-            // var mesh = new THREE.Mesh( geometry, material );
-            // mesh.position.set(camera.position.x, camera.position.y, camera.position.z);
-            // var point = {id:points.length, position:{x:camera.position.x, y:camera.position.y, z:camera.position.z}, neighbors:[]};
-            // points.push(point);
-            // console.log(JSON.stringify(points));
-            // scene.add( mesh );
-		}
-	}
-
 	function onWindowResize() {
 
 		camera.aspect = window.innerWidth / window.innerHeight;
@@ -178,24 +137,174 @@
 		renderer.setSize( window.innerWidth, window.innerHeight );
 	}
 
-
-
-	//
-
 	function animate() {
-
 		requestAnimationFrame( animate );
-
 		render();
 		stats.update();
 	}
 
 	function render() {
 		var delta = clock.getDelta();
-
 		controls.update( delta );
-
 		renderer.render( scene, camera );
+	}
+
+
+    //==========================================================================
+    //                           Nodes + Pathfinding
+    //==========================================================================
+
+    function initNodes(nodes)
+    {
+        var box_geometry = new THREE.BoxGeometry(2, 2, 2);
+        var box_material = new THREE.MeshBasicMaterial( {color: 0xffff00 } );
+        var line_material = new THREE.LineBasicMaterial( {color: 0xff0000 } );
+        nodes.forEach(function(node){
+            // Add links
+            var line_geometry = new THREE.Geometry();
+            node.neighbors.forEach(function(neigh){
+                var neighbor = getNode(neigh.id, nodes);
+                // neigh.dist = computeDistance(node, neighbor);    // Use this to compute distance of your .json file
+                line_geometry.vertices.push(
+                    node.position,
+                    neighbor.position
+                )
+            });
+            var line = new THREE.Line(line_geometry, line_material);
+            scene.add(line);
+
+            // Add box
+            var box_mesh = new THREE.Mesh(box_geometry, box_material);
+            box_mesh.position.copy(node.position);
+            scene.add(box_mesh);
+        });
+
+        // console.log(JSON.stringify(nodes));      Can be used to have a .json output
+    }
+
+    function computeDistance(a, b)
+    {
+        return Math.sqrt(Math.pow(Math.abs(a.x - b.x), 2) + Math.pow(Math.abs(a.y - b.y), 2) + Math.pow(Math.abs(a.z - b.z), 2));
+    }
+
+    function getNode(node_id, nodes)
+    {
+        var out_node = null;
+        nodes.forEach(function(node){
+            if(node.id == node_id)
+            {
+                out_node = node;
+            }
+        });
+        return out_node;
+    }
+
+    /*
+     start - start node ID
+     goal - goal node ID
+     nodes - Nodes objects
+    */
+    function astar(start, goal, nodes)
+    {
+        var closedSet = new Set();
+        var openSet = new Set([start]);
+        var cameFrom = new Map();
+        var gScore = new Map();
+        gScore[start] = 0
+        var fScore = new Map();
+        fScore[start] = h(start, goal, nodes);
+
+        while(openSet.size != 0)
+        {
+            // the node in openSet having the lowest fScore[] value
+            console.log(openSet);
+            var min = Infinity;
+            var current = null;
+            for(let nid of openSet)
+            {
+                if(fScore[nid] < min)
+                {
+                    min = fScore[nid];
+                    current = nid;
+                }
+            }
+
+            console.log("Current: " + current);
+            console.log("Goal: " + goal);
+            if(current == goal)
+                return reconstruct_path(cameFrom, current);
+
+            openSet.delete(current);
+            closedSet.add(current);
+            var current_node = getNode(current, nodes);
+            current_node.neighbors.forEach(function(neighbor_obj) {
+                var neighbor = neighbor_obj.id;
+                var neighbor_node = getNode(neighbor, nodes);
+                if(openSet.has(neighbor))
+                    return;
+
+                tentative_gScore = gScore[current] + getDistance(current, neighbor, nodes);
+                if(!openSet.has(neighbor)){
+                    openSet.add(neighbor);
+                } else if (tentative_gScore >= gScore[neighbor]) {
+                    return;
+                }
+
+                cameFrom[neighbor] = current;
+                gScore[neighbor] = tentative_gScore;
+                fScore[neighbor] = gScore[neighbor] + h(neighbor, goal);
+            });
+        }
+        console.error("Pathfinding has failed.");
+        return -1;
+    }
+
+    function reconstruct_path(cameFrom, current)
+    {
+        total_path = [current]
+        while(current in cameFrom.keys())
+        {
+            current = cameFrom[current]
+            total_path.push(current);
+        }
+        console.log("PATH: " + total_path);
+        return total_path;
+    }
+
+    function getMin(set)
+    {
+    }
+
+    function h(start, goal)
+    {
+        return 1;
+    }
+
+    function getDistance(start, goal, nodes)
+    {
+        var dist = 0;
+        s = getNode(start, nodes);
+        s.neighbors.forEach(function(neighbor) {
+            if(neighbor.id = goal)
+                dist = neighbor.dist;
+        });
+        return dist;
+    }
+
+
+    // Used to create points on scene
+	function checkKey(e) {
+		var event = window.event ? window.event : e;
+		if(event.keyCode == 32){
+            var geometry = new THREE.BoxGeometry( 2, 1, 1 );
+            var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+            var mesh = new THREE.Mesh( geometry, material );
+            mesh.position.set(camera.position.x, camera.position.y, camera.position.z);
+            var point = {id:points.length, position:{x:camera.position.x, y:camera.position.y, z:camera.position.z}, neighbors:[]};
+            points.push(point);
+            console.log(JSON.stringify(points));
+            scene.add( mesh );
+		}
 	}
 
 	</script>
