@@ -10,36 +10,36 @@
 
 <body>
 	<div id="info">
-        Arc3D
+        <h1>Arc3D</h1>
+        <button onclick="test()">Test</button>
 	</div>
 
-	<script src="js/three.min.js"></script>
-	<script src="js/loaders/OBJLoader.js"></script>
-	<script src="js/loaders/MTLLoader.js"></script>
-	<script src="js/loaders/DDSLoader.js"></script>
-	<script src="js/controls/FlyControls.js"></script>
-	<script src="js/Detector.js"></script>
-	<script src="js/libs/stats.min.js"></script>
+	<script src="threejs/three.min.js"></script>
+	<script src="threejs/loaders/OBJLoader.js"></script>
+	<script src="threejs/loaders/MTLLoader.js"></script>
+	<script src="threejs/loaders/DDSLoader.js"></script>
+	<script src="threejs/controls/FlyControls.js"></script>
+	<script src="threejs/Detector.js"></script>
+	<script src="threejs/libs/stats.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
 	<script>
 
     // Request JSON Async w/ JQuery
     $.getJSON("example.json", function(json) {
-        initNodes(json.nodes);
-        astar(0, 12, json.nodes);
+        var start = 4;
+        var goal = 15;
+        var nodes = json.nodes;
+        var path = astar(start, goal, nodes);
+        initNodes(nodes, path);
     });
 
 	if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
 	var container, stats;
-
 	var camera, controls, scene, renderer;
-
 	var cross;
-
 	var clock = new THREE.Clock();
-
     var points = [];
 
 
@@ -60,7 +60,12 @@
 		*	far — Camera frustum far plane.
 		*/
 		camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
-		camera.position.z = 0;
+        camera.position.x = 375;
+        camera.position.y = 145;
+		camera.position.z = 417;
+        camera.rotation.x = -2.28;
+        camera.rotation.y = 1.0;
+        camera.rotation.z = 2.32;
 
 		// Controls
 		controls = new THREE.FlyControls( camera );
@@ -154,10 +159,11 @@
     //                           Nodes + Pathfinding
     //==========================================================================
 
-    function initNodes(nodes)
+    function initNodes(nodes, path)
     {
         var box_geometry = new THREE.BoxGeometry(2, 2, 2);
         var box_material = new THREE.MeshBasicMaterial( {color: 0xffff00 } );
+        var box_material_1 = new THREE.MeshBasicMaterial( {color: 0x0000ff } );
         var line_material = new THREE.LineBasicMaterial( {color: 0xff0000 } );
         nodes.forEach(function(node){
             // Add links
@@ -174,7 +180,8 @@
             scene.add(line);
 
             // Add box
-            var box_mesh = new THREE.Mesh(box_geometry, box_material);
+            var material = path.indexOf(node.id) != -1 ? box_material : box_material_1;
+            var box_mesh = new THREE.Mesh(box_geometry, material);
             box_mesh.position.copy(node.position);
             scene.add(box_mesh);
         });
@@ -210,27 +217,30 @@
         var openSet = new Set([start]);
         var cameFrom = new Map();
         var gScore = new Map();
-        gScore[start] = 0
         var fScore = new Map();
-        fScore[start] = h(start, goal, nodes);
+
+        for(var i = 0; i < nodes.length; i++)
+        {
+            gScore.set(i, Infinity);
+            fScore.set(i, Infinity);
+        }
+
+        gScore.set(start, 0);
+        fScore.set(start, h(start, goal, nodes));
 
         while(openSet.size != 0)
         {
-            // the node in openSet having the lowest fScore[] value
-            console.log(openSet);
             var min = Infinity;
             var current = null;
             for(let nid of openSet)
             {
-                if(fScore[nid] < min)
+                if(fScore.get(nid) < min)
                 {
-                    min = fScore[nid];
+                    min = fScore.get(nid);
                     current = nid;
                 }
             }
 
-            console.log("Current: " + current);
-            console.log("Goal: " + goal);
             if(current == goal)
                 return reconstruct_path(cameFrom, current);
 
@@ -240,19 +250,20 @@
             current_node.neighbors.forEach(function(neighbor_obj) {
                 var neighbor = neighbor_obj.id;
                 var neighbor_node = getNode(neighbor, nodes);
-                if(openSet.has(neighbor))
+                if(closedSet.has(neighbor))
                     return;
 
-                tentative_gScore = gScore[current] + getDistance(current, neighbor, nodes);
+                tentative_gScore = gScore.get(current) + getDistance(current, neighbor, nodes);
+
                 if(!openSet.has(neighbor)){
                     openSet.add(neighbor);
-                } else if (tentative_gScore >= gScore[neighbor]) {
+                } else if (tentative_gScore >= gScore.get(neighbor)) {
                     return;
                 }
 
-                cameFrom[neighbor] = current;
-                gScore[neighbor] = tentative_gScore;
-                fScore[neighbor] = gScore[neighbor] + h(neighbor, goal);
+                cameFrom.set(neighbor, current);
+                gScore.set(neighbor, tentative_gScore);
+                fScore.set(neighbor, gScore.get(neighbor) + h(neighbor, goal));
             });
         }
         console.error("Pathfinding has failed.");
@@ -262,12 +273,13 @@
     function reconstruct_path(cameFrom, current)
     {
         total_path = [current]
-        while(current in cameFrom.keys())
+        while(cameFrom.has(current))
         {
-            current = cameFrom[current]
+            current = cameFrom.get(current);
             total_path.push(current);
         }
-        console.log("PATH: " + total_path);
+        console.log("Totalpath (" + total_path.length + "): ");
+        console.log(total_path);
         return total_path;
     }
 
@@ -280,6 +292,10 @@
         return 1;
     }
 
+    /*
+    *   Distance between two points.
+    *   Start and goal have to be neighbors
+    */
     function getDistance(start, goal, nodes)
     {
         var dist = 0;
@@ -292,7 +308,9 @@
     }
 
 
-    // Used to create points on scene
+    /*
+    *   Log some informations on key press
+    */
 	function checkKey(e) {
 		var event = window.event ? window.event : e;
 		if(event.keyCode == 32){
@@ -303,6 +321,7 @@
             var point = {id:points.length, position:{x:camera.position.x, y:camera.position.y, z:camera.position.z}, neighbors:[]};
             points.push(point);
             console.log(JSON.stringify(points));
+            console.log(camera.rotation);
             scene.add( mesh );
 		}
 	}
