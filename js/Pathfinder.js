@@ -106,14 +106,14 @@ Pathfinder.prototype.heuristic = function(node_a_id, node_b_id)
 /**
 * Use A-star algorithm to find a path between two points of the graph.
 *
-* @param {number} node_start_id
-* @param {number} node_goal_id
+* @param {number} start_id : ID of the start Node
+* @param {number} goal_id : ID of the goal Node
 * @return {Array} An array of Node IDs representing the path found.
 */
-Pathfinder.prototype.get_path = function(node_start_id, node_goal_id)
+Pathfinder.prototype.get_path = function(start_id, goal_id)
 {
     var closedSet = new Set();
-    var openSet = new Set([node_start_id]);
+    var openSet = new Set([start_id]);
     var cameFrom = new Map();
     var gScore = new Map();
     var fScore = new Map();
@@ -124,40 +124,65 @@ Pathfinder.prototype.get_path = function(node_start_id, node_goal_id)
         fScore.set(i, Infinity);
     }
 
-    gScore.set(node_start_id, 0);
-    fScore.set(node_start_id, h(node_start_id, node_goal_id));
+    gScore.set(start_id, 0);
+    fScore.set(start_id, this.heuristic(start_id, goal_id));
 
     while(openSet.size !== 0)
     {
         // Magic line: Transform the openSet in an Array, then apply it the
         // Math.min function
-        var current = Math.min.apply(null, Array.from(openSet));
+        var current_id = Math.min.apply(null, Array.from(openSet));
 
-        if(current == goal)
-        return reconstruct_path(cameFrom, current);
+        if(current_id == goal_id)
+        {
+            return this.reconstruct_path(cameFrom, current_id);
+        }
 
-        openSet.delete(current);
-        closedSet.add(current);
-        var current_node = getNode(current, nodes);
-        current_node.neighbors.forEach(function(neighbor_obj) {
-            var neighbor = neighbor_obj.id;
-            var neighbor_node = getNode(neighbor, nodes);
-            if(closedSet.has(neighbor))
-            return;
+        openSet.delete(current_id);
+        closedSet.add(current_id);
+        var neighbors = this.get_node(current_id).neighbors;
 
-            tentative_gScore = gScore.get(current) + getDistance(current, neighbor, nodes);
+        for(i = 0; i < neighbors.length; i++)
+        {
+            var neighbor_id = neighbors[i].id;
+            var neighbor_node = this.get_node(neighbor_id);
 
-            if(!openSet.has(neighbor)){
-                openSet.add(neighbor);
-            } else if (tentative_gScore >= gScore.get(neighbor)) {
-                return;
+            if(closedSet.has(neighbor_id))
+            {
+                continue; // Break the forEach
             }
 
-            cameFrom.set(neighbor, current);
-            gScore.set(neighbor, tentative_gScore);
-            fScore.set(neighbor, gScore.get(neighbor) + h(neighbor, goal, nodes));
-        });
+            tentative_gScore = gScore.get(current_id) + this.get_distance(current_id, neighbor_id);
+
+            if(!openSet.has(neighbor_id)){
+                openSet.add(neighbor_id);
+            } else if (tentative_gScore >= gScore.get(neighbor_id)) {
+                continue;
+            }
+
+            cameFrom.set(neighbor_id, current_id);
+            gScore.set(neighbor_id, tentative_gScore);
+            fScore.set(neighbor_id, gScore.get(neighbor_id) + this.heuristic(neighbor_id, goal_id));
+        }
     }
     console.error("Pathfinding has failed.");
     return -1;
+};
+
+/**
+* Reconstruct the path from the cameFrom map with the last current Node ID
+*
+* @param {Map} cameFrom
+* @param {number} current_id
+* @return {Array} An array of Node IDs representing the path found.
+*/
+Pathfinder.prototype.reconstruct_path = function(cameFrom, current_id)
+{
+    total_path = [current_id];
+    while(cameFrom.has(current_id))
+    {
+        current_id = cameFrom.get(current_id);
+        total_path.push(current_id);
+    }
+    return total_path;
 };
