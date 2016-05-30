@@ -53,6 +53,18 @@ Pathfinder.prototype.get_node = function(node_id)
 };
 
 /**
+* Return a three.js Vector3 of the vector position
+*
+* @param {number} node_id
+* @return {THREE.Vector3} Position vector of the specified ID node.
+*/
+Pathfinder.prototype.get_node_vector = function(node_id)
+{
+    var node_position = this.get_node(node_id).position;
+    return new THREE.Vector3(node_position.x, node_position.y, node_position.z);
+};
+
+/**
 * Get the distance between two neighbors nodes. No computing here, we are only
 * looking for the dist param value.
 *
@@ -140,11 +152,12 @@ Pathfinder.prototype.get_path = function(start_id, goal_id)
 
         openSet.delete(current_id);
         closedSet.add(current_id);
-        var neighbors = this.get_node(current_id).neighbors;
+        var current_node = this.get_node(current_id);
+        var neighbors = current_node.neighbors;
 
         for(i = 0; i < neighbors.length; i++)
         {
-            var neighbor_id = neighbors[i].id;
+            var neighbor_id = neighbors[i];
             var neighbor_node = this.get_node(neighbor_id);
 
             if(closedSet.has(neighbor_id))
@@ -152,7 +165,7 @@ Pathfinder.prototype.get_path = function(start_id, goal_id)
                 continue; // Break the forEach
             }
 
-            tentative_gScore = gScore.get(current_id) + this.get_distance(current_id, neighbor_id);
+            tentative_gScore = gScore.get(current_id) + this.compute_distance(current_node, neighbor_node);
 
             if(!openSet.has(neighbor_id)){
                 openSet.add(neighbor_id);
@@ -166,7 +179,7 @@ Pathfinder.prototype.get_path = function(start_id, goal_id)
         }
     }
     console.error("Pathfinding has failed.");
-    return -1;
+    return [];
 };
 
 /**
@@ -184,5 +197,5 @@ Pathfinder.prototype.reconstruct_path = function(cameFrom, current_id)
         current_id = cameFrom.get(current_id);
         total_path.push(current_id);
     }
-    return total_path;
+    return total_path.reverse();
 };

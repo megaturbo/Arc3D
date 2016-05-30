@@ -16,6 +16,7 @@
         <select id="select_node_b">
         </select>
         <button onclick="updatePathfinding()">GO</button>
+        <button onclick="logCamera()">log camera pos</button>
     </div>
 
     <script src="threejs/three.min.js"></script>
@@ -34,15 +35,21 @@
 
     if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
+
     var nodes, pathfinder, path;
     var lines = [];
     var boxes = [];
+    var points = [];
 
+    var IS_FOLLOWING_PATH = false;
+    var camera_next_node = null;
+    var camera_speed = 10;
+
+
+    // Specific three.js
     var container, stats;
     var camera, controls, scene, renderer;
-    var cross;
     var clock = new THREE.Clock();
-    var points = [];
 
 
     init();
@@ -50,16 +57,34 @@
 
 
     // Request JSON Async w/ JQuery
-    $.getJSON("example.json", function(json) {
+    $.getJSON("js/floor0.json", function(json) {
         nodes = json.nodes;
         pathfinder = new Pathfinder(nodes);
-        var start_id = 4;
+        var start_id = 3;
         var goal_id = 15;
         path = pathfinder.get_path(start_id, goal_id);
-        console.log(nodes);
         initSelect();
         initNodes();
     });
+
+    function startPathfinding()
+    {
+        initNodes();
+        startCamera();
+    }
+
+    function startCamera()
+    {
+        IS_FOLLOWING_PATH = true;
+        var p = pathfinder.get_node(path[0]).position;
+        camera.position.set(p.x, p.y, p.z);
+        camera.lookAt(pathfinder.get_node_vector(path[1]));
+    }
+
+    function moveCamera()
+    {
+        
+    }
 
     function initSelect(){
         var select_node_a = document.getElementById('select_node_a');
@@ -67,8 +92,10 @@
         for(i = 0; i < nodes.length; i++)
         {
             var node = nodes[i];
+            if(!node.name)
+                continue;
             var option_a = document.createElement("option");
-            option_a.text = "" + node.id;
+            option_a.text = "" + node.name;
             option_a.value = node.id;
             var option_b = option_a.cloneNode(true);
             select_node_a.options.add(option_a, node.id);
@@ -83,6 +110,11 @@
         var selected_b = Number(select_node_b.options[select_node_b.selectedIndex].value);
         path = pathfinder.get_path(selected_a, selected_b);
         initNodes();
+        startPathfinding();
+    }
+
+    function logCamera(){
+        console.log("camera.position.set(" + camera.position.x +", " + camera.position.y + ", " + camera.position.z + ");\ncamera.rotation.set(" + camera.rotation.x +", " + camera.rotation.y + ", " + camera.rotation.z + ");");
     }
 
     function init() {
@@ -99,18 +131,18 @@
         *	far — Camera frustum far plane.
         */
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
-        camera.position.x = 375;
-        camera.position.y = 145;
-        camera.position.z = 417;
-        camera.rotation.x = -2.28;
-        camera.rotation.y = 1.0;
-        camera.rotation.z = 2.32;
+        camera.position.set(2829.891419907196, 584.6991348052848, 564.3926258079091);
+        camera.rotation.set(-0.8430689262374866, 0.06926053312375899, 0.012252770046648277);
+
         // scene
         scene = new THREE.Scene();
 
         // Lights
         var ambient = new THREE.AmbientLight( 0xffffff );
         scene.add( ambient );
+        var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+        directionalLight.position.set( 0, 1, 0 );
+        scene.add( directionalLight );
 
         var onProgress = function ( xhr ) {
             if ( xhr.lengthComputable ) {
@@ -124,7 +156,7 @@
 
 
         var m_name = 'hearc';
-        var m_version = 'pathfinding';
+        var m_version = 'floor0';
         var m_path = m_name + '_' + m_version;
 
         THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
@@ -147,7 +179,6 @@
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( window.innerWidth, window.innerHeight );
         container.appendChild( renderer.domElement );
-
 
         // Controls
         controls = new THREE.FlyControls(camera, renderer.domElement);
@@ -186,6 +217,8 @@
 
     function render() {
         var delta = clock.getDelta();
+        if(IS_FOLLOWING_PATH)
+            moveCamera(delta);
         controls.update( delta );
         renderer.render( scene, camera );
     }
@@ -196,11 +229,14 @@
 
     function initNodes()
     {
+        // Clear scene
         while(lines.length !== 0 && boxes.length !== 0)
         {
             scene.remove(lines.pop());
             scene.remove(boxes.pop());
         }
+
+        // Materials and Geometry
         var box_geometry = new THREE.BoxGeometry(2, 2, 2);
         var box_mat_yellow = new THREE.MeshBasicMaterial( {color: 0xffff00 } );
         var box_mat_red = new THREE.MeshBasicMaterial( {color: 0xff0000 } );
@@ -209,14 +245,14 @@
 
         nodes.forEach(function(node){
             // Add links
-            node.neighbors.forEach(function(neigh){
+            node.neighbors.forEach(function(neighbor_id){
                 var line_geometry = new THREE.Geometry();
                 var lin_mat = lin_mat_red;
-                if((path[path.indexOf(node.id) - 1] == neigh.id) || (path[path.indexOf(neigh.id) - 1] == node.id))
+                if((path[path.indexOf(node.id) - 1] == neighbor_id) || (path[path.indexOf(neighbor_id) - 1] == node.id))
                 {
                     lin_mat = lin_mat_yellow;
                 }
-                var neighbor = pathfinder.get_node(neigh.id);
+                var neighbor = pathfinder.get_node(neighbor_id);
                 line_geometry.vertices.push(
                     node.position,
                     neighbor.position
@@ -243,15 +279,17 @@
     function checkKey(e) {
         var event = window.event ? window.event : e;
         if(event.keyCode == 32){
-            var geometry = new THREE.BoxGeometry( 2, 1, 1 );
+            var geometry = new THREE.BoxGeometry( 1, 1, 1 );
             var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
             var mesh = new THREE.Mesh( geometry, material );
             mesh.position.set(camera.position.x, camera.position.y, camera.position.z);
             var point = {id:points.length, position:{x:camera.position.x, y:camera.position.y, z:camera.position.z}, neighbors:[]};
             points.push(point);
+            var object;
             console.log(JSON.stringify(points));
-            console.log(camera.rotation);
+            // console.log(point);
             scene.add( mesh );
+            initNodes();
         }
     }
 
