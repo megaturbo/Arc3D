@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Arc3D</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+    <link href="./arc3d.css" rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+    <div id="info">
+        <h1>Arc3D</h1>
+        <select id="select_node_a">
+        </select>
+        <select id="select_node_b">
+        </select>
+        <button onclick="selectPath()">Find</button>
+        <button onclick="startCamera()">Start</button>
+        <button onclick="stopCamera()">Stop</button>
+        <button onclick="logCamera()">log camera pos</button>
+    </div>
+
+    <script src="threejs/three.min.js"></script>
+    <script src="threejs/loaders/OBJLoader.js"></script>
+    <script src="threejs/loaders/MTLLoader.js"></script>
+    <script src="threejs/loaders/DDSLoader.js"></script>
+    <script src="threejs/controls/FlyControls.js"></script>
+    <script src="threejs/Detector.js"></script>
+    <script src="threejs/libs/stats.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+
+    <!-- My scrips -->
+    <script src="js/Pathfinder.js"></script>
+    <script src="js/CameraTracking.js"></script>
+
+    <script>
+
+    if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
+
+
+    var nodes, pathfinder, camera_tracking;
+    var path = [];
+    var lines = [];
+    var boxes = [];
+    var points = [];
+
+
+    // Specific three.js
+    var container, stats;
+    var camera, controls, scene, renderer;
+    var clock = new THREE.Clock();
+
+
+    init();
+    animate();
+
+
+    // Request JSON Async w/ JQuery
+    $.getJSON("js/floor1.json", function(json) {
+        nodes = json.nodes;
+        initMenu();
+        pathfinder = new Pathfinder(nodes);
+        // var start_id = 3;
+        // var goal_id = 15;
+        // updatePathfinding(start_id, goal_id);
+        initNodes();
+        supercalifragilisticexpialidocious();
+    });
+
+    function supercalifragilisticexpialidocious()
+    {
+        for(var i = 0; i < nodes.length; i++)
+        {
+            var p = nodes[i].position;
+            if(p.z > -93 && p.z < -39)
+                p.z = -70;
+            p.y = 50;
+        }
+        console.log(JSON.stringify(nodes));
+    }
+
+    /**
+    * Initialize the menu with the nodes
+    * Should be called when the nodes are initialized.
+    */
+    function initMenu(){
+        var select_node_a = document.getElementById('select_node_a');
+        var select_node_b = document.getElementById('select_node_b');
+        for(i = 0; i < nodes.length; i++)
+        {
+            var node = nodes[i];
+            if(!node.name)
+            continue;
+            var option_a = document.createElement("option");
+            option_a.text = "" + node.name;
+            option_a.value = node.id;
+            var option_b = option_a.cloneNode(true);
+            select_node_a.options.add(option_a, node.id);
+            select_node_b.options.add(option_b, node.id);
+        }
+    }
+
+    function selectPath(){
+        var select_node_a = document.getElementById('select_node_a');
+        var select_node_b = document.getElementById('select_node_b');
+        var selected_a = Number(select_node_a.options[select_node_a.selectedIndex].value);
+        var selected_b = Number(select_node_b.options[select_node_b.selectedIndex].value);
+
+        updatePathfinding(selected_a, selected_b);
+    }
+
+    /**
+    * Update the pathfinding.
+    *  Get the new path from the Pathfinder and then calls the appropriate methods
+    *
+    * @param{Number} node_start_id: The first node ID
+    * @param{Number} node_goal_id: The goal node ID
+    */
+    function updatePathfinding(node_start_id, node_goal_id) {
+        path = pathfinder.get_path(node_start_id, node_goal_id);
+        initNodes();
+
+        camera_tracking.set_path(pathfinder.get_vectors_from_path(path));
+    }
+
+    function startCamera(){
+        camera_tracking.start();
+    }
+
+    function stopCamera(){
+        camera_tracking.stop();
+    }
+
+    function logCamera(){
+        console.log("camera.position.set(" + camera.position.x +", " + camera.position.y + ", " + camera.position.z + ");\ncamera.rotation.set(" + camera.rotation.x +", " + camera.rotation.y + ", " + camera.rotation.z + ");");
+    }
+
+    function init() {
+        // Create container
+        container = document.createElement( 'div' );
+        document.body.appendChild( container );
+        document.onkeydown = checkKey;
+
+        //	PerspectiveCamera( fov, aspect, near, far )
+        camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
+        camera.position.set(-2959.8781220063543, 956.3013741814179, 525.8852942173165);
+        camera.rotation.set(-1.1361334703124801, 0.1559186774298325, 0.1462304034918526);
+
+        // Camera tracking use for pathfinding animation
+        camera_tracking = new CameraTracking(camera);
+
+        // scene
+        scene = new THREE.Scene();
+
+        // Lights
+        var ambient = new THREE.AmbientLight( 0xffffff );
+        scene.add( ambient );
+        var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+        directionalLight.position.set( 0, 1, 0 );
+        scene.add( directionalLight );
+
+        var onProgress = function ( xhr ) {
+            if ( xhr.lengthComputable ) {
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                console.log( Math.round(percentComplete, 2) + '% downloaded' );
+            }
+        };
+
+        var onError = function ( xhr ) {
+        };
+
+
+        var m_name = 'hearc';
+        var m_version = 'floor1';
+        var m_path = m_name + '_' + m_version;
+
+        THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+        var mtlLoader = new THREE.MTLLoader();
+        mtlLoader.setBaseUrl( 'models/' );
+        mtlLoader.setPath( 'models/' );
+        mtlLoader.load( m_path + '.mtl', function( materials ) {
+            materials.preload();
+            var objLoader = new THREE.OBJLoader();
+            objLoader.setMaterials( materials );
+            objLoader.setPath( 'models/' );
+            objLoader.load( m_path + '.obj', function ( object ) {
+                object.position.y = - 95;
+                scene.add( object );
+            }, onProgress, onError );
+
+        });
+
+        renderer = new THREE.WebGLRenderer({antialias: true});
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        container.appendChild( renderer.domElement );
+
+        // Controls
+        controls = new THREE.FlyControls(camera, renderer.domElement);
+        controls.movementSpeed = 100;
+        controls.domElement = container;
+        controls.rollSpeed = 1;
+        controls.autoForward = false;
+        controls.dragToLook = true;
+
+        // Stats
+        stats = new Stats();
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.top = '0px';
+        stats.domElement.style.zIndex = 100;
+        container.appendChild( stats.domElement );
+
+        window.addEventListener( 'resize', onWindowResize, false );
+        render();
+    }
+
+    function onWindowResize() {
+
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+
+        renderer.setSize( window.innerWidth, window.innerHeight );
+    }
+
+    function animate() {
+        requestAnimationFrame( animate );
+        render();
+        stats.update();
+    }
+
+    function render() {
+        var delta = clock.getDelta();
+        controls.update( delta );
+        renderer.render( scene, camera );
+
+        camera_tracking.update(delta);
+    }
+
+    //==========================================================================
+    //                           Nodes
+    //==========================================================================
+
+    function initNodes()
+    {
+        // Clear scene
+        while(lines.length !== 0 && boxes.length !== 0)
+        {
+            scene.remove(lines.pop());
+            scene.remove(boxes.pop());
+        }
+
+        // Materials and Geometry
+        var box_geometry = new THREE.BoxGeometry(2, 2, 2);
+        var box_mat_yellow = new THREE.MeshBasicMaterial( {color: 0xffff00 } );
+        var box_mat_red = new THREE.MeshBasicMaterial( {color: 0xff0000 } );
+        var lin_mat_yellow = new THREE.LineBasicMaterial( {color: 0xffff00 } );
+        var lin_mat_red = new THREE.LineBasicMaterial( {color: 0xff0000 } );
+
+        nodes.forEach(function(node){
+            // Add links
+            node.neighbors.forEach(function(neighbor_id){
+                var line_geometry = new THREE.Geometry();
+                var lin_mat = lin_mat_red;
+                if((path[path.indexOf(node.id) - 1] == neighbor_id) || (path[path.indexOf(neighbor_id) - 1] == node.id))
+                {
+                    lin_mat = lin_mat_yellow;
+                }
+                var neighbor = pathfinder.get_node(neighbor_id);
+                line_geometry.vertices.push(
+                    node.position,
+                    neighbor.position
+                );
+                var line = new THREE.Line(line_geometry, lin_mat);
+                lines.push(line);
+                scene.add(line);
+            });
+
+            // Add box
+            var box_mat = path.indexOf(node.id) != -1 ? box_mat_yellow : box_mat_red;
+            var box_mesh = new THREE.Mesh(box_geometry, box_mat);
+            box_mesh.position.copy(node.position);
+            boxes.push(box_mesh);
+            scene.add(box_mesh);
+        });
+
+        // console.log(JSON.stringify(nodes));      Can be used to have a .json output
+    }
+
+    /*
+    *   Log some informations on key press
+    */
+    function checkKey(e) {
+        var event = window.event ? window.event : e;
+        if(event.keyCode == 32){
+            var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+            var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
+            var mesh = new THREE.Mesh( geometry, material );
+            mesh.position.set(camera.position.x, camera.position.y, camera.position.z);
+            var point = {id:points.length + 1000, position:{x:camera.position.x, y:camera.position.y, z:camera.position.z}, neighbors:[]};
+            points.push(point);
+            var object;
+            console.log(JSON.stringify(points));
+            // console.log(point);
+            scene.add( mesh );
+            initNodes();
+        }
+    }
+
+    </script>
+
+</body>
+</html>
