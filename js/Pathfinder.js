@@ -33,6 +33,26 @@ function Pathfinder(nodes){
     this.nodes = nodes;
 }
 
+
+/**
+* Give an array of position from an Array of node IDs
+*
+* @param {Array} Array of {Number} which are the nodes IDs
+* @return {Array} Array of THREE.Vector3
+*
+*/
+Pathfinder.prototype.get_vectors_from_path = function(path)
+{
+    vectors = [];
+    for(var i = 0; i < path.length; i++)
+    {
+        var p = this.get_node(path[i]).position;
+        console.log(p);
+        vectors.push(new THREE.Vector3(p.x, p.y, p.z));
+    }
+    return vectors;
+};
+
 /**
 * Get the node with the specified ID
 *
