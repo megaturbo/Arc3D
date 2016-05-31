@@ -37,7 +37,6 @@ CameraTracking.prototype.start = function(speed = CAMERA_DEFAULT_SPEED){
     this.speed = speed;
 };
 
-
 /**
 * Set the camera mode to idle.
 */
