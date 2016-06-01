@@ -18,7 +18,7 @@
         <button onclick="selectPath()">Find</button>
         <button onclick="startCamera()">Start</button>
         <button onclick="stopCamera()">Stop</button>
-        <button onclick="logCamera()">log camera pos</button>
+        <button onclick="saveCameraPosition()">save camera pos</button>
     </div>
 
     <script src="threejs/three.min.js"></script>
@@ -57,7 +57,7 @@
 
 
     // Request JSON Async w/ JQuery
-    $.getJSON("js/floor1.json", function(json) {
+    $.getJSON("js/nodes.json", function(json) {
         nodes = json.nodes;
         initMenu();
         pathfinder = new Pathfinder(nodes);
@@ -131,8 +131,13 @@
         camera_tracking.stop();
     }
 
-    function logCamera(){
-        console.log("camera.position.set(" + camera.position.x +", " + camera.position.y + ", " + camera.position.z + ");\ncamera.rotation.set(" + camera.rotation.x +", " + camera.rotation.y + ", " + camera.rotation.z + ");");
+    function saveCameraPosition(){
+        localStorage.cpx = camera.position.x;
+        localStorage.cpy = camera.position.y;
+        localStorage.cpz = camera.position.z;
+        localStorage.crx = camera.rotation.x;
+        localStorage.cry = camera.rotation.y;
+        localStorage.crz = camera.rotation.z;
     }
 
     function init() {
@@ -143,8 +148,8 @@
 
         //	PerspectiveCamera( fov, aspect, near, far )
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
-        camera.position.set(2682.1332976085155, 847.6829303001241, 366.50463193411383);
-        camera.rotation.set(-1.125531737876652, 0.02297910059056582, 0.0121035588856192);
+        camera.position.set(Number(localStorage.cpx), Number(localStorage.cpy), Number(localStorage.cpz));
+        camera.rotation.set(Number(localStorage.crx), Number(localStorage.cry), Number(localStorage.crz));
 
         // Camera tracking use for pathfinding animation
         camera_tracking = new CameraTracking(camera);
@@ -171,7 +176,7 @@
 
 
         var m_name = 'hearc';
-        var m_version = 'floor1';
+        var m_version = 'floor0';
         var m_path = m_name + '_' + m_version;
 
         THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
