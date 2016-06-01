@@ -65,7 +65,7 @@
         // var goal_id = 15;
         // updatePathfinding(start_id, goal_id);
         initNodes();
-        supercalifragilisticexpialidocious();
+        // supercalifragilisticexpialidocious();
     });
 
     function supercalifragilisticexpialidocious()
@@ -77,7 +77,6 @@
                 p.z = -70;
             p.y = 50;
         }
-        console.log(JSON.stringify(nodes));
     }
 
     /**
@@ -144,8 +143,8 @@
 
         //	PerspectiveCamera( fov, aspect, near, far )
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
-        camera.position.set(-2959.8781220063543, 956.3013741814179, 525.8852942173165);
-        camera.rotation.set(-1.1361334703124801, 0.1559186774298325, 0.1462304034918526);
+        camera.position.set(2682.1332976085155, 847.6829303001241, 366.50463193411383);
+        camera.rotation.set(-1.125531737876652, 0.02297910059056582, 0.0121035588856192);
 
         // Camera tracking use for pathfinding animation
         camera_tracking = new CameraTracking(camera);
