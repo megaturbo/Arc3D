@@ -109,35 +109,35 @@ THREE.FlyControls = function ( object, domElement ) {
 
 	};
 
-	this.mousedown = function( event ) {
-
-		if ( this.domElement !== document ) {
-
-			this.domElement.focus();
-
-		}
-
-		event.preventDefault();
-		event.stopPropagation();
-
-		if ( this.dragToLook ) {
-
-			this.mouseStatus ++;
-
-		} else {
-
-			switch ( event.button ) {
-
-				case 0: this.moveState.forward = 1; break;
-				case 2: this.moveState.back = 1; break;
-
-			}
-
-			this.updateMovementVector();
-
-		}
-
-	};
+	// this.mousedown = function( event ) {
+    //
+	// 	if ( this.domElement !== document ) {
+    //
+	// 		this.domElement.focus();
+    //
+	// 	}
+    //
+	// 	event.preventDefault();
+	// 	event.stopPropagation();
+    //
+	// 	if ( this.dragToLook ) {
+    //
+	// 		this.mouseStatus ++;
+    //
+	// 	} else {
+    //
+	// 		switch ( event.button ) {
+    //
+	// 			case 0: this.moveState.forward = 1; break;
+	// 			case 2: this.moveState.back = 1; break;
+    //
+	// 		}
+    //
+	// 		this.updateMovementVector();
+    //
+	// 	}
+    //
+	// };
 
 	this.mousemove = function( event ) {
 

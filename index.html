@@ -47,6 +47,7 @@
 
 
     // Specific three.js
+	var raycaster, mouse;
     var container, stats;
     var camera, controls, scene, renderer;
     var clock = new THREE.Clock();
@@ -61,21 +62,23 @@
         nodes = json.nodes;
         initMenu();
         pathfinder = new Pathfinder(nodes);
-        var start_id = 1044;
-        var goal_id = 1041;
+        var start_id = 2010;
+        var goal_id = 2011;
         updatePathfinding(start_id, goal_id);
         initNodes();
         // supercalifragilisticexpialidocious();
+        // console.log(JSON.stringify(json));
     });
 
+    /**
+    * DEBUG
+    */
     function supercalifragilisticexpialidocious()
     {
         for(var i = 0; i < nodes.length; i++)
         {
             var p = nodes[i].position;
-            if(p.z > -93 && p.z < -39)
-                p.z = -70;
-            p.y = 50;
+            p.y = 110;
         }
     }
 
@@ -131,6 +134,9 @@
         camera_tracking.stop();
     }
 
+    /**
+    * DEBUG
+    */
     function saveCameraPosition(){
         localStorage.cpx = camera.position.x;
         localStorage.cpy = camera.position.y;
@@ -195,6 +201,10 @@
 
         });
 
+
+		raycaster = new THREE.Raycaster();
+		mouse = new THREE.Vector2();
+
         renderer = new THREE.WebGLRenderer({antialias: true});
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setSize( window.innerWidth, window.innerHeight );
@@ -215,9 +225,30 @@
         stats.domElement.style.zIndex = 100;
         container.appendChild( stats.domElement );
 
+		document.addEventListener( 'mousedown', onDocumentMouseDown, false );
         window.addEventListener( 'resize', onWindowResize, false );
         render();
     }
+
+    /**
+    * DEBUG
+    */
+    function onDocumentMouseDown( event ) {
+
+		event.preventDefault();
+
+		mouse.x = ( event.clientX / renderer.domElement.clientWidth ) * 2 - 1;
+		mouse.y = - ( event.clientY / renderer.domElement.clientHeight ) * 2 + 1;
+
+		raycaster.setFromCamera( mouse, camera );
+
+		var intersects = raycaster.intersectObjects( boxes );
+
+		if ( intersects.length > 0 ) {
+			var node = pathfinder.get_node(Number(intersects[ 0 ].object.name));
+            console.log(node);
+       }
+	}
 
     function onWindowResize() {
 
@@ -284,6 +315,7 @@
             var box_mat = path.indexOf(node.id) != -1 ? box_mat_yellow : box_mat_red;
             var box_mesh = new THREE.Mesh(box_geometry, box_mat);
             box_mesh.position.copy(node.position);
+            box_mesh.name = node.id;
             boxes.push(box_mesh);
             scene.add(box_mesh);
         });
@@ -301,7 +333,7 @@
             var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
             var mesh = new THREE.Mesh( geometry, material );
             mesh.position.set(camera.position.x, camera.position.y, camera.position.z);
-            var point = {id:points.length + 1000, position:{x:camera.position.x, y:camera.position.y, z:camera.position.z}, neighbors:[]};
+            var point = {id:points.length + 2000, position:{x:camera.position.x, y:camera.position.y, z:camera.position.z}, neighbors:[]};
             points.push(point);
             var object;
             console.log(JSON.stringify(points));
