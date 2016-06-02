@@ -12,9 +12,9 @@ newmtl 03___Default
 	Kd 0.7255 0.2392 0.0000
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka maps/mur-beton-orange.png
-	map_Kd maps/mur-beton-orange.png
-	map_Ks maps/mur-spec.png
+	map_Ka maps\mur-beton-orange.png
+	map_Kd maps\mur-beton-orange.png
+	map_Ks maps\mur-spec.png
 
 newmtl wire_214229166
 	Ns 32
@@ -37,5 +37,5 @@ newmtl 01___Default
 	Kd 0.5882 0.5882 0.5882
 	Ks 0.0000 0.0000 0.0000
 	Ke 0.0000 0.0000 0.0000
-	map_Ka maps/couloir-sol.png
-	map_Kd maps/couloir-sol.png
+	map_Ka maps\neuchatel_googlemap.PNG
+	map_Kd maps\neuchatel_googlemap.PNG
