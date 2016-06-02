@@ -61,9 +61,9 @@
         nodes = json.nodes;
         initMenu();
         pathfinder = new Pathfinder(nodes);
-        // var start_id = 3;
-        // var goal_id = 15;
-        // updatePathfinding(start_id, goal_id);
+        var start_id = 1044;
+        var goal_id = 1041;
+        updatePathfinding(start_id, goal_id);
         initNodes();
         // supercalifragilisticexpialidocious();
     });
@@ -92,7 +92,7 @@
             if(!node.name)
             continue;
             var option_a = document.createElement("option");
-            option_a.text = "" + node.name;
+            option_a.text = "" + node.name + " [" + node.id + "]";
             option_a.value = node.id;
             var option_b = option_a.cloneNode(true);
             select_node_a.options.add(option_a, node.id);

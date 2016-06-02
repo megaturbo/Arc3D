@@ -163,7 +163,16 @@ Pathfinder.prototype.get_path = function(start_id, goal_id)
     {
         // Magic line: Transform the openSet in an Array, then apply it the
         // Math.min function
-        var current_id = Math.min.apply(null, Array.from(openSet));
+        var min = Infinity;
+        var current_id;
+        for(let item of openSet)
+        {
+            var score = fScore.get(item);
+            if(score < min){
+                current_id = item;
+                min = score;
+            }
+        }
 
         if(current_id == goal_id)
         {
@@ -179,6 +188,7 @@ Pathfinder.prototype.get_path = function(start_id, goal_id)
         {
             var neighbor_id = neighbors[i];
             var neighbor_node = this.get_node(neighbor_id);
+            console.log("Visiting: " + neighbor_id);
 
             if(closedSet.has(neighbor_id))
             {
