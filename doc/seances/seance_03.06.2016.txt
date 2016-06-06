@@ -1,0 +1,54 @@
+pocket campus - EPFL
+- Wifi localisation
+
+Obj primaires
+ - Vue 1ère personne ou 3è
+ - Balade de navigation /!\ Orientation
+ - Indoor location (outdoor GPS) (Pas perdre trop temps)
+ - Basic ambient light (Phong ?)
+ - 2 modes
+	- Simulation de chemin
+	- Li(v/f)e mode (flèche)
+ - 30 FPS
+ 
+Obj secondaire
+ - Testing connexion 3G/4G
+ - Disabled people ? (Escalier / Ascenceur)
+ - Split de la scène (LoD)
+ - Mobilier
+ - Texture / Eclairage
+ - iOS et Android
+ 
+Optimisation
+ - Chargement des textures à quel moment
+ - 60 FPS
+ 
+ 
+ 
+ Time planning (GANTT ?)
+ Pas hésiter demande de l'aide / Pas reste bloqué
+ 
+MAILS:
+	- 2 fois par semaine ( MER / VEN)
+	  - deployable sur github.io
+	  - Weekly report (Simple)
+	  
+	  
+	  
+First Weekly:
+ - Gantt
+ - Cahier des charges
+ 
+ 
+ Miniscrum ?
+  - Story
+   - Tasks
+   
+TASKS | DONE | ISSUES
+______|______|_______
+
+1st
+_____________________
+
+2nd
+_____________________
