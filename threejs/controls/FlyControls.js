@@ -51,7 +51,7 @@ THREE.FlyControls = function ( object, domElement ) {
 
 		switch ( event.keyCode ) {
 
-			case 16: /* shift */ this.movementSpeedMultiplier = .1; break;
+			case 16: /* shift */ this.movementSpeedMultiplier = 0.1; break;
 
 			case 87: /*W*/ this.moveState.forward = 1; break;
 			case 83: /*S*/ this.moveState.back = 1; break;
@@ -281,7 +281,7 @@ THREE.FlyControls = function ( object, domElement ) {
 	this.domElement.addEventListener( 'contextmenu', contextmenu, false );
 
 	this.domElement.addEventListener( 'mousemove', _mousemove, false );
-	this.domElement.addEventListener( 'mousedown', _mousedown, false );
+	// this.domElement.addEventListener( 'mousedown', _mousedown, false );
 	this.domElement.addEventListener( 'mouseup',   _mouseup, false );
 
 	window.addEventListener( 'keydown', _keydown, false );

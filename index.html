@@ -38,7 +38,12 @@
 
     if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
+    // Model
+    var m_name = 'hearc';
+    var m_version = '4';
+    var m_path = m_name + '_' + m_version;
 
+    // Pathfinding
     var nodes, pathfinder, camera_tracking;
     var path = [];
     var lines = [];
@@ -46,13 +51,14 @@
     var points = [];
 
 
-    // Specific three.js
+    // THREE
 	var raycaster, mouse;
     var container, stats;
     var camera, controls, scene, renderer;
     var clock = new THREE.Clock();
 
 
+    // Start
     init();
     animate();
 
@@ -62,25 +68,11 @@
         nodes = json.nodes;
         initMenu();
         pathfinder = new Pathfinder(nodes);
-        var start_id = 2010;
-        var goal_id = 2011;
+        var start_id = 3000;
+        var goal_id = 3011;
         updatePathfinding(start_id, goal_id);
         initNodes();
-        // supercalifragilisticexpialidocious();
-        // console.log(JSON.stringify(json));
     });
-
-    /**
-    * DEBUG
-    */
-    function supercalifragilisticexpialidocious()
-    {
-        for(var i = 0; i < nodes.length; i++)
-        {
-            var p = nodes[i].position;
-            p.y = 110;
-        }
-    }
 
     /**
     * Initialize the menu with the nodes
@@ -135,7 +127,7 @@
     }
 
     /**
-    * DEBUG
+    * DEBUG thanks js
     */
     function saveCameraPosition(){
         localStorage.cpx = camera.position.x;
@@ -180,11 +172,6 @@
         var onError = function ( xhr ) {
         };
 
-
-        var m_name = 'hearc';
-        var m_version = 'pathfinding';
-        var m_path = m_name + '_' + m_version;
-
         THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
         var mtlLoader = new THREE.MTLLoader();
         mtlLoader.setBaseUrl( 'models/' );
@@ -225,7 +212,7 @@
         stats.domElement.style.zIndex = 100;
         container.appendChild( stats.domElement );
 
-		document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+		// document.addEventListener( 'mousedown', onDocumentMouseDown, false );
         window.addEventListener( 'resize', onWindowResize, false );
         render();
     }
