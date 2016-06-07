@@ -171,23 +171,35 @@
 
         var onError = function ( xhr ) {
         };
-
         THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
-        var mtlLoader = new THREE.MTLLoader();
-        mtlLoader.setBaseUrl( 'models/' );
-        mtlLoader.setPath( 'models/' );
-        mtlLoader.load( m_path + '.mtl', function( materials ) {
-            materials.preload();
-            var objLoader = new THREE.OBJLoader();
-            objLoader.setMaterials( materials );
-            objLoader.setPath( 'models/' );
-            objLoader.load( m_path + '.obj', function ( object ) {
-                object.position.y = - 95;
-                scene.add( object );
-            }, onProgress, onError );
-
-        });
-
+                var mtlLoader = new THREE.MTLLoader();
+                mtlLoader.setBaseUrl( 'models/' );
+                mtlLoader.setPath( 'models/' );
+                mtlLoader.load( m_path + '.mtl', function( materials ) {
+                    materials.preload();
+                    var objLoader = new THREE.OBJLoader();
+                    objLoader.setMaterials( materials );
+                    objLoader.setPath( 'models/' );
+                    objLoader.load( m_path + '.obj', function ( object ) {
+                        object.position.y = - 95;
+                        scene.add( object );
+                    }, onProgress, onError );
+                });
+        // JSON LOADER
+        // var jsonLoader = new THREE.JSONLoader();
+        // models = ["walls_0", "walls_1", "ceiling_0"];
+        // for(var i = 0; i < models.length; i++)
+        // {
+        //     //TODO: Get rid of function within the loop
+        //     jsonLoader.load("models/multipart/" + models[i] + ".js", function(geometry, materials){
+        //         var material = new THREE.MeshLambertMaterial(materials[0]);
+        //         mesh = new THREE.Mesh(geometry, material);
+        //         console.log(material);
+        //         //TODO: Find out why the model is not at its correct position
+        //         mesh.position.y -= 100;
+        //         scene.add(mesh);
+        //     });
+        // }
 
 		raycaster = new THREE.Raycaster();
 		mouse = new THREE.Vector2();
