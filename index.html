@@ -158,9 +158,23 @@
         // Lights
         var ambient = new THREE.AmbientLight( 0xffffff );
         scene.add( ambient );
-        var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-        directionalLight.position.set( 0, 1, 0 );
-        scene.add( directionalLight );
+        var lights = [];
+		lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+		lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+		lights[ 2 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+
+		lights[ 0 ].position.set( 0, 200, 0 );
+		lights[ 1 ].position.set( 100, 200, 100 );
+		lights[ 2 ].position.set( - 100, - 200, - 100 );
+
+		scene.add( lights[ 0 ] );
+		scene.add( lights[ 1 ] );
+		scene.add( lights[ 2 ] );
+
+
+        // var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
+        // directionalLight.position.set( 0, 1, 0 );
+        // scene.add( directionalLight );
 
         var onProgress = function ( xhr ) {
             if ( xhr.lengthComputable ) {
@@ -173,14 +187,14 @@
         };
         // JSON LOADER
         var jsonLoader = new THREE.JSONLoader();
-        models = ["walls_0", "walls_1", "ceiling_0"];
+        models = ["walls_0", "walls_1", "walls_2", "walls_3", "ceiling_0", "ceiling_1", "ceiling_2", "stairs"];
         for(var i = 0; i < models.length; i++)
         {
             //TODO: Get rid of function within the loop
             jsonLoader.load("models/multipart/" + models[i] + ".js", function(geometry, materials){
+                delete materials[0].shininess;
                 var material = new THREE.MeshLambertMaterial(materials[0]);
                 mesh = new THREE.Mesh(geometry, material);
-                console.log(material);
                 //TODO: Find out why the model is not at its correct position
                 mesh.position.y -= 100;
                 scene.add(mesh);
@@ -192,6 +206,7 @@
 
         renderer = new THREE.WebGLRenderer({antialias: true});
         renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setClearColor( 0xcccccc );
         renderer.setSize( window.innerWidth, window.innerHeight );
         container.appendChild( renderer.domElement );
 
