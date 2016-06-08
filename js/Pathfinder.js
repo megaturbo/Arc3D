@@ -47,7 +47,6 @@ Pathfinder.prototype.get_vectors_from_path = function(path)
     for(var i = 0; i < path.length; i++)
     {
         var p = this.get_node(path[i]).position;
-        console.log(p);
         vectors.push(new THREE.Vector3(p.x, p.y, p.z));
     }
     return vectors;
@@ -188,7 +187,6 @@ Pathfinder.prototype.get_path = function(start_id, goal_id)
         {
             var neighbor_id = neighbors[i];
             var neighbor_node = this.get_node(neighbor_id);
-            console.log("Visiting: " + neighbor_id);
 
             if(closedSet.has(neighbor_id))
             {
