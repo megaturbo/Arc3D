@@ -190,16 +190,10 @@
         models = ["walls_0", "walls_1", "walls_2", "walls_3", "ceiling_0", "ceiling_1", "ceiling_2", "stairs"];
         for(var i = 0; i < models.length; i++)
         {
-            //TODO: Get rid of function within the loop
-            jsonLoader.load("models/multipart/" + models[i] + ".js", function(geometry, materials){
-                delete materials[0].shininess;
-                var material = new THREE.MeshLambertMaterial(materials[0]);
-                mesh = new THREE.Mesh(geometry, material);
-                //TODO: Find out why the model is not at its correct position
-                mesh.position.y -= 100;
-                scene.add(mesh);
-            });
+            jsonLoader.load("models/multipart/" + models[i] + ".js", addModelToScene);
         }
+
+
 
 		raycaster = new THREE.Raycaster();
 		mouse = new THREE.Vector2();
@@ -230,8 +224,18 @@
         render();
     }
 
+    function addModelToScene(geometry, materials)
+    {
+        delete materials[0].shininess;
+        var material = new THREE.MeshLambertMaterial(materials[0]);
+        mesh = new THREE.Mesh(geometry, material);
+        //TODO: Find out why the model is not at its correct position
+        mesh.position.y -= 100;
+        scene.add(mesh);
+    }
+
     /**
-    * DEBUG
+    * DEBUG : Log node object when clicked
     */
     function onDocumentMouseDown( event ) {
 
