@@ -71,7 +71,7 @@
         var start_id = 3000;
         var goal_id = 3011;
         updatePathfinding(start_id, goal_id);
-        initNodes();
+        // initNodes();
     });
 
     /**
@@ -113,7 +113,7 @@
     */
     function updatePathfinding(node_start_id, node_goal_id) {
         path = pathfinder.get_path(node_start_id, node_goal_id);
-        initNodes();
+        // initNodes();
 
         var curve_points = pathfinder.get_vectors_from_path(path);
         camera_tracking.set_path(curve_points);
