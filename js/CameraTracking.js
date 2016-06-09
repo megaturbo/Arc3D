@@ -59,7 +59,14 @@ CameraTracking.prototype.update = function(delta){
 
     this.timer += delta;
     var t_camera = (this.speed * this.timer) / this.spline.getLength();
-    var t_look = t_camera + 0.01;
+    var t_look = 0;
+    if(t_camera < 1.0){
+        t_look = t_camera + 0.01;
+    }
+    else {
+        this.stop();
+        return;
+    }
 
     var p_camera = this.spline.getPointAt( t_camera );
     var p_look = this.spline.getPointAt( t_look );
