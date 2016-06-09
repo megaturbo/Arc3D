@@ -48,7 +48,7 @@
     var path = [];
     var lines = [];
     var boxes = [];
-    var points = [];
+    var key_points = [];
 
 
     // THREE
@@ -115,7 +115,8 @@
         path = pathfinder.get_path(node_start_id, node_goal_id);
         initNodes();
 
-        camera_tracking.set_path(pathfinder.get_vectors_from_path(path));
+        var curve_points = pathfinder.get_vectors_from_path(path);
+        camera_tracking.set_path(curve_points);
     }
 
     function startCamera(){
@@ -193,7 +194,6 @@
         models = ["walls_0", "walls_1", "walls_2", "walls_3", "ceiling_0", "ceiling_1", "ceiling_2", "stairs"];
         for(var i = 0; i < models.length; i++)
         {
-            console.log("Loading: " + models[i]);
             jsonLoader.load("models/multipart/" + models[i] + ".js", addModelToScene);
         }
 
@@ -231,7 +231,6 @@
     function addModelToScene(geometry, materials)
     {
         delete materials[0].shininess;
-        console.log(materials);
         var material = new THREE.MeshLambertMaterial(materials[0]);
         mesh = new THREE.Mesh(geometry, material);
         //TODO: Find out why the model is not at its correct position
@@ -342,10 +341,10 @@
             var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
             var mesh = new THREE.Mesh( geometry, material );
             mesh.position.set(camera.position.x, camera.position.y, camera.position.z);
-            var point = {id:points.length + 3000, position:{x:camera.position.x, y:camera.position.y, z:camera.position.z}, neighbors:[]};
-            points.push(point);
+            var point = {id:key_points.length + 3000, position:{x:camera.position.x, y:camera.position.y, z:camera.position.z}, neighbors:[]};
+            key_points.push(point);
             var object;
-            console.log(JSON.stringify(points));
+            console.log(JSON.stringify(key_points));
             // console.log(point);
             scene.add( mesh );
             initNodes();
