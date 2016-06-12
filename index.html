@@ -15,10 +15,10 @@
         </select>
         <select id="select_node_b">
         </select>
-        <button onclick="selectPath()">Find</button>
-        <button onclick="startCamera()">Start</button>
+        <button onclick="selectPath()">GO !</button>
         <button onclick="stopCamera()">Stop</button>
-        <button onclick="saveCameraPosition()">save camera pos</button>
+        <input type="range" value="50" max="200" min="0" step="5" oninput="selectSpeed(this.value)" onchange="selectSpeed(this.value)">
+        <!-- <button onclick="saveCameraPosition()">save camera pos</button> -->
     </div>
 
     <script src="threejs/three.min.js"></script>
@@ -74,6 +74,10 @@
         // initNodes();
     });
 
+    function selectSpeed(new_speed){
+        camera_tracking.set_speed(new_speed);
+    }
+
     /**
     * Initialize the menu with the nodes
     * Should be called when the nodes are initialized.
@@ -102,6 +106,8 @@
         var selected_b = Number(select_node_b.options[select_node_b.selectedIndex].value);
 
         updatePathfinding(selected_a, selected_b);
+
+        camera_tracking.start();
     }
 
     /**
@@ -117,10 +123,6 @@
 
         var curve_points = pathfinder.get_vectors_from_path(path);
         camera_tracking.set_path(curve_points);
-    }
-
-    function startCamera(){
-        camera_tracking.start();
     }
 
     function stopCamera(){

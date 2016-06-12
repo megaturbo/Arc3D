@@ -15,7 +15,6 @@ function CameraTracking(camera){
     this.spline = undefined;
     this.IS_RUNNING = false;
 
-    this.current_id = 0;
     this.speed = CAMERA_DEFAULT_SPEED;
     this.timer = 0.0;
 }
@@ -36,8 +35,6 @@ CameraTracking.prototype.set_path = function(path){
 CameraTracking.prototype.start = function(){
     this.IS_RUNNING = true;
     this.timer = 0.0;
-    this.current_id = 0;
-    this.camera.position.copy(this.path[this.current_id]);
 };
 
 /**
@@ -57,8 +54,8 @@ CameraTracking.prototype.update = function(delta){
     if(!this.IS_RUNNING)
         return;
 
-    this.timer += delta;
-    var t_camera = (this.speed * this.timer) / this.spline.getLength();
+    this.timer += delta * this.speed;
+    var t_camera = this.timer / this.spline.getLength();
     var t_look = 0;
     if(t_camera < 1.0){
         t_look = t_camera + 0.01;
