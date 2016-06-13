@@ -28,6 +28,7 @@
     <script src="threejs/loaders/MTLLoader.js"></script>
     <script src="threejs/loaders/DDSLoader.js"></script>
     <script src="threejs/controls/FlyControls.js"></script>
+    <script src="threejs/controls/DeviceOrientationControls.js"></script>
     <script src="threejs/Detector.js"></script>
     <script src="threejs/libs/stats.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
@@ -225,12 +226,13 @@
         container.appendChild( renderer.domElement );
 
         // Controls
-        controls = new THREE.FlyControls(camera, renderer.domElement);
-        controls.movementSpeed = 100;
-        controls.domElement = container;
-        controls.rollSpeed = 1;
-        controls.autoForward = false;
-        controls.dragToLook = true;
+        // controls = new THREE.FlyControls(camera, renderer.domElement);
+        // controls.movementSpeed = 100;
+        // controls.domElement = container;
+        // controls.rollSpeed = 1;
+        // controls.autoForward = false;
+        // controls.dragToLook = true;
+        controls = new THREE.DeviceOrientationControls( camera , renderer.domElement);
 
         // Stats
         stats = new Stats();
