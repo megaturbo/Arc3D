@@ -49,6 +49,8 @@
     var boxes = [];
     var key_points = [];
 
+    var euler = new THREE.Euler();
+
 
     // THREE
 	var raycaster, mouse;
@@ -86,7 +88,8 @@
       alpha = Math.round(event.alpha);
       beta = Math.round(event.beta);
       gamma = Math.round(event.gamma);
-      console.log(alpha);
+      euler.set( beta, alpha, - gamma, 'YXZ' );
+      camera.quaternion.setFromEuler(euler);
     };
 
     /**
