@@ -35,12 +35,14 @@
     <!-- My scrips -->
     <script src="js/Pathfinder.js"></script>
     <script src="js/CameraTracking.js"></script>
+    <script src="js/Utils.js"></script>
 
     <script>
 
     if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
     // Pathfinding
+    var current_node_id = getUrlParameter('node_id');
     var nodes, pathfinder, camera_tracking;
     var path = [];
     var lines = [];
@@ -68,12 +70,24 @@
         var start_id = 3000;
         var goal_id = 3011;
         updatePathfinding(start_id, goal_id);
+        if(current_node_id !== undefined){
+            console.log("Node id: " + current_node_id);
+            console.log(pathfinder.get_node_vector(current_node_id));
+            camera.position.copy(pathfinder.get_node_vector(current_node_id));
+        }
         // initNodes();
     });
 
     function selectSpeed(new_speed){
         camera_tracking.set_speed(new_speed);
     }
+
+    window.ondeviceorientation = function(event) {
+      alpha = Math.round(event.alpha);
+      beta = Math.round(event.beta);
+      gamma = Math.round(event.gamma);
+      console.log(alpha);
+    };
 
     /**
     * Initialize the menu with the nodes
