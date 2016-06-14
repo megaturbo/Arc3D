@@ -34,7 +34,7 @@
     <script src="threejs/libs/stats.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
-    <!-- My scrips -->
+    <!-- My scripts -->
     <script src="js/Pathfinder.js"></script>
     <script src="js/CameraTracking.js"></script>
     <script src="js/Utils.js"></script>
@@ -86,14 +86,6 @@
     function selectSpeed(new_speed){
         camera_tracking.set_speed(new_speed);
     }
-
-    window.ondeviceorientation = function(event) {
-      alpha = Math.round(event.alpha);
-      beta = Math.round(event.beta);
-      gamma = Math.round(event.gamma);
-      euler.set( beta, alpha, - gamma, 'YXZ' );
-      camera.quaternion.setFromEuler(euler);
-    };
 
     function switchControls(){
         console.log(camera.position);
@@ -261,6 +253,7 @@
 
 		// document.addEventListener( 'mousedown', onDocumentMouseDown, false );
         window.addEventListener( 'resize', onWindowResize, false );
+
         render();
     }
 
