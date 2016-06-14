@@ -19,6 +19,7 @@
         <button onclick="stopCamera()">Stop</button>
         <input type="range" value="50" max="200" min="0" step="5" oninput="selectSpeed(this.value)" onchange="selectSpeed(this.value)">
         <button onclick="geoFindMe()">Find me</button>
+        <button id="control" onclick="switchControls()">FlyControls</button>
         <div id="out"></div>
         <!-- <button onclick="saveCameraPosition()">save camera pos</button> -->
     </div>
@@ -51,7 +52,8 @@
     var key_points = [];
 
     var euler = new THREE.Euler();
-
+    var CONTROL_MODE = { FLY: 0, GYRO: 1};
+    var control_mode = CONTROL_MODE.GYRO;
 
     // THREE
 	var raycaster, mouse;
@@ -92,6 +94,29 @@
       euler.set( beta, alpha, - gamma, 'YXZ' );
       camera.quaternion.setFromEuler(euler);
     };
+
+    function switchControls(){
+        console.log(camera.position);
+
+        switch( control_mode ) {
+            case CONTROL_MODE.FLY:
+                controls = new THREE.DeviceOrientationControls( camera , renderer.domElement);
+                control_mode = CONTROL_MODE.GYRO;
+                break;
+
+            case CONTROL_MODE.GYRO:
+                controls = new THREE.FlyControls(camera, renderer.domElement);
+                controls.movementSpeed = 100;
+                controls.domElement = container;
+                controls.rollSpeed = 1;
+                controls.autoForward = false;
+                controls.dragToLook = true;
+                control_mode = CONTROL_MODE.FLY;
+                break;
+        }
+
+        document.getElementById('control').innerHTML = control_mode;
+    }
 
     /**
     * Initialize the menu with the nodes
@@ -225,14 +250,7 @@
         renderer.setSize( window.innerWidth, window.innerHeight );
         container.appendChild( renderer.domElement );
 
-        // Controls
-        // controls = new THREE.FlyControls(camera, renderer.domElement);
-        // controls.movementSpeed = 100;
-        // controls.domElement = container;
-        // controls.rollSpeed = 1;
-        // controls.autoForward = false;
-        // controls.dragToLook = true;
-        controls = new THREE.DeviceOrientationControls( camera , renderer.domElement);
+        switchControls();
 
         // Stats
         stats = new Stats();
