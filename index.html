@@ -20,8 +20,6 @@
         <input type="range" value="50" max="200" min="0" step="5" oninput="selectSpeed(this.value)" onchange="selectSpeed(this.value)">
         <button onclick="geoFindMe()">Find me</button>
         <button id="control" onclick="ARC3D.switchControls()">Switch Controls</button>
-        <div id="out"></div>
-        <!-- <button onclick="saveCameraPosition()">save camera pos</button> -->
     </div>
 
     <script src="threejs/three.min.js"></script>
@@ -123,19 +121,7 @@
     function stopCamera(){
         cameraTracking.stop();
     }
-
-    /**
-    * DEBUG thanks js
-    */
-    function saveCameraPosition(){
-        localStorage.cpx = camera.position.x;
-        localStorage.cpy = camera.position.y;
-        localStorage.cpz = camera.position.z;
-        localStorage.crx = camera.rotation.x;
-        localStorage.cry = camera.rotation.y;
-        localStorage.crz = camera.rotation.z;
-    }
-
+    
     function init() {
         // Create container
         container = document.createElement( 'div' );
@@ -144,8 +130,6 @@
 
         //	PerspectiveCamera( fov, aspect, near, far )
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
-        // camera.position.set(Number(localStorage.cpx), Number(localStorage.cpy), Number(localStorage.cpz));
-        // camera.rotation.set(Number(localStorage.crx), Number(localStorage.cry), Number(localStorage.crz));
         camera.position.set(518.1343902256439, 179.21829815866715, -204.30850284213201);
         camera.rotation.set(-0.1076350906304018, 1.5321409768616594, 0.07200147984575293);
 
@@ -216,8 +200,17 @@
 
 		// document.addEventListener( 'mousedown', onDocumentMouseDown, false );
         window.addEventListener( 'resize', onWindowResize, false );
+        window.addEventListener('devicemotion', deviceMotionHandler, false);
 
         render();
+    }
+
+    function deviceMotionHandler(eventData) {
+        var info, xyz = "[X, Y, Z]";
+
+        // Grab the acceleration from the results
+        var a = eventData.acceleration;
+        console.log(a);
     }
 
     function addModelToScene(geometry, materials)
