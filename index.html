@@ -88,7 +88,7 @@
     }
 
     function switchControls(){
-        console.log(camera.position);
+        var old_camera = camera.clone();
 
         switch( control_mode ) {
             case CONTROL_MODE.FLY:
@@ -225,7 +225,7 @@
         };
         // JSON LOADER
         var jsonLoader = new THREE.JSONLoader();
-        models = ["walls_0", "walls_1", "walls_2", "walls_3", "ceiling_0", "ceiling_1", "ceiling_2", "stairs"];
+        models = ["walls_0", "walls_1", "walls_2", "walls_3", "ceiling_0", "ceiling_1", "ceiling_2", "stairs", "window_0"];
         for(var i = 0; i < models.length; i++)
         {
             jsonLoader.load("models/multipart/" + models[i] + ".js", addModelToScene);
@@ -260,7 +260,7 @@
     function addModelToScene(geometry, materials)
     {
         delete materials[0].shininess;
-        var material = new THREE.MeshLambertMaterial(materials[0]);
+        var material = new THREE.MeshFaceMaterial(materials);
         mesh = new THREE.Mesh(geometry, material);
         //TODO: Find out why the model is not at its correct position
         mesh.position.y -= 100;
