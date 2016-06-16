@@ -49,6 +49,13 @@
     var boxes = [];
     var key_points = [];
 
+    var user_position = {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0
+    };
+    var last_time;
+
     // THREE
 	var raycaster, mouse;
     var container, stats;
@@ -121,7 +128,7 @@
     function stopCamera(){
         cameraTracking.stop();
     }
-    
+
     function init() {
         // Create container
         container = document.createElement( 'div' );
@@ -200,18 +207,31 @@
 
 		// document.addEventListener( 'mousedown', onDocumentMouseDown, false );
         window.addEventListener( 'resize', onWindowResize, false );
-        window.addEventListener('devicemotion', deviceMotionHandler, false);
 
         render();
     }
 
-    function deviceMotionHandler(eventData) {
-        var info, xyz = "[X, Y, Z]";
-
-        // Grab the acceleration from the results
-        var a = eventData.acceleration;
-        console.log(a);
-    }
+    // function deviceMotionHandler(eventData) {
+    //     if (last_time === undefined){
+    //         last_time = Date.now();
+    //         return;
+    //     }
+    //     var now = Date.now();
+    //     var dt = now - last_time;
+    //     last_time = now;
+    //
+    //     // Grab the acceleration from the results
+    //     var a = eventData.acceleration;
+    //
+    //     if(Math.abs(a.x) > 1.0)
+    //         user_position.x += (1.0/2.0) * a.x * dt;
+    //     if(Math.abs(a.y) > 1.0)
+    //         user_position.y += (1.0/2.0) * a.y * dt;
+    //     if(Math.abs(a.z) > 1.0)
+    //         user_position.z += (1.0/2.0) * a.z * dt;
+    //
+    //     console.log(user_position);
+    // }
 
     function addModelToScene(geometry, materials)
     {
