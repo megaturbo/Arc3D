@@ -41,9 +41,15 @@
 
     if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 
-    // Pathfinding
+    // Check if position is defined in GET paramters
     var current_node_id = ARC3D.getUrlParameter('node_id');
-    var nodes, pathfinder, cameraTracking;
+    if(current_node_id !== undefined) {
+        console.log("current: " + current_node_id);
+        ARC3D.isPositionDefined = true;
+    }
+
+    // nodespathflol
+    var nodes, pathfinder, cameraTracking, spline;
     var path = [];
     var lines = [];
     var boxes = [];
@@ -54,11 +60,11 @@
     var texture_path = 'models/textures/';
 
     // Accelerometer localisation
-    var user_position = {
-        x: 0.0,
-        y: 0.0,
-        z: 0.0
-    };
+    var user_velocity = new THREE.Vector3(0.0, 0.0, 0.0);
+    var user_position = new THREE.Vector3(0.0, 0.0, 0.0);
+    if(!ARC3D.isPositionDefined) user_position.copy(ARC3D.defaultCameraPosition);
+    console.log(user_position);
+
     var last_time;
 
     // THREE
@@ -68,9 +74,6 @@
     var clock = new THREE.Clock();
 
 
-    // Start
-    init();
-    animate();
 
 
     // Request JSON Async w/ JQuery
@@ -78,9 +81,11 @@
         nodes = json.nodes;
         initMenu();
         pathfinder = new ARC3D.Pathfinder(nodes);
-        if(current_node_id !== undefined){
-            camera.position.copy(pathfinder.getNodePosition(current_node_id));
-        }
+
+
+        // Start
+        init();
+        animate();
     });
 
     function selectSpeed(new_speed){
@@ -126,7 +131,15 @@
     */
     function updatePathfinding(node_start_id, node_goal_id) {
         path = pathfinder.getPath(node_start_id, node_goal_id);
-        cameraTracking.setPath(pathfinder.getPathPositions(path));
+        spline = cameraTracking.setPath(pathfinder.getPathPositions(path));
+        console.log(spline.getLength());
+
+        // Create a Tubegeometry from the spline created by the CameraTracking
+        var geometry = new THREE.TubeGeometry(spline, Math.floor(spline.getLength() / 10), 2, 8, false);
+        var material = new THREE.MeshPhongMaterial( {color: 0x4caf50 } );
+        var mesh = new THREE.Mesh(geometry, material);
+        mesh.position.y -= 20;
+        scene.add(mesh);
         cameraTracking.start();
     }
 
@@ -142,8 +155,11 @@
 
         //	PerspectiveCamera( fov, aspect, near, far )
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
-        camera.position.set(518.1343902256439, 179.21829815866715, -204.30850284213201);
-        camera.rotation.set(-0.1076350906304018, 1.5321409768616594, 0.07200147984575293);
+        if(!ARC3D.isPositionDefined){
+            camera.position.copy(ARC3D.defaultCameraPosition);
+        }else{
+            camera.position.copy(pathfinder.getNodePosition(current_node_id));
+        }
 
 
         var t_path = "models/textures/";
@@ -220,33 +236,33 @@
         stats.domElement.style.zIndex = 100;
         container.appendChild( stats.domElement );
 
-		// document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+		document.addEventListener( 'mousedown', onDocumentMouseDown, false );
         window.addEventListener( 'resize', onWindowResize, false );
 
         render();
     }
 
-    // function deviceMotionHandler(eventData) {
-    //     if (last_time === undefined){
-    //         last_time = Date.now();
-    //         return;
-    //     }
-    //     var now = Date.now();
-    //     var dt = now - last_time;
-    //     last_time = now;
-    //
-    //     // Grab the acceleration from the results
-    //     var a = eventData.acceleration;
-    //
-    //     if(Math.abs(a.x) > 1.0)
-    //         user_position.x += (1.0/2.0) * a.x * dt;
-    //     if(Math.abs(a.y) > 1.0)
-    //         user_position.y += (1.0/2.0) * a.y * dt;
-    //     if(Math.abs(a.z) > 1.0)
-    //         user_position.z += (1.0/2.0) * a.z * dt;
-    //
-    //     console.log(user_position);
-    // }
+    function deviceMotionHandler(eventData) {
+        if (last_time === undefined){
+            last_time = Date.now();
+            return;
+        }
+        var now = Date.now();
+        var dt = now - last_time;
+        last_time = now;
+
+        // Grab the acceleration from the results
+        var a = eventData.acceleration;
+
+        if(Math.abs(a.x) > 1.0)
+            user_position.x += (1.0/2.0) * a.x * dt;
+        if(Math.abs(a.y) > 1.0)
+            user_position.y += (1.0/2.0) * a.y * dt;
+        if(Math.abs(a.z) > 1.0)
+            user_position.z += (1.0/2.0) * a.z * dt;
+
+        console.log(user_position);
+    }
 
     function addModelToScene(geometry, materials)
     {
