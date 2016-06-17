@@ -49,8 +49,11 @@
     var boxes = [];
     var key_points = [];
 
+    //TODO: use or note. Window reflection
     var reflectionCube;
+    var texture_path = 'models/textures/';
 
+    // Accelerometer localisation
     var user_position = {
         x: 0.0,
         y: 0.0,
@@ -135,7 +138,7 @@
         // Create container
         container = document.createElement( 'div' );
         document.body.appendChild( container );
-        document.onkeydown = ARC3D.addNodeAtCameraPosition;
+        document.onkeydown = ARC3D.keyEvent;
 
         //	PerspectiveCamera( fov, aspect, near, far )
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
@@ -247,14 +250,6 @@
 
     function addModelToScene(geometry, materials)
     {
-        for(var i = 0; i < materials.length; i++)
-        {
-            var m = materials[i];
-            if(m.name == 'Window_Inside'){
-                materials[i] = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: reflectionCube } );
-            }
-        }
-        console.log(materials);
         var material = new THREE.MultiMaterial(materials);
         mesh = new THREE.Mesh(geometry, material);
         mesh.position.y -= 100;
