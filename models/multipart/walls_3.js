@@ -14,27 +14,25 @@
 },
 
 "materials": [
-{
-"DbgIndex" : 0,
-"DbgName"  : "03 - Default",
-"colorDiffuse"  : [0.7255, 0.2392, 0.0000],
-"colorAmbient"  : [0.7255, 0.2392, 0.0000],
-"colorSpecular"  : [0.9000, 0.9000, 0.9000],
-"transparency"  : 1.0,
-"specularCoef"  : 10.0,
-"mapDiffuse"    : "mur-beton-orange.png",
-"mapSpecular"    : "mur-spec.png",
-"vertexColors" : false
-},
+    {
+    "DbgIndex" : 0,
+    "DbgName"  : "03 - Default",
+    "colorDiffuse"  : [0.7255, 0.2392, 0.0000],
+    "colorSpecular"  : [0.9000, 0.9000, 0.9000],
+    "opacity"  : 1.0,
+    "specularCoef"  : 10.0,
+    "mapDiffuse"    : "mur-beton-orange.png",
+    "mapSpecular"    : "mur-spec.png",
+    "vertexColors" : false
+    },
 
 {
 "DbgIndex" : 1,
 "DbgName"  : "couloir-sol",
 "colorDiffuse"  : [0.1333, 0.1333, 0.1333],
-"colorAmbient"  : [0.1333, 0.1333, 0.1333],
-"colorSpecular"  : [0.9000, 0.9000, 0.9000],
-"transparency"  : 1.0,
-"specularCoef"  : 10.0,
+"colorSpecular"  : [0.5000, 0.5000, 0.5000],
+"opacity"  : 1.0,
+"specularCoef"  : 50.0,
 "mapDiffuse"    : "couloir-sol.png",
 "vertexColors" : false
 }
