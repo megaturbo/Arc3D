@@ -16,7 +16,7 @@
 "materials": [
 {
 "DbgIndex" : 0,
-"DbgName"  : "01 - Default",
+"DbgName"  : "Window_Inside",
 "colorDiffuse"  : [0.5882, 0.8353, 0.9765],
 "colorAmbient"  : [0.5882, 0.8353, 0.9765],
 "colorSpecular"  : [0.9020, 0.9608, 1.0000],

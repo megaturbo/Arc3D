@@ -49,6 +49,8 @@
     var boxes = [];
     var key_points = [];
 
+    var reflectionCube;
+
     var user_position = {
         x: 0.0,
         y: 0.0,
@@ -141,6 +143,16 @@
         camera.rotation.set(-0.1076350906304018, 1.5321409768616594, 0.07200147984575293);
 
 
+        var t_path = "models/textures/";
+        var t_form = ".png";
+        var urls = [
+            t_path + 'mur-orange' + t_form, t_path + 'mur-orange' + t_form,
+            t_path + 'plafond-orange' + t_form, t_path + 'couloir-sol' + t_form,
+            t_path + 'mur-orange' + t_form, t_path + 'mur-orange' + t_form
+        ];
+        console.log(urls);
+        reflectionCube = new THREE.CubeTextureLoader().load(urls);
+        reflectionCube.format = THREE.RGBFormat;
 
         // Camera tracking use for pathfinding animation
         cameraTracking = new ARC3D.CameraTracking(camera);
@@ -235,8 +247,15 @@
 
     function addModelToScene(geometry, materials)
     {
-        // delete materials[0].shininess;
-        var material = new THREE.MeshFaceMaterial(materials);
+        for(var i = 0; i < materials.length; i++)
+        {
+            var m = materials[i];
+            if(m.name == 'Window_Inside'){
+                materials[i] = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: reflectionCube } );
+            }
+        }
+        console.log(materials);
+        var material = new THREE.MultiMaterial(materials);
         mesh = new THREE.Mesh(geometry, material);
         mesh.position.y -= 100;
         scene.add(mesh);
