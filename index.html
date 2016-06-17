@@ -62,8 +62,6 @@
     // Accelerometer localisation
     var user_velocity = new THREE.Vector3(0.0, 0.0, 0.0);
     var user_position = new THREE.Vector3(0.0, 0.0, 0.0);
-    if(!ARC3D.isPositionDefined) user_position.copy(ARC3D.defaultCameraPosition);
-    console.log(user_position);
 
     var last_time;
 
@@ -76,7 +74,10 @@
 
 
 
-    // Request JSON Async w/ JQuery
+    /**
+    * Request asynchronously the .json file of nodes and the init the whole program
+    * It's something. ¯\_(ツ)_/¯
+    */
     $.getJSON("nodes/nodes.json", function(json) {
         nodes = json.nodes;
         initMenu();
@@ -91,6 +92,27 @@
     function selectSpeed(new_speed){
         cameraTracking.setSpeed(new_speed);
     }
+
+
+
+    function deviceMotionHandler(eventData) {
+        if (last_time === undefined){
+            last_time = Date.now();
+            return;
+        }
+        var now = Date.now();
+        var dt = now - last_time;
+        last_time = now;
+
+        // Grab the acceleration from the results
+        var a = eventData.acceleration;
+        var accVec = new THREE.Vector3(a.x, a.y, a.z);
+        user_velocity.add(accVec.multiplyScalar(dt));
+        user_position.add(user_velocity.multiplyScalar(dt));
+        console.log(user_velocity);
+        console.log(user_position);
+    }
+
 
     /**
     * Initialize the menu with the nodes
@@ -157,8 +179,10 @@
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
         if(!ARC3D.isPositionDefined){
             camera.position.copy(ARC3D.defaultCameraPosition);
+            user_position.copy(ARC3D.defaultCameraPosition);
         }else{
             camera.position.copy(pathfinder.getNodePosition(current_node_id));
+            user_position.copy(pathfinder.getNodePosition(current_node_id));
         }
 
 
@@ -240,28 +264,6 @@
         window.addEventListener( 'resize', onWindowResize, false );
 
         render();
-    }
-
-    function deviceMotionHandler(eventData) {
-        if (last_time === undefined){
-            last_time = Date.now();
-            return;
-        }
-        var now = Date.now();
-        var dt = now - last_time;
-        last_time = now;
-
-        // Grab the acceleration from the results
-        var a = eventData.acceleration;
-
-        if(Math.abs(a.x) > 1.0)
-            user_position.x += (1.0/2.0) * a.x * dt;
-        if(Math.abs(a.y) > 1.0)
-            user_position.y += (1.0/2.0) * a.y * dt;
-        if(Math.abs(a.z) > 1.0)
-            user_position.z += (1.0/2.0) * a.z * dt;
-
-        console.log(user_position);
     }
 
     function addModelToScene(geometry, materials)
