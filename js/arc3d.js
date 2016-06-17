@@ -69,7 +69,7 @@ ARC3D.initNodes = function(){
             {
                 lin_mat = lin_mat_yellow;
             }
-            var neighbor = pathfinder.get_node(neighbor_id);
+            var neighbor = pathfinder.getNode(neighbor_id);
             line_geometry.vertices.push(
                 node.position,
                 neighbor.position
@@ -96,20 +96,21 @@ ARC3D.initNodes = function(){
 /*
 *   Log some informations on key press
 */
-ARC3D.addNodeAtCameraPosition = function(e) {
+ARC3D.keyEvent = function(e) {
     var event = window.event ? window.event : e;
     if(event.keyCode == 32){
-        var geometry = new THREE.BoxGeometry( 1, 1, 1 );
-        var material = new THREE.MeshBasicMaterial( { color: 0xffff00 } );
-        var mesh = new THREE.Mesh( geometry, material );
-        mesh.position.set(camera.position.x, camera.position.y, camera.position.z);
-        var point = {id:key_points.length + 3000, position:{x:camera.position.x, y:camera.position.y, z:camera.position.z}, neighbors:[]};
+        var cpos = camera.position;
+        var point = {id:key_points.length + 3000, position:{x:cpos.x, y:cpos.y, z:cpos.z}, neighbors:[]};
         key_points.push(point);
+
+        var light = new THREE.PointLight( 0xffffff, 1, 0 );
+
+        light.position.copy(cpos)
+        scene.add(light);
+
         var object;
+
         console.log(JSON.stringify(key_points));
-        // console.log(point);
-        scene.add( mesh );
-        ARC3D.initNodes();
     }
 };
 
@@ -142,4 +143,24 @@ ARC3D.geoFindMe = function() {
     output.innerHTML = "<p>Locating…</p>";
 
     navigator.geolocation.getCurrentPosition(success, error);
+};
+
+ARC3D.toggleFullScreen = function() {
+    if (!document.fullscreenElement && !document.mozFullScreenElement && !document.webkitFullscreenElement) {  // current working methods
+        if (document.documentElement.requestFullscreen) {
+            document.documentElement.requestFullscreen();
+        } else if (document.documentElement.mozRequestFullScreen) {
+            document.documentElement.mozRequestFullScreen();
+        } else if (document.documentElement.webkitRequestFullscreen) {
+            document.documentElement.webkitRequestFullscreen(Element.ALLOW_KEYBOARD_INPUT);
+        }
+    } else {
+        if (document.cancelFullScreen) {
+            document.cancelFullScreen();
+        } else if (document.mozCancelFullScreen) {
+            document.mozCancelFullScreen();
+        } else if (document.webkitCancelFullScreen) {
+            document.webkitCancelFullScreen();
+        }
+    }
 };
