@@ -4,6 +4,11 @@ var ARC3D = {};
 ARC3D.ControlModes = { FLY: 0, GYRO: 1};
 ARC3D.controlMode = ARC3D.ControlModes.GYRO;
 
+ARC3D.defaultCameraPosition = new THREE.Vector3(518.1343902256439, 179.21829815866715, -204.30850284213201);
+ARC3D.defaultCameraRotation = new THREE.Vector3(-0.1076350906304018, 1.5321409768616594, 0.07200147984575293);
+
+ARC3D.isPositionDefined = false;
+
 /**
 * Get url paramters. From:
 http://stackoverflow.com/questions/19491336/get-url-parameter-jquery-or-how-to-get-query-string-values-in-js
