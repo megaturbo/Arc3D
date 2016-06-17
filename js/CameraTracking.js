@@ -22,10 +22,12 @@ ARC3D.CameraTracking = function(camera) {
     * Set the path the camera shall follow.
     *
     * @param {Array} Array of THREE.Vector3 (the positions)
+    * @return {Curve3} The curve created for the pathfinding.
     */
     this.setPath = function(path) {
         this.path = path;
         this.spline = new THREE.CatmullRomCurve3(this.path);
+        return this.spline;
     };
 
     /**
@@ -56,7 +58,7 @@ ARC3D.CameraTracking = function(camera) {
         var t_camera = this.distance / this.spline.getLength();
         var t_look = 0;
         if(t_camera < 1.0){
-            t_look = t_camera + 0.01;
+            t_look = t_camera + 0.02;
         }
         else {
             this.stop();
