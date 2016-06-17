@@ -27,6 +27,11 @@ ARC3D.CameraTracking = function(camera) {
     this.setPath = function(path) {
         this.path = path;
         this.spline = new THREE.CatmullRomCurve3(this.path);
+        // for(var i = 0; i < path.length; i++){
+        //     var p = this.path[i];
+        //     console.log(p);
+        //     this.spline.points.push(new THREE.Vector3(i.x, i.y, i.z));
+        // }
         return this.spline;
     };
 
