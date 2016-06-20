@@ -17,6 +17,7 @@
         </select>
         <button onclick="selectPath()">GO !</button>
         <button onclick="stopCamera()">Stop</button>
+        <button onclick="changeControls()" id="change_controls" >Mobile</button>
         <input type="range" value="50" max="200" min="0" step="5" oninput="selectSpeed(this.value)" onchange="selectSpeed(this.value)">
     </div>
 
@@ -87,6 +88,20 @@
         init();
         animate();
     });
+
+    function changeControls(){
+        var btn = document.getElementById('change_controls');
+        switch(ARC3D.controlMode){
+            case ARC3D.ControlModes.GYRO:
+                ARC3D.setControl(ARC3D.ControlModes.FLY);
+                btn.innerHTML = "Desktop";
+                break;
+            case ARC3D.ControlModes.FLY:
+                ARC3D.setControl(ARC3D.ControlModes.GYRO);
+                btn.innerHTML = "Mobile";
+                break;
+        }
+    }
 
     function selectSpeed(new_speed){
         cameraTracking.setSpeed(new_speed);
