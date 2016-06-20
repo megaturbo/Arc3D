@@ -10,7 +10,6 @@
 
 <body>
     <div id="info">
-        <h1>Arc3D</h1>
         <select id="select_node_a">
         </select>
         <select id="select_node_b">
@@ -19,6 +18,11 @@
         <button onclick="stopCamera()">Stop</button>
         <button onclick="changeControls()" id="change_controls" >Mobile</button>
         <input type="range" value="50" max="200" min="0" step="5" oninput="selectSpeed(this.value)" onchange="selectSpeed(this.value)">
+    </div>
+
+    <div id="left-clicker" onclick="clickLeft()">
+    </div>
+    <div id="right-clicker" onclick="clickRight()">
     </div>
 
     <script src="threejs/three.min.js"></script>
@@ -89,6 +93,14 @@
         animate();
     });
 
+    function clickLeft(){
+        console.log("Left side clicked");
+    }
+
+    function clickRight(){
+        console.log("Right side clicked");
+    }
+
     function changeControls(){
         var btn = document.getElementById('change_controls');
         switch(ARC3D.controlMode){
@@ -119,7 +131,7 @@
 
         var dts = dt / 1000.0; // delta time in seconds.
 
-        // Grab the acceleration from the results
+        // Grab the acceleration from the results. The gravity is already sub'd from the acceleration. Thanks API.
         var a = eventData.acceleration;
         var user_acceleration = new THREE.Vector3(a.x, a.y, a.z);
 
@@ -132,12 +144,12 @@
         user_velocity.add(a_times_t);
         // user_position.add(user_velocity.multiplyScalar(dt));
 
-        console.log("##### deviceMotionHandler #####");
-        console.log("ax: " + user_acceleration.x +" ms^-2");
-        console.log("dt: " + dts + " + s");
-        console.log("a*t x = " + a_times_t.x +" ms^-1");
-        console.log("vx: " + user_velocity.x + " m^s-1");
-        console.log(user_acceleration);
+        // console.log("##### deviceMotionHandler #####");
+        // console.log("ax: " + user_acceleration.x +" ms^-2");
+        // console.log("dt: " + dts + " + s");
+        // console.log("a*t x = " + a_times_t.x +" ms^-1");
+        // console.log("vx: " + user_velocity.x + " m^s-1");
+        // console.log(user_acceleration);
     }
 
 
@@ -146,6 +158,9 @@
     * Should be called when the nodes are initialized.
     */
     function initMenu(){
+        if(nodes === undefined)
+            console.err("ARC3D : Nodes should be defined before initMenu()");
+
         var select_node_a = document.getElementById('select_node_a');
         var select_node_b = document.getElementById('select_node_b');
         for(i = 0; i < nodes.length; i++)

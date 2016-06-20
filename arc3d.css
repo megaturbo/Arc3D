@@ -6,13 +6,38 @@ body {
     margin: 0px;
     overflow: hidden;
 }
+
+body select{
+    width: 100px;
+}
+
 #info {
+    -webkit-box-shadow: inset 0px -5px 23px -6px rgba(0,0,0,0.75);
+    -moz-box-shadow: inset 0px -5px 23px -6px rgba(0,0,0,0.75);
+    box-shadow: inset 0px -5px 23px -6px rgba(0,0,0,0.75);
+    background-color: #ccc;
     color: #fff;
     position: absolute;
-    top: 10px;
+    height: 10%;
     width: 100%;
     text-align: center;
     z-index: 100;
     display:block;
 }
 #info a, .button { color: #f00; font-weight: bold; text-decoration: underline; cursor: pointer }
+
+#left-clicker {
+    position: absolute;
+    /*background-color: #f00;*/
+    left: 0;
+    width: 50%;
+    height: 100%;
+}
+
+#right-clicker {
+    position: absolute;
+    /*background-color: #00f;*/
+    right: 0;
+    width: 50%;
+    height: 100%;
+}
