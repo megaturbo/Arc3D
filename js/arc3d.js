@@ -2,7 +2,7 @@ var ARC3D = {};
 
 
 ARC3D.ControlModes = { FLY: 0, GYRO: 1};
-ARC3D.controlMode = ARC3D.ControlModes.GYRO;
+ARC3D.controlMode = undefined;
 
 ARC3D.defaultCameraPosition = new THREE.Vector3(518.1343902256439, 179.21829815866715, -204.30850284213201);
 ARC3D.defaultCameraRotation = new THREE.Vector3(-0.1076350906304018, 1.5321409768616594, 0.07200147984575293);
@@ -26,11 +26,6 @@ ARC3D.getUrlParameter = function getUrlParameter(sParam) {
             return sParameterName[1] === undefined ? true : sParameterName[1];
         }
     }
-};
-
-
-
-ARC3D.switchControls = function(){
 };
 
 /**
