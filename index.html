@@ -134,22 +134,34 @@
         // Grab the acceleration from the results. The gravity is already sub'd from the acceleration. Thanks API.
         var a = eventData.acceleration;
         var user_acceleration = new THREE.Vector3(a.x, a.y, a.z);
+        var acc_for_velocity = user_acceleration.clone();
+        var acc_for_position = user_acceleration.clone();
 
         // Lowpass filter on acceleration
         if (user_acceleration.length() < 0.5)
             return;
+        if (user_velocity.length() < 0.5)
+            user_velocity = new THREE.Vector3(0.0, 0.0, 0.0);
 
-        var a_times_t = user_acceleration.multiplyScalar(dts);
 
-        user_velocity.add(a_times_t);
-        // user_position.add(user_velocity.multiplyScalar(dt));
+        // console.log("##################### " + dts + " s.");
+        // console.log("POS: " + user_position.x);
+        // console.log("VEL: " + user_velocity.x);
 
-        // console.log("##### deviceMotionHandler #####");
-        // console.log("ax: " + user_acceleration.x +" ms^-2");
-        // console.log("dt: " + dts + " + s");
-        // console.log("a*t x = " + a_times_t.x +" ms^-1");
-        // console.log("vx: " + user_velocity.x + " m^s-1");
-        // console.log(user_acceleration);
+        user_position.add(user_velocity);
+        // console.log("P+V: " + user_position.x);
+
+        acc_for_position.multiplyScalar(0.5 * dts * dts);
+        // console.log("AT2: " + acc_for_position.x);
+
+        user_position.add(acc_for_position);
+        // console.log("P+A: " + user_position.x);
+
+        user_velocity.add(acc_for_velocity.multiplyScalar(dts));
+        // console.log("NEV: " + user_velocity.x);
+
+        camera.position.copy(user_position);
+        console.log(user_acceleration.x + ";" + user_velocity.x + ";" + user_position.x);
     }
 
 
