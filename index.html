@@ -19,7 +19,6 @@
         <button onclick="stopCamera()">Stop</button>
         <input type="range" value="50" max="200" min="0" step="5" oninput="selectSpeed(this.value)" onchange="selectSpeed(this.value)">
         <button onclick="geoFindMe()">Find me</button>
-        <button id="control" onclick="ARC3D.switchControls()">Switch Controls</button>
     </div>
 
     <script src="threejs/three.min.js"></script>
@@ -83,7 +82,6 @@
         initMenu();
         pathfinder = new ARC3D.Pathfinder(nodes);
 
-
         // Start
         init();
         animate();
@@ -92,7 +90,6 @@
     function selectSpeed(new_speed){
         cameraTracking.setSpeed(new_speed);
     }
-
 
 
     function deviceMotionHandler(eventData) {
@@ -186,6 +183,7 @@
         }
 
 
+        // Load a reflection Cube for inside surfaces
         var t_path = "models/textures/";
         var t_form = ".png";
         var urls = [
@@ -193,7 +191,6 @@
             t_path + 'plafond-orange' + t_form, t_path + 'couloir-sol' + t_form,
             t_path + 'mur-orange' + t_form, t_path + 'mur-orange' + t_form
         ];
-        console.log(urls);
         reflectionCube = new THREE.CubeTextureLoader().load(urls);
         reflectionCube.format = THREE.RGBFormat;
 
@@ -241,17 +238,26 @@
         }
 
 
-
+        // TODO: Remove this. Used for debug. To check which node is which one. gud english hear
 		raycaster = new THREE.Raycaster();
 		mouse = new THREE.Vector2();
 
+        // Renderer
         renderer = new THREE.WebGLRenderer({antialias: true});
         renderer.setPixelRatio( window.devicePixelRatio );
         renderer.setClearColor( 0xcccccc );
         renderer.setSize( window.innerWidth, window.innerHeight );
         container.appendChild( renderer.domElement );
 
-        ARC3D.switchControls();
+        // Set control mode
+        if (window.deviceMotionHandler) {
+            // Listen for the event and handle DeviceOrientationEvent object
+            ARC3D.setControl(ARC3D.ControlModes.GYRO);
+            window.addEventListener('devicemotion', deviceMotionHandler, false);
+            console.log("Device motion Event is defined");
+        }else{
+            ARC3D.setControl(ARC3D.ControlModes.FLY);
+        }
 
         // Stats
         stats = new Stats();
