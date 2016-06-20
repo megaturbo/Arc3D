@@ -18,7 +18,6 @@
         <button onclick="selectPath()">GO !</button>
         <button onclick="stopCamera()">Stop</button>
         <input type="range" value="50" max="200" min="0" step="5" oninput="selectSpeed(this.value)" onchange="selectSpeed(this.value)">
-        <button onclick="geoFindMe()">Find me</button>
     </div>
 
     <script src="threejs/three.min.js"></script>
@@ -74,8 +73,10 @@
 
 
     /**
-    * Request asynchronously the .json file of nodes and the init the whole program
+    * Request asynchronously the .json file of nodes, then init the whole program
     * It's something. ¯\_(ツ)_/¯
+    *
+    * Synchronously asynchronous
     */
     $.getJSON("nodes/nodes.json", function(json) {
         nodes = json.nodes;
@@ -101,13 +102,27 @@
         var dt = now - last_time;
         last_time = now;
 
+        var dts = dt / 1000.0; // delta time in seconds.
+
         // Grab the acceleration from the results
         var a = eventData.acceleration;
-        var accVec = new THREE.Vector3(a.x, a.y, a.z);
-        user_velocity.add(accVec.multiplyScalar(dt));
-        user_position.add(user_velocity.multiplyScalar(dt));
-        console.log(user_velocity);
-        console.log(user_position);
+        var user_acceleration = new THREE.Vector3(a.x, a.y, a.z);
+
+        // Lowpass filter on acceleration
+        if (user_acceleration.length() < 0.5)
+            return;
+
+        var a_times_t = user_acceleration.multiplyScalar(dts);
+
+        user_velocity.add(a_times_t);
+        // user_position.add(user_velocity.multiplyScalar(dt));
+
+        console.log("##### deviceMotionHandler #####");
+        console.log("ax: " + user_acceleration.x +" ms^-2");
+        console.log("dt: " + dts + " + s");
+        console.log("a*t x = " + a_times_t.x +" ms^-1");
+        console.log("vx: " + user_velocity.x + " m^s-1");
+        console.log(user_acceleration);
     }
 
 
@@ -170,7 +185,7 @@
         // Create container
         container = document.createElement( 'div' );
         document.body.appendChild( container );
-        document.onkeydown = ARC3D.keyEvent;
+        // document.onkeydown = ARC3D.keyEvent;
 
         //	PerspectiveCamera( fov, aspect, near, far )
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
@@ -250,11 +265,11 @@
         container.appendChild( renderer.domElement );
 
         // Set control mode
-        if (window.deviceMotionHandler) {
+        if (window.DeviceOrientationEvent) {
             // Listen for the event and handle DeviceOrientationEvent object
             ARC3D.setControl(ARC3D.ControlModes.GYRO);
             window.addEventListener('devicemotion', deviceMotionHandler, false);
-            console.log("Device motion Event is defined");
+            console.log("Device orientation/motion Event is defined. Listening to it...");
         }else{
             ARC3D.setControl(ARC3D.ControlModes.FLY);
         }
@@ -266,7 +281,7 @@
         stats.domElement.style.zIndex = 100;
         container.appendChild( stats.domElement );
 
-		document.addEventListener( 'mousedown', onDocumentMouseDown, false );
+		// document.addEventListener( 'mousedown', onDocumentMouseDown, false );
         window.addEventListener( 'resize', onWindowResize, false );
 
         render();
