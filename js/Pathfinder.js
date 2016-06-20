@@ -22,7 +22,7 @@
 *
 * @constructor
 * @this {Pathfinder}
-* @param {Node list} nodes
+* @param {Node list} nodes : Node graph
 * See example.json for Node architecture
 */
 ARC3D.Pathfinder = function(nodes){
@@ -31,7 +31,7 @@ ARC3D.Pathfinder = function(nodes){
     /**
     * Give an array of position from an Array of node IDs
     *
-    * @param {Array} Array of {Number} which are the nodes IDs
+    * @param {Array} path  Array of {Number} which are the nodes IDs
     * @return {Array} Array of THREE.Vector3
     *
     */
@@ -49,7 +49,7 @@ ARC3D.Pathfinder = function(nodes){
     /**
     * Get the node with the specified ID
     *
-    * @param {number} node_id
+    * @param {number} node_id  :The id of the node...
     * @return {Node} The node with the specified ID or null if there is no Node with
     *                such ID.
     */
@@ -68,7 +68,7 @@ ARC3D.Pathfinder = function(nodes){
     /**
     * Return a three.js Vector3 of the vector position
     *
-    * @param {number} node_id
+    * @param {number} node_id : The id of the node...
     * @return {THREE.Vector3} Position vector of the specified ID node.
     */
     this.getNodePosition = function(node_id)
@@ -81,8 +81,8 @@ ARC3D.Pathfinder = function(nodes){
     * Get the distance between two neighbors nodes. No computing here, we are only
     * looking for the dist param value.
     *
-    * @param {number} node_a_id
-    * @param {number} node_b_id
+    * @param {number} node_a_id : The id of the first node
+    * @param {number} node_b_id : The id of the second node
     * @return {number} The distance between the two points or null if no Node found
     *                  or B is not a neighbor
     */
@@ -102,8 +102,8 @@ ARC3D.Pathfinder = function(nodes){
     /**
     * Calculate the distance between two nodes as the crow flies
     *
-    * @param {Node} node_a
-    * @param {Node} node_b
+    * @param {Node} node_a : The id of the first node
+    * @param {Node} node_b : The id of the second node
     * @return {number} The distance between the two nodes.
     */
     this.computeDistance = function(node_a, node_b)
@@ -116,8 +116,8 @@ ARC3D.Pathfinder = function(nodes){
     /**
     * Heuristic used in the get_path function
     *
-    * @param {number} node_a_id
-    * @param {number} node_b_id
+    * @param {number} node_a_id : The id of the first node
+    * @param {number} node_b_id : The id of the second node
     * @return {number} The cost for the two nodes
     */
     this.heuristic = function(node_a_id, node_b_id)
@@ -207,8 +207,8 @@ ARC3D.Pathfinder = function(nodes){
     /**
     * Reconstruct the path from the cameFrom map with the last current Node ID
     *
-    * @param {Map} cameFrom
-    * @param {number} current_id
+    * @param {Map} cameFrom : The path where the algorithm cam from
+    * @param {number} current_id : The current node ID
     * @return {Array} An array of Node IDs representing the path found.
     */
     this.reconstructPath = function(cameFrom, current_id)

@@ -7,7 +7,7 @@ var CAMERA_DEFAULT_SPEED = 50;
 *
 * @constructor
 * @this {CameraTracking}
-* @param {THREE.Camera} A three.js camera
+* @param {THREE.Camera} camera : A three.js camera
 */
 ARC3D.CameraTracking = function(camera) {
     this.camera = camera;
@@ -21,7 +21,7 @@ ARC3D.CameraTracking = function(camera) {
     /**
     * Set the path the camera shall follow.
     *
-    * @param {Array} Array of THREE.Vector3 (the positions)
+    * @param {Array} path : Array of THREE.Vector3 (the positions)
     * @return {Curve3} The curve created for the pathfinding.
     */
     this.setPath = function(path) {
@@ -53,7 +53,7 @@ ARC3D.CameraTracking = function(camera) {
     /**
     * Update the camera position. Have to be called every frame.
     *
-    * @param {Number} delta time since the last frame
+    * @param {Number} delta : Delta time since the last frame
     */
     this.update = function(delta){
         if(!this.isRunning)
@@ -79,7 +79,7 @@ ARC3D.CameraTracking = function(camera) {
     /**
     * Set the camera velocity
     *
-    * @param {Number} The speed to set
+    * @param {Number} speed : The speed to set
     */
     this.setSpeed = function (speed) {
         this.speed = speed;
