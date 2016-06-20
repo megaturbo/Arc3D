@@ -31,21 +31,35 @@ ARC3D.getUrlParameter = function getUrlParameter(sParam) {
 
 
 ARC3D.switchControls = function(){
-    switch( ARC3D.controlMode ) {
+};
+
+/**
+* Set the camera control mode.
+*
+* @param {Number} mode : The desired mode for camera control.
+*
+* Best. Code. Ever.
+*/
+ARC3D.setControl = function(mode){
+    switch(mode) {
         case ARC3D.ControlModes.FLY:
-        controls = new THREE.DeviceOrientationControls( camera , renderer.domElement);
-        ARC3D.controlMode = ARC3D.ControlModes.GYRO;
-        break;
+            controls = new THREE.FlyControls(camera, renderer.domElement);
+            controls.movementSpeed = 100;
+            controls.domElement = container;
+            controls.rollSpeed = 1;
+            controls.autoForward = false;
+            controls.dragToLook = true;
+            ARC3D.controlMode = ARC3D.ControlModes.FLY;
+            break;
 
         case ARC3D.ControlModes.GYRO:
-        controls = new THREE.FlyControls(camera, renderer.domElement);
-        controls.movementSpeed = 100;
-        controls.domElement = container;
-        controls.rollSpeed = 1;
-        controls.autoForward = false;
-        controls.dragToLook = true;
-        ARC3D.controlMode = ARC3D.ControlModes.FLY;
-        break;
+            controls = new THREE.DeviceOrientationControls( camera , renderer.domElement);
+            ARC3D.controlMode = ARC3D.ControlModes.GYRO;
+            break;
+
+        default:
+            console.info("Control mode not found.");
+            break;
     }
 };
 
@@ -110,7 +124,7 @@ ARC3D.keyEvent = function(e) {
 
         var light = new THREE.PointLight( 0xffffff, 1, 0 );
 
-        light.position.copy(cpos)
+        light.position.copy(cpos);
         scene.add(light);
 
         var object;
