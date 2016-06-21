@@ -120,51 +120,6 @@
     }
 
 
-    function deviceMotionHandler(eventData) {
-        if (last_time === undefined){
-            last_time = Date.now();
-            return;
-        }
-        var now = Date.now();
-        var dt = now - last_time;
-        last_time = now;
-
-        var dts = dt / 1000.0; // delta time in seconds.
-
-        // Grab the acceleration from the results. The gravity is already sub'd from the acceleration. Thanks API.
-        var a = eventData.acceleration;
-        var user_acceleration = new THREE.Vector3(a.x, a.y, a.z);
-        var acc_for_velocity = user_acceleration.clone();
-        var acc_for_position = user_acceleration.clone();
-
-        // Lowpass filter on acceleration
-        if (user_acceleration.length() < 0.5)
-            return;
-        if (user_velocity.length() < 0.5)
-            user_velocity = new THREE.Vector3(0.0, 0.0, 0.0);
-
-
-        // console.log("##################### " + dts + " s.");
-        // console.log("POS: " + user_position.x);
-        // console.log("VEL: " + user_velocity.x);
-
-        user_position.add(user_velocity);
-        // console.log("P+V: " + user_position.x);
-
-        acc_for_position.multiplyScalar(0.5 * dts * dts);
-        // console.log("AT2: " + acc_for_position.x);
-
-        user_position.add(acc_for_position);
-        // console.log("P+A: " + user_position.x);
-
-        user_velocity.add(acc_for_velocity.multiplyScalar(dts));
-        // console.log("NEV: " + user_velocity.x);
-
-        camera.position.copy(user_position);
-        console.log(user_acceleration.x + ";" + user_velocity.x + ";" + user_position.x);
-    }
-
-
     /**
     * Initialize the menu with the nodes
     * Should be called when the nodes are initialized.
@@ -310,8 +265,6 @@
         if (window.DeviceOrientationEvent) {
             // Listen for the event and handle DeviceOrientationEvent object
             ARC3D.setControl(ARC3D.ControlModes.GYRO);
-            window.addEventListener('devicemotion', deviceMotionHandler, false);
-            console.log("Device orientation/motion Event is defined. Listening to it...");
         }else{
             ARC3D.setControl(ARC3D.ControlModes.FLY);
         }
