@@ -30,9 +30,8 @@
 "DbgIndex" : 1,
 "DbgName"  : "couloir-sol",
 "colorDiffuse"  : [0.1333, 0.1333, 0.1333],
-"colorAmbient"  : [0.1333, 0.1333, 0.1333],
 "colorSpecular"  : [0.9000, 0.9000, 0.9000],
-"transparency"  : 1.0,
+"opacity"  : 1.0,
 "specularCoef"  : 50.0,
 "mapDiffuse"    : "couloir-sol.png",
 "vertexColors" : false
