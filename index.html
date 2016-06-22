@@ -6,17 +6,26 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     <link href="./arc3d.css" rel='stylesheet' type='text/css'>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+        <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 </head>
 
 <body>
     <div id="info">
-        <select id="select_node_a">
+        <select class="browser-default" id="select_node_a">
         </select>
-        <select id="select_node_b">
+        <select class="browser-default"  id="select_node_b">
         </select>
-        <button onclick="selectPath()">GO !</button>
-        <button onclick="stopCamera()">Stop</button>
-        <button onclick="changeControls()" id="change_controls" >Mobile</button>
+        <a class="waves-effect waves-light btn" onclick="selectPath()">Démarrer</a>
+        <a class="waves-effect waves-light btn"  onclick="togglePause()">Pause</a>
+        <a class="waves-effect waves-light btn" onclick="ARC3D.toggleFullScreen()">[]</a>
+
+        <!-- <button onclick="changeControls()" id="change_controls" >Mobile</button> -->
+        Speed:
         <input type="range" value="50" max="200" min="0" step="5" oninput="selectSpeed(this.value)" onchange="selectSpeed(this.value)">
     </div>
 
@@ -33,7 +42,6 @@
     <script src="threejs/controls/DeviceOrientationControls.js"></script>
     <script src="threejs/Detector.js"></script>
     <script src="threejs/libs/stats.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 
     <!-- My scripts -->
     <script src="js/arc3d.js"></script>
@@ -74,6 +82,9 @@
     var camera, controls, scene, renderer;
     var clock = new THREE.Clock();
 
+    THREE.DefaultLoadingManager.onProgress = function ( item, loaded, total ) {
+        console.log( item, loaded, total );
+    };
 
     /**
     * Request asynchronously the .json file of nodes, then init the whole program
@@ -98,6 +109,14 @@
     function clickRight(){
         controls.setNorth();
         console.log("Right side clicked");
+    }
+
+    function stopCamera(){
+        cameraTracking.stop();
+    }
+
+    function togglePause(){
+        cameraTracking.togglePause();
     }
 
     function changeControls(){
@@ -133,13 +152,16 @@
         {
             var node = nodes[i];
             if(!node.name)
-            continue;
-            var option_a = document.createElement("option");
-            option_a.text = "" + node.name + " [" + node.id + "]";
-            option_a.value = node.id;
-            var option_b = option_a.cloneNode(true);
-            select_node_a.options.add(option_a, node.id);
-            select_node_b.options.add(option_b, node.id);
+                continue;
+
+            if (node.name.split('-')[0] == 'room'){
+                var option_a = document.createElement("option");
+                option_a.text = "Salle " + node.name.split('-')[1];
+                option_a.value = node.id;
+                var option_b = option_a.cloneNode(true);
+                select_node_a.options.add(option_a, node.id);
+                select_node_b.options.add(option_b, node.id);
+            }
         }
     }
 
@@ -164,19 +186,19 @@
         spline = cameraTracking.setPath(pathfinder.getPathPositions(path));
         console.log(spline.getLength());
 
+        // Remove old Tubegeometry if exist
+        var o = scene.getObjectByName("spline");
+        scene.remove(o);
+
         // Create a Tubegeometry from the spline created by the CameraTracking
         var geometry = new THREE.TubeGeometry(spline, Math.floor(spline.getLength() / 10), 2, 8, false);
         var material = new THREE.MeshPhongMaterial( {color: 0x4caf50 } );
         var mesh = new THREE.Mesh(geometry, material);
+        mesh.name = "spline";
         mesh.position.y -= 20;
         scene.add(mesh);
         cameraTracking.start();
     }
-
-    function stopCamera(){
-        cameraTracking.stop();
-    }
-
     function init() {
         // Create container
         container = document.createElement( 'div' );
@@ -273,7 +295,7 @@
         stats.domElement.style.position = 'absolute';
         stats.domElement.style.top = '0px';
         stats.domElement.style.zIndex = 100;
-        container.appendChild( stats.domElement );
+        // container.appendChild( stats.domElement );
 
 		// document.addEventListener( 'mousedown', onDocumentMouseDown, false );
         window.addEventListener( 'resize', onWindowResize, false );
