@@ -221,18 +221,6 @@
             user_position.copy(pathfinder.getNodePosition(current_node_id));
         }
 
-
-        // Load a reflection Cube for inside surfaces
-        var t_path = "models/textures/";
-        var t_form = ".png";
-        var urls = [
-            t_path + 'mur-orange' + t_form, t_path + 'mur-orange' + t_form,
-            t_path + 'plafond-orange' + t_form, t_path + 'couloir-sol' + t_form,
-            t_path + 'mur-orange' + t_form, t_path + 'mur-orange' + t_form
-        ];
-        reflectionCube = new THREE.CubeTextureLoader().load(urls);
-        reflectionCube.format = THREE.RGBFormat;
-
         // Camera tracking use for pathfinding animation
         cameraTracking = new ARC3D.CameraTracking(camera);
 
@@ -240,6 +228,58 @@
         scene = new THREE.Scene();
 
         // Lights
+        initLights();
+
+        // XHR events listening
+        var onProgress = function ( xhr ) {
+            if ( xhr.lengthComputable ) {
+                var percentComplete = xhr.loaded / xhr.total * 100;
+                console.log( Math.round(percentComplete, 2) + '% downloaded' );
+            }
+        };
+
+        var onError = function ( xhr ) {
+        };
+
+        // JSON LOADER
+        var jsonLoader = new THREE.JSONLoader();
+        models = ["commerce_0", "walls_0", "walls_1", "walls_2", "walls_3", "floors", "stairs", "window_0", "window_1", "window_2"];
+        for(var i = 0; i < models.length; i++)
+        {
+            jsonLoader.load("models/multipart/" + models[i] + ".js", addModelToScene);
+        }
+
+        // Renderer
+        renderer = new THREE.WebGLRenderer({antialias: true});
+        renderer.setPixelRatio( window.devicePixelRatio );
+        renderer.setClearColor( 0xcccccc );
+        renderer.setSize( window.innerWidth, window.innerHeight );
+        container.appendChild( renderer.domElement );
+
+        // Set control mode, depending on whether it's a mobile or a computer
+        if (ARC3D.mobileCheck()) {
+            ARC3D.setControl(ARC3D.ControlModes.GYRO);
+        }else{
+            ARC3D.setControl(ARC3D.ControlModes.FLY);
+        }
+
+        // Stats
+        stats = new Stats();
+        stats.domElement.style.position = 'absolute';
+        stats.domElement.style.top = '0px';
+        stats.domElement.style.zIndex = 100;
+        // container.appendChild( stats.domElement );
+
+        window.addEventListener( 'resize', onWindowResize, false );
+
+        render();
+    }
+
+    /**
+    * Init a few lights in the scene
+    */
+    function initLights()
+    {
         var ambient = new THREE.AmbientLight( 0xffffff );
         scene.add( ambient );
         var lights = [];
@@ -254,60 +294,8 @@
 		scene.add( lights[ 0 ] );
 		scene.add( lights[ 1 ] );
 		scene.add( lights[ 2 ] );
-
-        // var directionalLight = new THREE.DirectionalLight( 0xffffff, 0.5 );
-        // directionalLight.position.set( 0, 1, 0 );
-        // scene.add( directionalLight );
-
-        var onProgress = function ( xhr ) {
-            if ( xhr.lengthComputable ) {
-                var percentComplete = xhr.loaded / xhr.total * 100;
-                console.log( Math.round(percentComplete, 2) + '% downloaded' );
-            }
-        };
-
-        var onError = function ( xhr ) {
-        };
-        // JSON LOADER
-        var jsonLoader = new THREE.JSONLoader();
-        models = ["commerce_0", "walls_0", "walls_1", "walls_2", "walls_3", "floors", "stairs", "window_0", "window_1", "window_2"];
-        for(var i = 0; i < models.length; i++)
-        {
-            jsonLoader.load("models/multipart/" + models[i] + ".js", addModelToScene);
-        }
-
-
-        // TODO: Remove this. Used for debug. To check which node is which one. gud english hear
-		raycaster = new THREE.Raycaster();
-		mouse = new THREE.Vector2();
-
-        // Renderer
-        renderer = new THREE.WebGLRenderer({antialias: true});
-        renderer.setPixelRatio( window.devicePixelRatio );
-        renderer.setClearColor( 0xcccccc );
-        renderer.setSize( window.innerWidth, window.innerHeight );
-        container.appendChild( renderer.domElement );
-
-        // Set control mode
-        if (ARC3D.mobileCheck()) {
-            // Listen for the event and handle DeviceOrientationEvent object
-            ARC3D.setControl(ARC3D.ControlModes.GYRO);
-        }else{
-            ARC3D.setControl(ARC3D.ControlModes.FLY);
-        }
-
-        // Stats
-        stats = new Stats();
-        stats.domElement.style.position = 'absolute';
-        stats.domElement.style.top = '0px';
-        stats.domElement.style.zIndex = 100;
-        // container.appendChild( stats.domElement );
-
-		// document.addEventListener( 'mousedown', onDocumentMouseDown, false );
-        window.addEventListener( 'resize', onWindowResize, false );
-
-        render();
     }
+
 
     function addModelToScene(geometry, materials)
     {

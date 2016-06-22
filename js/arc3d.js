@@ -10,6 +10,10 @@ ARC3D.defaultCameraRotation = new THREE.Vector3(-0.1076350906304018, 1.532140976
 
 ARC3D.isPositionDefined = false;
 
+
+raycaster = new THREE.Raycaster();
+mouse = new THREE.Vector2();
+
 /**
 * Get url paramters. From:
 http://stackoverflow.com/questions/19491336/get-url-parameter-jquery-or-how-to-get-query-string-values-in-js
