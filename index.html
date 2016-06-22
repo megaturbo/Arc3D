@@ -39,7 +39,6 @@
     <script src="js/arc3d.js"></script>
     <script src="js/Pathfinder.js"></script>
     <script src="js/CameraTracking.js"></script>
-    <script src="js/gyronorm.complete.min.js"></script>
 
     <script>
 
@@ -75,21 +74,6 @@
     var camera, controls, scene, renderer;
     var clock = new THREE.Clock();
 
-    var gn = new GyroNorm();
-
-      gn.init().then(function(){
-          gn.start(function(data){
-              // Process:
-              // data.do.alpha    ( deviceorientation event alpha value )
-              // data.do.beta     ( deviceorientation event beta value )
-              // data.do.gamma    ( deviceorientation event gamma value )
-              // data.do.absolute ( deviceorientation event absolute value )
-              console.log(data.do.alpha + " - " + data.do.beta + " - " + data.do.gamma);
-          });
-      }).catch(function(e){
-        // Catch if the DeviceOrientation or DeviceMotion is not supported by the browser or device
-      });
-
 
     /**
     * Request asynchronously the .json file of nodes, then init the whole program
@@ -112,7 +96,7 @@
     }
 
     function clickRight(){
-        controls.setOffset(50);
+        controls.setNorth();
         console.log("Right side clicked");
     }
 

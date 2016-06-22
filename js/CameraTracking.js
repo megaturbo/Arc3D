@@ -51,6 +51,13 @@ ARC3D.CameraTracking = function(camera) {
     };
 
     /**
+    * Toggle pause mode
+    */
+    this.togglePause = function(){
+        this.isRunning = !this.isRunning;
+    };
+
+    /**
     * Update the camera position. Have to be called every frame.
     *
     * @param {Number} delta : Delta time since the last frame

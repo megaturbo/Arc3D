@@ -57,8 +57,8 @@ THREE.DeviceOrientationControls = function ( object ) {
 
 	}();
 
-    this.setOffset = function(offset){
-        this.offset = offset;
+    this.setNorth = function(){
+        this.offset = 270 - scope.deviceOrientation.alpha;
     };
 
 	this.connect = function() {
@@ -85,7 +85,7 @@ THREE.DeviceOrientationControls = function ( object ) {
 
 		if ( scope.enabled === false ) return;
 
-		var alpha  = scope.deviceOrientation.alpha ? THREE.Math.degToRad( scope.deviceOrientation.alpha + this.offset ) : 0; // Z
+		var alpha  = scope.deviceOrientation.alpha ? THREE.Math.degToRad( scope.deviceOrientation.alpha + this.offset) : 0; // Z
 		var beta   = scope.deviceOrientation.beta  ? THREE.Math.degToRad( scope.deviceOrientation.beta  ) : 90; // X'
 		var gamma  = scope.deviceOrientation.gamma ? THREE.Math.degToRad( scope.deviceOrientation.gamma ) : 0; // Y''
 		var orient = scope.screenOrientation       ? THREE.Math.degToRad( scope.screenOrientation       ) : 0; // O
