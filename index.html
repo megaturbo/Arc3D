@@ -194,9 +194,15 @@
         var geometry = new THREE.TubeGeometry(spline, Math.floor(spline.getLength() / 10), 2, 8, false);
         var material = new THREE.MeshPhongMaterial( {color: 0x4caf50 } );
         var mesh = new THREE.Mesh(geometry, material);
+
+        // Set some parameters
         mesh.name = "spline";
         mesh.position.y -= 20;
+
+        // Add the TubeGeometry to the scene.
         scene.add(mesh);
+
+        // Start the tracking
         cameraTracking.start();
     }
     function init() {
@@ -283,7 +289,7 @@
         container.appendChild( renderer.domElement );
 
         // Set control mode
-        if (window.DeviceOrientationEvent) {
+        if (ARC3D.mobileCheck()) {
             // Listen for the event and handle DeviceOrientationEvent object
             ARC3D.setControl(ARC3D.ControlModes.GYRO);
         }else{
