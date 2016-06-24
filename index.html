@@ -33,6 +33,7 @@
     <div id="bottom-right">
         <a class="btn waves-effect grey lighten-5 grey-text text-darken-3" id="button-live" onclick="liveButton()">Live</a>
         <a class="btn waves-effect grey lighten-5 grey-text text-darken-3" id="button-simulation" onclick="simulationButton()">Simulation</a>
+        <a class="btn waves-effect grey lighten-5 grey-text text-darken-3" id="button-simulation-pause" onclick="simulationPauseButton()"><i class="material-icons" id="icon-pause">pause</i></a>
     </div>
 
     <div id="bottom-left">
@@ -113,6 +114,10 @@
         animate();
     });
 
+    /**
+    * Which side is clicked.
+    * Not yet used, but should be for orientation calibration
+    */
     function clickLeft(){
         console.log("Left side clicked");
     }
@@ -121,11 +126,26 @@
         console.log("Right side clicked");
     }
 
+    /**
+    * Camera Mode buttons.
+    *
+    * Simulation - With a constant speed
+    * Live - Depend on what the user looks at.
+    */
     function simulationButton(){
         if(cameraTracking.isRunning){
-            cameraTracking.togglePause();
+            cameraTracking.stop();
         }else{
             selectPath();
+        }
+    }
+
+    function simulationPauseButton(){
+        var d = document.getElementById('icon-pause');
+        if(cameraTracking.togglePause()){
+            d.innerHTML = 'play_arrow';
+        }else{
+            d.innerHTML = 'pause';
         }
     }
 
@@ -133,6 +153,10 @@
         throw "NotYetImplemented";
     }
 
+
+    /**
+    * Access functions
+    */
     function stopCamera(){
         cameraTracking.stop();
     }

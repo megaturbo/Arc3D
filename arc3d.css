@@ -44,6 +44,10 @@ body input[type=range] {
     right: 0;
 }
 
+#button-simulation-pause{
+    padding: 0px 10px 0px 10px;
+}
+
 #bottom-left {
     z-index: 10;
     background: white;

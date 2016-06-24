@@ -54,9 +54,11 @@ ARC3D.CameraTracking = function(camera) {
 
     /**
     * Toggle pause mode
+    * @return True if now it's in pause. False if it's not
     */
     this.togglePause = function(){
         this.isPaused = !this.isPaused;
+        return this.isPaused;
     };
 
     /**
@@ -72,7 +74,7 @@ ARC3D.CameraTracking = function(camera) {
         var t_camera = this.distance / this.spline.getLength();
         var t_look = 0;
         if(t_camera < 1.0){
-            t_look = t_camera + 0.02;
+            t_look = t_camera <= 0.98 ? t_camera + 0.02 : 1.0;
         }
         else {
             this.stop();
