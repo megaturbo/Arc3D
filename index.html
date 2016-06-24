@@ -7,24 +7,35 @@
     <link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
     <link href="./arc3d.css" rel='stylesheet' type='text/css'>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
-        <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
 
+    <!-- materialize -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!-- Compiled and minified CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
 </head>
 
 <body>
-    <div id="info">
+    <div id="fromto">
+        <label>From</label>
         <select class="browser-default" id="select_node_a">
         </select>
+        <label>To</label>
         <select class="browser-default"  id="select_node_b">
         </select>
-        <a class="waves-effect waves-light btn" onclick="selectPath()">Démarrer</a>
-        <a class="waves-effect waves-light btn"  onclick="togglePause()">Pause</a>
-        <a class="waves-effect waves-light btn" onclick="ARC3D.toggleFullScreen()">[]</a>
+    </div>
 
-        <!-- <button onclick="changeControls()" id="change_controls" >Mobile</button> -->
+    <div id="fullscreen">
+        <a class="btn waves-effect grey lighten-5 grey-text text-darken-3" onclick="toggleFullScreen()"><i id="icon-fullscreen" class="material-icons left">fullscreen</i></a>
+    </div>
+
+    <div id="bottom-right">
+        <a class="btn waves-effect grey lighten-5 grey-text text-darken-3" onclick="selectPath()">Démarrer</a>
+        <a class="btn waves-effect grey lighten-5 grey-text text-darken-3"  onclick="togglePause()">Pause</a>
+    </div>
+
+    <div id="bottom-left">
         Speed:
         <input type="range" value="50" max="200" min="0" step="5" oninput="selectSpeed(this.value)" onchange="selectSpeed(this.value)">
     </div>
@@ -117,6 +128,16 @@
 
     function togglePause(){
         cameraTracking.togglePause();
+    }
+
+    function toggleFullScreen(){
+        ARC3D.toggleFullScreen();
+        var ic = document.getElementById('icon-fullscreen');
+        console.log(ic);
+        if (ic.innerHTML == 'fullscreen')
+            ic.innerHTML = 'fullscreen_exit';
+        else
+            ic.innerHTML = 'fullscreen';
     }
 
     function changeControls(){

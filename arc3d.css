@@ -6,26 +6,51 @@ body {
     overflow: hidden;
 }
 
-body select.browser-default{
-    width: auto;
-    display:inline;
-}
-
 body input[type=range] {
     width: auto;
 }
 
-#info {
-    -webkit-box-shadow: inset 0px -5px 23px -6px rgba(0,0,0,0.75);
-    -moz-box-shadow: inset 0px -5px 23px -6px rgba(0,0,0,0.75);
-    box-shadow: inset 0px -5px 23px -6px rgba(0,0,0,0.75);
-    background-color: #fff;
-    position: absolute;
-    height: 100px;
-    width: 100%;
-    text-align: center;
-    z-index: 100;
+#fromto{
+    background: white;
+    position:absolute;
+    top: 0;
+    z-index: 20;
+    margin: 10px;
+    padding: 10px;
+}
+
+#fromto select.browser-default{
+    width: auto;
     display:block;
+}
+
+#fullscreen{
+    background: white;
+    position: absolute;
+    width: 40px;
+    top: 0;
+    right: 0;
+    z-index: 20;
+}
+
+#fullscreen .btn{
+    padding-left: 10px;
+}
+
+#bottom-right{
+    z-index: 20;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+#bottom-left {
+    z-index: 10;
+    background: white;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    padding: 0px 10px 0px 10px;
 }
 
 #left-clicker {
