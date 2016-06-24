@@ -274,6 +274,9 @@
 
         render();
     }
+    window.addEventListener("compassneedscalibration", function(event) {
+        console.log("Compass need calibration");
+}, true);
 
     /**
     * Init a few lights in the scene
