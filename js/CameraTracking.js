@@ -12,6 +12,7 @@ var CAMERA_DEFAULT_SPEED = 50;
 ARC3D.CameraTracking = function(camera) {
     this.camera = camera;
     this.isRunning = false;
+    this.isPaused = false;
     this.speed = CAMERA_DEFAULT_SPEED;
 
     this.path = [];
@@ -41,6 +42,7 @@ ARC3D.CameraTracking = function(camera) {
     this.start = function(){
         this.isRunning = true;
         this.distance = 0.0;
+        this.isPaused = false;
     };
 
     /**
@@ -54,7 +56,7 @@ ARC3D.CameraTracking = function(camera) {
     * Toggle pause mode
     */
     this.togglePause = function(){
-        this.isRunning = !this.isRunning;
+        this.isPaused = !this.isPaused;
     };
 
     /**
@@ -63,7 +65,7 @@ ARC3D.CameraTracking = function(camera) {
     * @param {Number} delta : Delta time since the last frame
     */
     this.update = function(delta){
-        if(!this.isRunning)
+        if(!this.isRunning || this.isPaused)
             return;
 
         this.distance += delta * this.speed;

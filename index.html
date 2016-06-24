@@ -31,8 +31,8 @@
     </div>
 
     <div id="bottom-right">
-        <a class="btn waves-effect grey lighten-5 grey-text text-darken-3" onclick="selectPath()">Démarrer</a>
-        <a class="btn waves-effect grey lighten-5 grey-text text-darken-3"  onclick="togglePause()">Pause</a>
+        <a class="btn waves-effect grey lighten-5 grey-text text-darken-3" id="button-live" onclick="liveButton()">Live</a>
+        <a class="btn waves-effect grey lighten-5 grey-text text-darken-3" id="button-simulation" onclick="simulationButton()">Simulation</a>
     </div>
 
     <div id="bottom-left">
@@ -118,8 +118,19 @@
     }
 
     function clickRight(){
-        controls.setNorth();
         console.log("Right side clicked");
+    }
+
+    function simulationButton(){
+        if(cameraTracking.isRunning){
+            cameraTracking.togglePause();
+        }else{
+            selectPath();
+        }
+    }
+
+    function liveButton(){
+        throw "NotYetImplemented";
     }
 
     function stopCamera(){
