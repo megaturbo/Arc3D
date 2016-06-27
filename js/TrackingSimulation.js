@@ -84,7 +84,7 @@ ARC3D.TrackingSimulation = function(camera) {
         var p_camera = this.spline.getPointAt( t_camera );
         var p_look = this.spline.getPointAt( t_look );
         this.camera.position.copy( p_camera );
-        var vectorToLook = this.camera.clone().lookAt( p_look );
+        this.camera.lookAt( p_look );
     };
 
     /**

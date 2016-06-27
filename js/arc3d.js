@@ -17,6 +17,10 @@ ARC3D.isPositionDefined = false;
 raycaster = new THREE.Raycaster();
 mouse = new THREE.Vector2();
 
+// View
+ARC3D.buttonDefaultClass = 'btn waves-effect grey lighten-5 grey-text text-darken-3';
+ARC3D.buttonActiveClass = 'btn waves-effect';
+
 /**
 * Get url paramters. From:
 http://stackoverflow.com/questions/19491336/get-url-parameter-jquery-or-how-to-get-query-string-values-in-js

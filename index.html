@@ -61,6 +61,7 @@
     <script src="js/arc3d.js"></script>
     <script src="js/Pathfinder.js"></script>
     <script src="js/TrackingSimulation.js"></script>
+    <script src="js/TrackingLive.js"></script>
 
     <script>
 
@@ -141,26 +142,48 @@
     * Live - Depend on what the user looks at.
     */
     function simulationButton(){
+        if(ARC3D.trackingMode == ARC3D.TrackingModes.LIVE)
+            return;
         ARC3D.trackingMode = ARC3D.TrackingModes.SIM;
-
-        if(tracking.isRunning){
-            tracking.stop();
-        }else{
-            selectPath();
-        }
+        tracking = new ARC3D.TrackingSimulation(camera);
+        btnSimulation.className = ARC3D.buttonActiveClass;
+        selectPath();
     }
 
-    function simulationPauseButton(){
+    function liveButton(){
+        if(ARC3D.trackingMode == ARC3D.TrackingModes.SIM)
+            return;
+        ARC3D.trackingMode = ARC3D.TrackingModes.LIVE;
+        tracking = new ARC3D.TrackingLive(camera);
+        btnLive.className = ARC3D.buttonActiveClass;
+        selectPath();
+    }
+
+    function pauseTracking(){
+        tracking.togglePause();
+        refreshPauseIcon();
+    }
+
+    function stopTracking(){
+        ARC3D.trackingMode = ARC3D.TrackingModes.WAITING;
+        btnSimulation.className = ARC3D.buttonDefaultClass;
+        btnLive.className = ARC3D.buttonDefaultClass;
+        tracking.stop();
+    }
+
+    function hideTrackingButtons(){
+        btnLive.style.visiblity = 'hidden';
+        btnSimulation.style.visiblity = 'hidden';
+    }
+
+
+    function refreshPauseIcon(){
         var d = document.getElementById('icon-pause');
-        if(tracking.togglePause()){
+        if(tracking.isPaused){
             d.innerHTML = 'play_arrow';
         }else{
             d.innerHTML = 'pause';
         }
-    }
-
-    function liveButton(){
-        throw new Error("Live mode is not implemented, yet");
     }
 
     /**
@@ -237,6 +260,7 @@
         var selected_b = Number(select_node_b.options[select_node_b.selectedIndex].value);
 
         updatePathfinding(selected_a, selected_b);
+        refreshPauseIcon();
     }
 
     /**
