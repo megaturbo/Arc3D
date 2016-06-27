@@ -21,7 +21,7 @@
 "colorSpecular"  : [0.9000, 0.9000, 0.9000],
 "opacity"  : 1.0,
 "specularCoef"  : 10.0,
-"mapDiffuse"    : "couloir-sol.png",
+"mapDiffuse"    : "../textures/couloir-sol.png",
 "vertexColors" : false
 }
 
