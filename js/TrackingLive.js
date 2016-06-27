@@ -19,6 +19,9 @@ ARC3D.TrackingLive = function(camera) {
     this.spline = undefined;
     this.distance = 0.0;
 
+    this.cube = new THREE.Mesh( new THREE.CubeGeometry( 10, 10, 10 ), new THREE.MeshNormalMaterial() );
+    scene.add(this.cube);
+
     /**
     * Set the path the camera shall follow.
     *
@@ -38,6 +41,8 @@ ARC3D.TrackingLive = function(camera) {
         this.isRunning = true;
         this.distance = 0.0;
         this.isPaused = false;
+        this.camera.position.copy( 0.0 );
+        this.camera.lookAt(this.spline.getPointAt(0.01));
     };
 
     /**
@@ -82,26 +87,19 @@ ARC3D.TrackingLive = function(camera) {
         // Point on the spline
         var p_camera = this.spline.getPointAt( t_camera );
         var p_look = this.spline.getPointAt( t_look );
+        this.cube.position.copy(p_look);
 
-        var cameraClone = this.camera.clone();
-        cameraClone.lookAt(p_look);
-        var vectorRotationCamera = cameraClone.rotation.toVector3();
-        var vectorRotationLook = this.camera.rotation.toVector3();
+        var frustum = new THREE.Frustum();
+        var projScreenMatrix = new THREE.Matrix4();
+        projScreenMatrix.multiplyMatrices( camera.projectionMatrix, camera.matrixWorldInverse );
 
-        var vX = vectorRotationLook.clone();
-        var vY = vectorRotationCamera.clone();
-        var costheta = vX.dot(vY) / (vX.length() * vY.length());
-        var theta = Math.acos(costheta);
+        frustum.setFromMatrix( new THREE.Matrix4().multiplyMatrices( camera.projectionMatrix, camera.matrixWorldInverse ) );
 
-        var angle = vectorRotationLook.angleTo(vectorRotationCamera) * 180 / Math.PI;
-        // console.log(angle);
-        console.log(costheta);
-        if(angle > 45)
-            return;
+        if(frustum.containsPoint(p_look)){
+            this.camera.position.copy( p_camera );
+            this.distance = d;
+        }
 
-
-        this.camera.position.copy( p_camera );
-        this.distance = d;
     };
 
     /**
