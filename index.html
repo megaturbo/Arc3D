@@ -142,20 +142,26 @@
     * Live - Depend on what the user looks at.
     */
     function simulationButton(){
+        // Cannot use button when the other mode is being used
         if(ARC3D.trackingMode == ARC3D.TrackingModes.LIVE)
             return;
         ARC3D.trackingMode = ARC3D.TrackingModes.SIM;
-        tracking = new ARC3D.TrackingSimulation(camera);
         btnSimulation.className = ARC3D.buttonActiveClass;
+
+        // New tracking mode
+        tracking = new ARC3D.TrackingSimulation(camera);
         selectPath();
     }
 
     function liveButton(){
+        // Cannot use button when the other mode is being used
         if(ARC3D.trackingMode == ARC3D.TrackingModes.SIM)
             return;
         ARC3D.trackingMode = ARC3D.TrackingModes.LIVE;
-        tracking = new ARC3D.TrackingLive(camera);
         btnLive.className = ARC3D.buttonActiveClass;
+
+        // New tracking mode
+        tracking = new ARC3D.TrackingLive(camera);
         selectPath();
     }
 

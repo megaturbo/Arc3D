@@ -65,8 +65,10 @@ ARC3D.TrackingLive = function(camera) {
         if(!this.isRunning || this.isPaused)
             return;
 
-        this.distance += delta * this.speed;
-        var t_camera = this.distance / this.spline.getLength();
+        // Distance = t * v
+        var d = this.distance;
+        d += delta * this.speed;
+        var t_camera = d / this.spline.getLength();
         var t_look = 0;
         if(t_camera < 1.0){
             t_look = t_camera <= 0.98 ? t_camera + 0.02 : 1.0;
@@ -76,10 +78,30 @@ ARC3D.TrackingLive = function(camera) {
             return;
         }
 
+
+        // Point on the spline
         var p_camera = this.spline.getPointAt( t_camera );
         var p_look = this.spline.getPointAt( t_look );
+
+        var cameraClone = this.camera.clone();
+        cameraClone.lookAt(p_look);
+        var vectorRotationCamera = cameraClone.rotation.toVector3();
+        var vectorRotationLook = this.camera.rotation.toVector3();
+
+        var vX = vectorRotationLook.clone();
+        var vY = vectorRotationCamera.clone();
+        var costheta = vX.dot(vY) / (vX.length() * vY.length());
+        var theta = Math.acos(costheta);
+
+        var angle = vectorRotationLook.angleTo(vectorRotationCamera) * 180 / Math.PI;
+        // console.log(angle);
+        console.log(costheta);
+        if(angle > 45)
+            return;
+
+
         this.camera.position.copy( p_camera );
-        var vectorToLook = this.camera.clone().lookAt( p_look );
+        this.distance = d;
     };
 
     /**
