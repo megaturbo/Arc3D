@@ -87,10 +87,6 @@
     var btnPause = document.getElementById('button-pause');
     var btnStop = document.getElementById('button-stop');
 
-    //TODO: use or note. Window reflection
-    var reflectionCube;
-    var texture_path = 'models/textures/';
-
     // Accelerometer localisation
     var user_velocity = new THREE.Vector3(0.0, 0.0, 0.0);
     var user_position = new THREE.Vector3(0.0, 0.0, 0.0);
@@ -113,13 +109,14 @@
     *
     * Synchronously asynchronous
     */
-    $.getJSON("nodes/nodes.json", function(json) {
+    $.getJSON("nodes/nodes_with_elevators.json", function(json) {
         nodes = json.nodes;
         initMenu();
         pathfinder = new ARC3D.Pathfinder(nodes);
 
         // Start
         init();
+        ARC3D.initNodes();
         animate();
     });
 
@@ -304,7 +301,7 @@
         // Create container
         container = document.createElement( 'div' );
         document.body.appendChild( container );
-        // document.onkeydown = ARC3D.keyEvent;
+        document.onkeydown = ARC3D.keyEvent;
 
         //	PerspectiveCamera( fov, aspect, near, far )
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
@@ -365,6 +362,7 @@
         stats.domElement.style.zIndex = 100;
         // container.appendChild( stats.domElement );
 
+        window.addEventListener('mousedown', onDocumentMouseDown, false);
         window.addEventListener( 'resize', onWindowResize, false );
 
         render();

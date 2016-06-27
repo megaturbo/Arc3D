@@ -19,9 +19,6 @@ ARC3D.TrackingLive = function(camera) {
     this.spline = undefined;
     this.distance = 0.0;
 
-    this.cube = new THREE.Mesh( new THREE.CubeGeometry( 10, 10, 10 ), new THREE.MeshNormalMaterial() );
-    scene.add(this.cube);
-
     /**
     * Set the path the camera shall follow.
     *
@@ -87,7 +84,6 @@ ARC3D.TrackingLive = function(camera) {
         // Point on the spline
         var p_camera = this.spline.getPointAt( t_camera );
         var p_look = this.spline.getPointAt( t_look );
-        this.cube.position.copy(p_look);
 
         var frustum = new THREE.Frustum();
         var projScreenMatrix = new THREE.Matrix4();
@@ -95,6 +91,7 @@ ARC3D.TrackingLive = function(camera) {
 
         frustum.setFromMatrix( new THREE.Matrix4().multiplyMatrices( camera.projectionMatrix, camera.matrixWorldInverse ) );
 
+        // Only move the camera if the user is aiming at the path.
         if(frustum.containsPoint(p_look)){
             this.camera.position.copy( p_camera );
             this.distance = d;
