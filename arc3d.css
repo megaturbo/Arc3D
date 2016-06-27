@@ -44,7 +44,7 @@ body input[type=range] {
     right: 0;
 }
 
-#button-simulation-pause{
+#bottom-right .btn-small{
     padding: 0px 10px 0px 10px;
 }
 

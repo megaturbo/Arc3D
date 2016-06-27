@@ -3,13 +3,13 @@
 var CAMERA_DEFAULT_SPEED = 50;
 
 /**
-* Creates a CmaeraTracking object
+* Creates a TrackingSimulation object
 *
 * @constructor
 * @this {CameraTracking}
 * @param {THREE.Camera} camera : A three.js camera
 */
-ARC3D.CameraTracking = function(camera) {
+ARC3D.TrackingLive = function(camera) {
     this.camera = camera;
     this.isRunning = false;
     this.isPaused = false;
@@ -28,11 +28,6 @@ ARC3D.CameraTracking = function(camera) {
     this.setPath = function(path) {
         this.path = path;
         this.spline = new THREE.CatmullRomCurve3(this.path);
-        // for(var i = 0; i < path.length; i++){
-        //     var p = this.path[i];
-        //     console.log(p);
-        //     this.spline.points.push(new THREE.Vector3(i.x, i.y, i.z));
-        // }
         return this.spline;
     };
 

@@ -4,6 +4,9 @@ var ARC3D = {};
 ARC3D.ControlModes = { FLY: 0, GYRO: 1};
 ARC3D.controlMode = undefined;
 
+ARC3D.TrackingModes = {WAITING: 0, SIM: 1, LIVE: 2};
+ARC3D.trackingMode = ARC3D.TrackingModes.WAITING;
+
 // ARC3D.defaultCameraPosition = new THREE.Vector3(518.1343902256439, 179.21829815866715, -204.30850284213201);
 ARC3D.defaultCameraPosition = new THREE.Vector3(0.0 , 0.0, 0.0);
 ARC3D.defaultCameraRotation = new THREE.Vector3(-0.1076350906304018, 1.5321409768616594, 0.07200147984575293);

@@ -33,7 +33,9 @@
     <div id="bottom-right">
         <a class="btn waves-effect grey lighten-5 grey-text text-darken-3" id="button-live" onclick="liveButton()">Live</a>
         <a class="btn waves-effect grey lighten-5 grey-text text-darken-3" id="button-simulation" onclick="simulationButton()">Simulation</a>
-        <a class="btn waves-effect grey lighten-5 grey-text text-darken-3" id="button-simulation-pause" onclick="simulationPauseButton()"><i class="material-icons" id="icon-pause">pause</i></a>
+
+        <a class="btn waves-effect grey lighten-5 grey-text text-darken-3 btn-small" id="button-pause" onclick="pauseTracking()"><i class="material-icons" id="icon-pause">pause</i></a>
+        <a class="btn waves-effect grey lighten-5 grey-text text-darken-3 btn-small" id="button-stop" onclick="stopTracking()"><i class="material-icons" id="icon-stop">stop</i></a>
     </div>
 
     <div id="bottom-left">
@@ -58,7 +60,7 @@
     <!-- My scripts -->
     <script src="js/arc3d.js"></script>
     <script src="js/Pathfinder.js"></script>
-    <script src="js/CameraTracking.js"></script>
+    <script src="js/TrackingSimulation.js"></script>
 
     <script>
 
@@ -72,11 +74,17 @@
     }
 
     // nodespathflol
-    var nodes, pathfinder, cameraTracking, spline;
+    var nodes, pathfinder, tracking, spline;
     var path = [];
     var lines = [];
     var boxes = [];
     var key_points = [];
+
+    // UI-Access
+    var btnLive = document.getElementById('button-live');
+    var btnSimulation = document.getElementById('button-simulation');
+    var btnPause = document.getElementById('button-pause');
+    var btnStop = document.getElementById('button-stop');
 
     //TODO: use or note. Window reflection
     var reflectionCube;
@@ -133,8 +141,10 @@
     * Live - Depend on what the user looks at.
     */
     function simulationButton(){
-        if(cameraTracking.isRunning){
-            cameraTracking.stop();
+        ARC3D.trackingMode = ARC3D.TrackingModes.SIM;
+
+        if(tracking.isRunning){
+            tracking.stop();
         }else{
             selectPath();
         }
@@ -142,7 +152,7 @@
 
     function simulationPauseButton(){
         var d = document.getElementById('icon-pause');
-        if(cameraTracking.togglePause()){
+        if(tracking.togglePause()){
             d.innerHTML = 'play_arrow';
         }else{
             d.innerHTML = 'pause';
@@ -150,19 +160,18 @@
     }
 
     function liveButton(){
-        throw "NotYetImplemented";
+        throw new Error("Live mode is not implemented, yet");
     }
-
 
     /**
     * Access functions
     */
     function stopCamera(){
-        cameraTracking.stop();
+        tracking.stop();
     }
 
     function togglePause(){
-        cameraTracking.togglePause();
+        tracking.togglePause();
     }
 
     function toggleFullScreen(){
@@ -190,7 +199,7 @@
     }
 
     function selectSpeed(new_speed){
-        cameraTracking.setSpeed(new_speed);
+        tracking.setSpeed(new_speed);
     }
 
 
@@ -239,14 +248,14 @@
     */
     function updatePathfinding(node_start_id, node_goal_id) {
         path = pathfinder.getPath(node_start_id, node_goal_id);
-        spline = cameraTracking.setPath(pathfinder.getPathPositions(path));
+        spline = tracking.setPath(pathfinder.getPathPositions(path));
         console.log(spline.getLength());
 
         // Remove old Tubegeometry if exist
         var o = scene.getObjectByName("spline");
         scene.remove(o);
 
-        // Create a Tubegeometry from the spline created by the CameraTracking
+        // Create a Tubegeometry from the spline created by the TrackingSimulation
         var geometry = new THREE.TubeGeometry(spline, Math.floor(spline.getLength() / 10), 2, 8, false);
         var material = new THREE.MeshPhongMaterial( {color: 0x4caf50 } );
         var mesh = new THREE.Mesh(geometry, material);
@@ -259,7 +268,7 @@
         scene.add(mesh);
 
         // Start the tracking
-        cameraTracking.start();
+        tracking.start();
     }
     function init() {
         // Create container
@@ -278,7 +287,7 @@
         }
 
         // Camera tracking use for pathfinding animation
-        cameraTracking = new ARC3D.CameraTracking(camera);
+        tracking = new ARC3D.TrackingSimulation(camera);
 
         // scene
         scene = new THREE.Scene();
@@ -403,7 +412,7 @@
         controls.update( delta );
         renderer.render( scene, camera );
 
-        cameraTracking.update(delta);
+        tracking.update(delta);
     }
 
     </script>
