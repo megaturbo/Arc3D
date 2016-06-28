@@ -380,11 +380,11 @@
         var ambient = new THREE.AmbientLight( 0xffffff );
         scene.add( ambient );
         var lights = [];
-		lights[ 0 ] = new THREE.PointLight( 0xffffff, 1, 0 );
-		lights[ 1 ] = new THREE.PointLight( 0xffffff, 1, 0 );
-		lights[ 2 ] = new THREE.PointLight( 0xffffff, 1, 0 );
+		lights[ 0 ] = new THREE.PointLight( 0xffffff, 5, 1000 );
+		lights[ 1 ] = new THREE.PointLight( 0xffffff, 5, 100 );
+		lights[ 2 ] = new THREE.PointLight( 0xffffff, 5, 100 );
 
-		lights[ 0 ].position.set( 0, 200, 0 );
+		lights[ 0 ].position.copy(pathfinder.getNodePosition(0));
 		lights[ 1 ].position.set( 100, 200, 100 );
 		lights[ 2 ].position.set( - 100, - 200, - 100 );
 
@@ -397,6 +397,7 @@
     function addModelToScene(geometry, materials)
     {
         var material = new THREE.MultiMaterial(materials);
+        // var material = new THREE.MeshLambertMaterial({color: 0xbbbbbb});
         mesh = new THREE.Mesh(geometry, material);
         mesh.position.y -= 100;
         scene.add(mesh);

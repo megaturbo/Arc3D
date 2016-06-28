@@ -44,8 +44,6 @@
 {
 "DbgIndex" : 2,
 "DbgName"  : "walls",
-"colorDiffuse"  : [0.7255, 0.2392, 0.0000],
-"colorSpecular"  : [0.9000, 0.9000, 0.9000],
 "opacity"  : 1.0,
 "specularCoef"  : 10.0,
 "mapDiffuse"    : "../textures/mur-orange.png",

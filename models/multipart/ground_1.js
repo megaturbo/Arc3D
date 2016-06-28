@@ -17,7 +17,7 @@
 {
 "DbgIndex" : 0,
 "DbgName"  : "couloir-sol",
-"colorDiffuse"  : [0.1333, 0.1333, 0.1333],
+"colorDiffuse"  : [0.8, 0.8, 0.8],
 "colorSpecular"  : [0.9000, 0.9000, 0.9000],
 "opacity"  : 1.0,
 "specularCoef"  : 10.0,
@@ -58,7 +58,7 @@
 
 {
 "DbgIndex" : 3,
-"DbgName"  : "plafond_crépi",
+"DbgName"  : "plafond_crï¿½pi",
 "colorDiffuse"  : [0.5880, 0.5880, 0.5880],
 "colorSpecular"  : [0.9000, 0.9000, 0.9000],
 "opacity"  : 1.0,

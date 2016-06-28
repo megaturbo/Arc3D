@@ -126,7 +126,7 @@ ARC3D.keyEvent = function(e) {
     var event = window.event ? window.event : e;
     if(event.keyCode == 32){
         var cpos = camera.position;
-        var point = {id:key_points.length + 3000, position:{x:cpos.x, y:cpos.y, z:cpos.z}, neighbors:[]};
+        var point = {id:key_points.length + 3000, positiwaon:{x:cpos.x, y:cpos.y, z:cpos.z}, neighbors:[]};
         key_points.push(point);
 
         var light = new THREE.PointLight( 0xffffff, 1, 0 );

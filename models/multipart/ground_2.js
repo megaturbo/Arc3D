@@ -16,7 +16,7 @@
 "materials": [
 {
 "DbgIndex" : 0,
-"DbgName"  : "plafond_crépi",
+"DbgName"  : "plafond_crï¿½pi",
 "colorDiffuse"  : [0.5880, 0.5880, 0.5880],
 "colorSpecular"  : [0.9000, 0.9000, 0.9000],
 "opacity"  : 1.0,
@@ -71,7 +71,6 @@
 {
 "DbgIndex" : 4,
 "DbgName"  : "ceiling",
-"colorDiffuse"  : [0.5880, 0.5880, 0.5880],
 "colorSpecular"  : [0.9000, 0.9000, 0.9000],
 "opacity"  : 1.0,
 "specularCoef"  : 10.0,
