@@ -116,7 +116,7 @@
 
         // Start
         init();
-        ARC3D.initNodes();
+        // ARC3D.initNodes();
         animate();
     });
 
@@ -335,7 +335,8 @@
 
         // JSON LOADER
         var jsonLoader = new THREE.JSONLoader();
-        models = ["commerce_0", "walls_0", "walls_1", "walls_2", "walls_3", "floors", "stairs", "window_0", "window_1", "window_2", "window_3"];
+        models = ["commerce_0", "walls_0", "walls_1", "walls_2", "walls_3", "stairs", "window_0", "window_1", "window_2", "window_3", "ground_1", "ground_2", "ground_3", "ground_4"];
+        // models = ["stairs", "hearc"];
         for(var i = 0; i < models.length; i++)
         {
             jsonLoader.load("models/multipart/" + models[i] + ".js", addModelToScene);
@@ -360,9 +361,9 @@
         stats.domElement.style.position = 'absolute';
         stats.domElement.style.top = '0px';
         stats.domElement.style.zIndex = 100;
-        // container.appendChild( stats.domElement );
+        container.appendChild( stats.domElement );
 
-        window.addEventListener('mousedown', onDocumentMouseDown, false);
+        // window.addEventListener('mousedown', onDocumentMouseDown, false);
         window.addEventListener( 'resize', onWindowResize, false );
 
         render();
