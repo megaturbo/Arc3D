@@ -443,7 +443,7 @@ rollout ThreeJSExporter "ThreeJSExporter"
 			(
 
 				fname = filenameFromPath bm.filename
-				Format "\"%\"    : \"%\",\n" label fname to:ostream
+				Format "\"%\"    : \"../textures/%\",\n" label fname to:ostream
 
 			)
 
@@ -481,13 +481,12 @@ rollout ThreeJSExporter "ThreeJSExporter"
 				-- colors
 
 				DumpColor mat.diffuse  "colorDiffuse"
-				DumpColor mat.ambient  "colorAmbient"
 				DumpColor mat.specular "colorSpecular"
 
 				t = mat.opacity / 100
 				s = mat.glossiness
 
-				Format "\"transparency\"  : %,\n" t to:ostream
+				Format "\"opacity\"  : %,\n" t to:ostream
 				Format "\"specularCoef\"  : %,\n" s to:ostream
 
 				-- maps
@@ -510,7 +509,8 @@ rollout ThreeJSExporter "ThreeJSExporter"
 
 			)
 
-			Format "\"vertexColors\" : %\n" useVertexColors to:ostream
+			Format "\"vertexColors\" : %,\n" useVertexColors to:ostream
+            Format "\"mapDiffuseWrap\" : [\"repeat\",\"repeat\"]\n" to:ostream
 			Format "}" to:ostream
 
 			if ( i < totalMaterials ) then Format "," to:ostream
