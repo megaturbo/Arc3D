@@ -18,54 +18,54 @@
 "DbgIndex" : 0,
 "DbgName"  : "couloir-sol",
 "colorDiffuse"  : [0.1333, 0.1333, 0.1333],
-"colorAmbient"  : [0.1333, 0.1333, 0.1333],
 "colorSpecular"  : [0.9000, 0.9000, 0.9000],
-"transparency"  : 1.0,
+"opacity"  : 1.0,
 "specularCoef"  : 10.0,
 "mapDiffuse"    : "../textures/couloir-sol.png",
 "mapSpecular"    : "../textures/couloir-sol-spec.png",
 "mapBump"    : "../textures/couloir-sol-normal.png",
-"vertexColors" : false
+"vertexColors" : false,
+"mapDiffuseWrap" : ["repeat","repeat"]
 },
 
 {
 "DbgIndex" : 1,
 "DbgName"  : "mur_blanc",
 "colorDiffuse"  : [0.5880, 0.5880, 0.5880],
-"colorAmbient"  : [0.5880, 0.5880, 0.5880],
 "colorSpecular"  : [0.9000, 0.9000, 0.9000],
-"transparency"  : 1.0,
+"opacity"  : 1.0,
 "specularCoef"  : 10.0,
 "mapDiffuse"    : "../textures/mur-blanc.png",
 "mapBump"    : "../textures/mur-normal.png",
-"vertexColors" : false
+"vertexColors" : false,
+"mapDiffuseWrap" : ["repeat","repeat"]
 },
 
 {
 "DbgIndex" : 2,
 "DbgName"  : "walls",
 "colorDiffuse"  : [0.7255, 0.2392, 0.0000],
-"colorAmbient"  : [0.7255, 0.2392, 0.0000],
 "colorSpecular"  : [0.9000, 0.9000, 0.9000],
-"transparency"  : 1.0,
+"opacity"  : 1.0,
 "specularCoef"  : 10.0,
 "mapDiffuse"    : "../textures/mur-orange.png",
 "mapSpecular"    : "../textures/mur-spec.png",
 "mapBump"    : "../textures/mur-normal.png",
-"vertexColors" : false
+"vertexColors" : false,
+"mapDiffuseWrap" : ["repeat","repeat"]
 },
 
 {
 "DbgIndex" : 3,
-"DbgName"  : "plafond_crï¿½pi",
+"DbgName"  : "plafond_crépi",
 "colorDiffuse"  : [0.5880, 0.5880, 0.5880],
-"colorAmbient"  : [0.5880, 0.5880, 0.5880],
 "colorSpecular"  : [0.9000, 0.9000, 0.9000],
-"transparency"  : 1.0,
+"opacity"  : 1.0,
 "specularCoef"  : 10.0,
 "mapDiffuse"    : "../textures/plafond-crepi.png",
 "mapBump"    : "../textures/plafond-crepi-normal.png",
-"vertexColors" : false
+"vertexColors" : false,
+"mapDiffuseWrap" : ["repeat","repeat"]
 }
 
 ],
