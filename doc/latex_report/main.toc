@@ -1,25 +1,33 @@
-\select@language {french}
-\contentsline {chapter}{\numberline {1}Introduction}{2}
-\contentsline {chapter}{\numberline {2}Analyse}{3}
-\contentsline {chapter}{\numberline {3}Impl\IeC {\'e}mentation}{4}
-\contentsline {section}{\numberline {3.1}Mod\IeC {\`e}le}{4}
-\contentsline {subsection}{\numberline {3.1.1}Mod\IeC {\'e}lisation}{4}
-\contentsline {subsection}{\numberline {3.1.2}Texturation}{4}
-\contentsline {subsection}{\numberline {3.1.3}Import/Export}{4}
-\contentsline {section}{\numberline {3.2}Pathfinding}{4}
-\contentsline {subsection}{\numberline {3.2.1}N\oe uds}{4}
-\contentsline {subsection}{\numberline {3.2.2}Algorithme}{4}
-\contentsline {section}{\numberline {3.3}Localisation en int\IeC {\'e}rieur}{5}
-\contentsline {subsection}{\numberline {3.3.1}GPS}{5}
-\contentsline {subsection}{\numberline {3.3.2}Triangulation Wifi}{5}
-\contentsline {subsection}{\numberline {3.3.3}Triangulation Bluetooth}{5}
-\contentsline {subsection}{\numberline {3.3.4}Acc\IeC {\'e}l\IeC {\'e}rom\IeC {\`e}tre et Gyroscope}{5}
-\contentsline {section}{\numberline {3.4}Contr\IeC {\^o}les}{5}
-\contentsline {subsection}{\numberline {3.4.1}Ordinateur et mobile}{5}
-\contentsline {subsection}{\numberline {3.4.2}Orientation mobile}{5}
-\contentsline {section}{\numberline {3.5}Suivi cam\IeC {\'e}ra}{5}
-\contentsline {subsection}{\numberline {3.5.1}Lissage du chemin}{5}
-\contentsline {subsection}{\numberline {3.5.2}Camera LookAt}{5}
-\contentsline {section}{\numberline {3.6}Interface graphique}{5}
-\contentsline {chapter}{\numberline {4}Conclusion}{6}
-\contentsline {chapter}{\numberline {5}Bibliographie}{7}
+\select@language {english}
+\select@language {francais}
+\select@language {english}
+\select@language {francais}
+\contentsline {chapter}{\numberline {1}Introduction}{4}
+\contentsline {chapter}{\numberline {2}Analyse}{5}
+\contentsline {section}{\numberline {2.1}Probl\IeC {\`e}me}{5}
+\contentsline {section}{\numberline {2.2}Solutions}{5}
+\contentsline {chapter}{\numberline {3}D\IeC {\'e}veloppement}{6}
+\contentsline {section}{\numberline {3.1}Mod\IeC {\`e}le}{6}
+\contentsline {subsection}{\numberline {3.1.1}Mod\IeC {\'e}lisation}{6}
+\contentsline {subsection}{\numberline {3.1.2}Texturisation}{6}
+\contentsline {subsection}{\numberline {3.1.3}Import/Export}{6}
+\contentsline {section}{\numberline {3.2}Recherche de chemin}{6}
+\contentsline {subsection}{\numberline {3.2.1}N\IeC {\oe }uds}{6}
+\contentsline {subsection}{\numberline {3.2.2}Algorithme}{6}
+\contentsline {section}{\numberline {3.3}Localisation en int\IeC {\'e}rieur}{6}
+\contentsline {subsection}{\numberline {3.3.1}GPS}{7}
+\contentsline {subsection}{\numberline {3.3.2}Triangulation Wifi}{7}
+\contentsline {subsection}{\numberline {3.3.3}Triangulation Bluetooth}{7}
+\contentsline {subsection}{\numberline {3.3.4}Acc\IeC {\'e}l\IeC {\'e}rom\IeC {\`e}tre et Gyroscope}{7}
+\contentsline {section}{\numberline {3.4}Contr\IeC {\^o}les}{7}
+\contentsline {subsection}{\numberline {3.4.1}Ordinateur et mobile}{7}
+\contentsline {subsection}{\numberline {3.4.2}Orientation mobile}{7}
+\contentsline {section}{\numberline {3.5}Suivi cam\IeC {\'e}ra}{7}
+\contentsline {subsection}{\numberline {3.5.1}Lissage du chemin}{7}
+\contentsline {subsection}{\numberline {3.5.2}Camera LookAt}{7}
+\contentsline {section}{\numberline {3.6}Interface graphique}{7}
+\contentsline {chapter}{\numberline {4}R\IeC {\'e}sultats}{8}
+\contentsline {chapter}{\numberline {5}Discussion}{9}
+\contentsline {section}{\numberline {5.1}Conclusion}{9}
+\contentsline {section}{\numberline {5.2}Perspectives}{9}
+\contentsline {chapter}{\numberline {6}Bibliographie}{10}

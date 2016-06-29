@@ -1,31 +1,41 @@
-\documentclass{report}
+\documentclass[a4paper,notitlepage]{report}
 
 % Packages
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc} 
-\usepackage[francais]{babel}
+\usepackage[francais,english]{babel}
 
 \author{Thomas \bsc{Roulin}}
 \title{ARC3D}
 
 \begin{document}
-
+% Title then clear page
 \maketitle
+\clearpage
 
+% Abstract in both languages
+\vspace*{\fill}
 \input{abstract}
+\vspace*{\fill}
+\selectlanguage{francais}
 
+% ToC
 \tableofcontents
 
+% Content
 \chapter{Introduction}
+Conceptualisation.
 Lancer le sujet, ensuite:
 Exposition du sujet, la problématique et plan.
 
 
 \chapter{Analyse}
- Présentation du problème, les solutions. Comment le problème a été découpé.
- Concepts et justifications.
+Présentation du problème, les solutions. Comment le problème a été découpé.
+Concepts et justifications.
+\section{Problème}
+\section{Solutions}
 
-\chapter{Implémentation}
+\chapter{Développement}
 \input{modele}
 \input{pathfinding}
 \input{localisation}
@@ -33,7 +43,17 @@ Exposition du sujet, la problématique et plan.
 \input{suivi_camera}
 \input{interface}
 
-\chapter{Conclusion}
+\chapter{Résultats}
+Lister les objectifs, lesquels sont réussi, pourquoi les autres le sont pas...
+
+\chapter{Discussion}
+\section{Conclusion}
+\section{Perspectives}
+Objectifs pas réussis : Comment les réussir.
+
+Améliorations possibles.
+
+Pas de perspectives faciles.
 
 
 \chapter{Bibliographie}
