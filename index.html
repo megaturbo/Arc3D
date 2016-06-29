@@ -109,7 +109,7 @@
     *
     * Synchronously asynchronous
     */
-    $.getJSON("nodes/nodes_with_elevators.json", function(json) {
+    $.getJSON("nodes/nodes.json", function(json) {
         nodes = json.nodes;
         initMenu();
         pathfinder = new ARC3D.Pathfinder(nodes);
