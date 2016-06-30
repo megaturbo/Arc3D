@@ -4,14 +4,17 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc} 
 \usepackage[francais,english]{babel}
+\usepackage{graphicx}
 
-\author{Thomas \bsc{Roulin}}
-\title{ARC3D}
+% Counters for toc and numerotation depth
+%\setcounter{tocdepth}{1}
+\setcounter{secnumdepth}{1}
+
+\graphicspath{{images/}}
 
 \begin{document}
-% Title then clear page
-\maketitle
-\clearpage
+
+\input{titlepage}
 
 % Abstract in both languages
 \vspace*{\fill}
@@ -24,24 +27,37 @@
 
 % Content
 \chapter{Introduction}
-Conceptualisation.
 Lancer le sujet, ensuite:
 Exposition du sujet, la problématique et plan.
+\section{Problématique générale}
+XXiè siècle, on veut se simplifier la vie, on a passé de temps.
+argument on veut avoir mieux. 3D ça en jette. Notre école a certaines prétention, notamment dans le domaine visualisation temps réel
+\section{Contextualisation}
+Comment pourquoi à quel niveau les salles sont bloquées
 
 
 \chapter{Analyse}
-Présentation du problème, les solutions. Comment le problème a été découpé.
+Présentation du problème, les solutions. Comment il a été découpé.
 Concepts et justifications.
-\section{Problème}
-\section{Solutions}
+\section{État de l'art}
+\subsection{3D temps réel}
+\subsection{Navigation}
+\subsection{Architecture}
+\input{localisation}
 
 \chapter{Développement}
 \input{modele}
+\section{Rendu graphique}
+Matériaux de Lambert
+Éclairage.
+
 \input{pathfinding}
-\input{localisation}
 \input{controles}
 \input{suivi_camera}
 \input{interface}
+
+\section{Rendu temps réel}
+je l'ai testé sur 3 trucs. minimum 30 fps
 
 \chapter{Résultats}
 Lister les objectifs, lesquels sont réussi, pourquoi les autres le sont pas...

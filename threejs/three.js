@@ -2504,9 +2504,9 @@ THREE.Vector3.prototype = {
 	projectOnVector: function ( vector ) {
 
 		var scalar = vector.dot( this ) / vector.lengthSq();
-	
+
 		return this.copy( vector ).multiplyScalar( scalar );
-	
+
 	},
 
 	projectOnPlane: function () {
@@ -3551,7 +3551,7 @@ THREE.Euler.prototype = {
 		return function reorder( newOrder ) {
 
 			q.setFromEuler( this );
-			
+
 			return this.setFromQuaternion( q, newOrder );
 
 		};
@@ -4649,7 +4649,7 @@ THREE.Matrix3.prototype = {
 
 			return this.identity();
 		}
-		
+
 		var detInv = 1 / det;
 
 		te[ 0 ] = t11 * detInv;
@@ -5383,7 +5383,7 @@ THREE.Matrix4.prototype = {
 			return this.identity();
 
 		}
-		
+
 		var detInv = 1 / det;
 
 		te[ 0 ] = t11 * detInv;
@@ -33000,7 +33000,7 @@ THREE.SpritePlugin = function ( renderer, sprites ) {
 	}
 
 	function painterSortStable ( a, b ) {
-		
+
 		if ( a.renderOrder !== b.renderOrder ) {
 
 			return a.renderOrder - b.renderOrder;
@@ -36164,7 +36164,7 @@ THREE.CubicBezierCurve.prototype.getPoint = function ( t ) {
 
 	var b3 = THREE.ShapeUtils.b3;
 
-	return new THREE.Vector2( 
+	return new THREE.Vector2(
 		b3( t, this.v0.x, this.v1.x, this.v2.x, this.v3.x ),
 		b3( t, this.v0.y, this.v1.y, this.v2.y, this.v3.y )
 	);
@@ -36175,7 +36175,7 @@ THREE.CubicBezierCurve.prototype.getTangent = function( t ) {
 
 	var tangentCubicBezier = THREE.CurveUtils.tangentCubicBezier;
 
-	return new THREE.Vector2( 
+	return new THREE.Vector2(
 		tangentCubicBezier( t, this.v0.x, this.v1.x, this.v2.x, this.v3.x ),
 		tangentCubicBezier( t, this.v0.y, this.v1.y, this.v2.y, this.v3.y )
 	).normalize();
@@ -36237,7 +36237,7 @@ THREE.EllipseCurve = function ( aX, aY, xRadius, yRadius, aStartAngle, aEndAngle
 	this.aEndAngle = aEndAngle;
 
 	this.aClockwise = aClockwise;
-	
+
 	this.aRotation = aRotation || 0;
 
 };
@@ -36263,7 +36263,7 @@ THREE.EllipseCurve.prototype.getPoint = function ( t ) {
 		angle = this.aStartAngle + t * deltaAngle;
 
 	}
-	
+
 	var x = this.aX + this.xRadius * Math.cos( angle );
 	var y = this.aY + this.yRadius * Math.sin( angle );
 
@@ -36346,7 +36346,7 @@ THREE.QuadraticBezierCurve3 = THREE.Curve.create(
 
 	function ( t ) {
 
-		var b2 = THREE.ShapeUtils.b2;		
+		var b2 = THREE.ShapeUtils.b2;
 
 		return new THREE.Vector3(
 			b2( t, this.v0.x, this.v1.x, this.v2.x ),
@@ -40467,7 +40467,7 @@ THREE.ArrowHelper.prototype.setColor = function ( color ) {
  */
 
 THREE.BoxHelper = function ( object, color ) {
-	
+
 	if ( color === undefined ) color = 0xffff00;
 
 	var indices = new Uint16Array( [ 0, 1, 1, 2, 2, 3, 3, 0, 4, 5, 5, 6, 6, 7, 7, 4, 0, 4, 1, 5, 2, 6, 3, 7 ] );
@@ -41869,4 +41869,3 @@ THREE.MorphBlendMesh.prototype.update = function ( delta ) {
 	}
 
 };
-

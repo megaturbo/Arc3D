@@ -49,9 +49,6 @@
     </div>
 
     <script src="threejs/three.min.js"></script>
-    <script src="threejs/loaders/OBJLoader.js"></script>
-    <script src="threejs/loaders/MTLLoader.js"></script>
-    <script src="threejs/loaders/DDSLoader.js"></script>
     <script src="threejs/controls/FlyControls.js"></script>
     <script src="threejs/controls/DeviceOrientationControls.js"></script>
     <script src="threejs/Detector.js"></script>
@@ -87,11 +84,7 @@
     var btnPause = document.getElementById('button-pause');
     var btnStop = document.getElementById('button-stop');
 
-    // Accelerometer localisation
-    var user_velocity = new THREE.Vector3(0.0, 0.0, 0.0);
-    var user_position = new THREE.Vector3(0.0, 0.0, 0.0);
-
-    var last_time;
+    var building_parts = [];
 
     // THREE
 	var raycaster, mouse;
@@ -100,7 +93,7 @@
     var clock = new THREE.Clock();
 
     THREE.DefaultLoadingManager.onProgress = function ( item, loaded, total ) {
-        console.log( item, loaded, total );
+        // console.log( item, loaded, total );
     };
 
     /**
@@ -307,10 +300,8 @@
         camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
         if(!ARC3D.isPositionDefined){
             camera.position.copy(ARC3D.defaultCameraPosition);
-            user_position.copy(ARC3D.defaultCameraPosition);
         }else{
             camera.position.copy(pathfinder.getNodePosition(current_node_id));
-            user_position.copy(pathfinder.getNodePosition(current_node_id));
         }
 
         // Camera tracking use for pathfinding animation
@@ -335,11 +326,10 @@
 
         // JSON LOADER
         var jsonLoader = new THREE.JSONLoader();
-        models = ["commerce_0", "walls_0", "walls_1", "walls_2", "walls_3", "stairs", "window_0", "window_1", "window_2", "window_3", "ground_1", "ground_2", "ground_3", "ground_4"];
-        // models = ["stairs", "hearc"];
+        var models = ARC3D.models;
         for(var i = 0; i < models.length; i++)
         {
-            jsonLoader.load("models/multipart/" + models[i] + ".js", addModelToScene);
+            jsonLoader.load(models[i], addModelToScene);
         }
 
         // Renderer
@@ -394,13 +384,21 @@
     }
 
 
-    function addModelToScene(geometry, materials)
+    function addModelToScene(geometry, materials, modelName)
     {
+
         var material = new THREE.MultiMaterial(materials);
         // var material = new THREE.MeshLambertMaterial({color: 0xbbbbbb});
         mesh = new THREE.Mesh(geometry, material);
+        mesh.name = modelName;
         mesh.position.y -= 100;
         scene.add(mesh);
+
+        var helper = new THREE.BoundingBoxHelper(mesh, Math.random() * 0xffffff);
+        helper.update();
+        scene.add(helper);
+
+        building_parts.push({mesh: mesh, boundingBox: helper});
     }
 
     /**
@@ -438,6 +436,22 @@
     }
 
     function render() {
+        var p = camera.position;
+        for(var i = 0; i < building_parts.length; i++){
+            var me = building_parts[i].mesh;
+            var bb = building_parts[i].boundingBox.box;
+
+            //When it's not a wall, continue to next iteration
+            if($.inArray(me.name, ARC3D.modelsWalls) <= -1){
+                continue;
+            }
+
+            me.visible = false;
+            if( bb.min.x <= p.x && p.x <= bb.max.x && bb.min.y <= p.y && p.y <= bb.max.y && bb.min.z <= p.z && p.z <= bb.max.z) {
+                me.visible = true;
+            }
+        }
+
         var delta = clock.getDelta();
         controls.update( delta );
         renderer.render( scene, camera );

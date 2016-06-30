@@ -21,6 +21,67 @@ mouse = new THREE.Vector2();
 ARC3D.buttonDefaultClass = 'btn waves-effect grey lighten-5 grey-text text-darken-3';
 ARC3D.buttonActiveClass = 'btn waves-effect';
 
+//Models
+ARC3D.modelsWalls = ["walls_0", "walls_1", "walls_2", "walls_3"];
+ARC3D.modelsWindows = ["window_0", "window_1", "window_2", "window_3"];
+ARC3D.modelsGrounds = ["ground_1", "ground_2", "ground_3", "ground_4"];
+ARC3D.modelsStairs = ["stairs"];
+ARC3D.modelsMisc = ["commerce_0"];
+
+ARC3D.models = [].concat(ARC3D.modelsWalls, ARC3D.modelsWindows, ARC3D.modelsGrounds, ARC3D.modelsStairs, ARC3D.modelsMisc);
+
+/**
+* JSONLoader load method override
+*
+* The same as three.js version except it uses a modelName and give it to the callback
+*/
+THREE.JSONLoader.prototype.load = function( modelName, onLoad, onProgress, onError ) {
+
+    var url = "models/multipart/" + modelName + ".js";
+
+
+    var scope = this;
+
+    var texturePath = this.texturePath && ( typeof this.texturePath === "string" ) ? this.texturePath : THREE.Loader.prototype.extractUrlBase( url );
+
+    var loader = new THREE.XHRLoader( this.manager );
+    loader.setWithCredentials( this.withCredentials );
+    loader.load( url, function ( text ) {
+
+        var json = JSON.parse( text );
+        var metadata = json.metadata;
+
+        if ( metadata !== undefined ) {
+
+            var type = metadata.type;
+
+            if ( type !== undefined ) {
+
+                if ( type.toLowerCase() === 'object' ) {
+
+                    console.error( 'THREE.JSONLoader: ' + url + ' should be loaded with THREE.ObjectLoader instead.' );
+                    return;
+
+                }
+
+                if ( type.toLowerCase() === 'scene' ) {
+
+                    console.error( 'THREE.JSONLoader: ' + url + ' should be loaded with THREE.SceneLoader instead.' );
+                    return;
+
+                }
+
+            }
+
+        }
+
+        var object = scope.parse( json, texturePath );
+        onLoad( object.geometry, object.materials, modelName );
+
+    }, onProgress, onError );
+
+};
+
 /**
 * Get url paramters. From:
 http://stackoverflow.com/questions/19491336/get-url-parameter-jquery-or-how-to-get-query-string-values-in-js
