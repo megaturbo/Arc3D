@@ -53,6 +53,7 @@
     <script src="threejs/controls/DeviceOrientationControls.js"></script>
     <script src="threejs/Detector.js"></script>
     <script src="threejs/libs/stats.min.js"></script>
+    <script src="js/threex.rendererstats.js"></script>
 
     <!-- My scripts -->
     <script src="js/arc3d.js"></script>
@@ -85,10 +86,11 @@
     var btnStop = document.getElementById('button-stop');
 
     var building_parts = [];
+    var building_materials = {};
 
     // THREE
 	var raycaster, mouse;
-    var container, stats;
+    var container, stats, rendererStats;
     var camera, controls, scene, renderer;
     var clock = new THREE.Clock();
 
@@ -353,6 +355,12 @@
         stats.domElement.style.zIndex = 100;
         container.appendChild( stats.domElement );
 
+        rendererStats = new THREEx.RendererStats();
+        rendererStats.domElement.style.position   = 'absolute';
+        rendererStats.domElement.style.left  = '0px';
+        rendererStats.domElement.style.bottom    = '0px';
+        container.appendChild( rendererStats.domElement );
+
         // window.addEventListener('mousedown', onDocumentMouseDown, false);
         window.addEventListener( 'resize', onWindowResize, false );
 
@@ -386,9 +394,23 @@
 
     function addModelToScene(geometry, materials, modelName)
     {
+        var mat_refs = [];
 
-        var material = new THREE.MultiMaterial(materials);
-        // var material = new THREE.MeshLambertMaterial({color: 0xbbbbbb});
+        // Only create one material per different material
+        for(var i = 0; i < materials.length; i++){
+            var m = materials[i];
+            m.map = null;
+            m.specularMap = null;
+            m.bumpMap = null;
+
+            if (!(m.name in building_materials)){
+                building_materials[m.name] = m;
+            }
+            mat_refs.push(building_materials[m.name]);
+        }
+        var material = new THREE.MeshLambertMaterial(mat_refs[0]);
+        // var material = new THREE.MeshLambertMaterial({color: Math.random() * 0xffffff});
+        console.log(mat_refs.length);
         mesh = new THREE.Mesh(geometry, material);
         mesh.name = modelName;
         mesh.position.y -= 100;
@@ -436,6 +458,8 @@
     }
 
     function render() {
+        rendererStats.update(renderer);
+
         var p = camera.position;
         for(var i = 0; i < building_parts.length; i++){
             var me = building_parts[i].mesh;
