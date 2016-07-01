@@ -399,7 +399,7 @@
         // Only create one material per different material
         for(var i = 0; i < materials.length; i++){
             var m = materials[i];
-            m.map = null;
+            // m.map = null;
             m.specularMap = null;
             m.bumpMap = null;
 
@@ -407,8 +407,9 @@
                 building_materials[m.name] = m;
             }
             mat_refs.push(building_materials[m.name]);
+            // mat_refs.push(new THREE.MeshLambertMaterial({color: Math.random() * 0xffffff}));
         }
-        var material = new THREE.MeshLambertMaterial(mat_refs[0]);
+        var material = new THREE.MeshFaceMaterial(mat_refs);
         // var material = new THREE.MeshLambertMaterial({color: Math.random() * 0xffffff});
         console.log(mat_refs.length);
         mesh = new THREE.Mesh(geometry, material);
