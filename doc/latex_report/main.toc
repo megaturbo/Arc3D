@@ -31,6 +31,7 @@
 \contentsline {subsection}{Lissage du chemin}{7}
 \contentsline {subsection}{Regard de la cam\IeC {\'e}ra}{7}
 \contentsline {section}{\numberline {3.6}Interface graphique}{7}
+\contentsline {section}{\numberline {3.7}Rendu temps r\IeC {\'e}el}{7}
 \contentsline {chapter}{\numberline {4}R\IeC {\'e}sultats}{8}
 \contentsline {chapter}{\numberline {5}Discussion}{9}
 \contentsline {section}{\numberline {5.1}Conclusion}{9}

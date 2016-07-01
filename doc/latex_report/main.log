@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.6.28)  30 JUN 2016 14:06
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.6.28)  1 JUL 2016 11:18
 entering extended mode
 **./main.tex
 (main.tex
@@ -509,15 +509,16 @@ LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <7> on input line 6.
 LaTeX Font Info:    External font `cmex10' loaded for size
 (Font)              <5> on input line 6.
-)
+ [2
+
+])
 \tf@toc=\write3
 \openout3 = `main.toc'.
 
- [2
 
-] [3]
+(introduction.tex [3]
 Chapitre 1.
-[4
+) [4
 
 ]
 Chapitre 2.
@@ -542,8 +543,8 @@ Chapitre 6.
 
 ] (main.aux) ) 
 Here is how much of TeX's memory you used:
- 3181 strings out of 493335
- 42143 string characters out of 3136665
+ 3184 strings out of 493335
+ 42187 string characters out of 3136665
  109591 words of memory out of 3000000
  6646 multiletter control sequences out of 15000+200000
  14934 words of font info for 29 fonts, out of 3000000 for 9000
@@ -565,7 +566,7 @@ s\ikonoklast\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc14
 c\dpi600\ecrm1440.pk> <C:\Users\ikonoklast\AppData\Local\MiKTeX\2.9\fonts\pk\lj
 four\jknappen\ec\dpi600\ecrm0900.pk> <C:\Users\ikonoklast\AppData\Local\MiKTeX\
 2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecbx2074.pk>
-Output written on main.pdf (11 pages, 578941 bytes).
+Output written on main.pdf (11 pages, 579407 bytes).
 PDF statistics:
  433 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
