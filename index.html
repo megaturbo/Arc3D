@@ -24,6 +24,9 @@
         <label>To</label>
         <select class="browser-default"  id="select_node_b">
         </select>
+        <label>Toilets</label><br />
+        <img src="img/toilet-man.png" class="img" onclick="getNearestToilet(ARC3D.toiletMale)"/>
+        <img src="img/toilet-woman.png" class="img" onclick="getNearestToilet(ARC3D.toiletFemale)"/>
     </div>
 
     <div id="fullscreen">
@@ -125,6 +128,26 @@
 
     function clickRight(){
         console.log("Right side clicked");
+    }
+
+    function getNearestToilet(toilet_style)
+    {
+        var start_id = pathfinder.getNearestNodeId(camera.position);
+        var path = [];
+        var length = Infinity;
+        for(var i = 0; i < nodes.length; i++)
+        {
+            var n = nodes[i];
+            if(n.name == toilet_style)
+            {
+                var tmpath = pathfinder.getPath(start_id, n.id);
+                if(pathfinder.getPathLength(tmpath) < length)
+                {
+                    path = tmpath;
+                }
+            }
+        }
+        updatePathfinding(path[0], path[path.length - 1]);
     }
 
     /**
@@ -399,9 +422,6 @@
         // Only create one material per different material
         for(var i = 0; i < materials.length; i++){
             var m = materials[i];
-            // m.map = null;
-            m.specularMap = null;
-            m.bumpMap = null;
 
             if (!(m.name in building_materials)){
                 building_materials[m.name] = m;
@@ -410,6 +430,7 @@
             // mat_refs.push(new THREE.MeshLambertMaterial({color: Math.random() * 0xffffff}));
         }
         var material = new THREE.MeshFaceMaterial(mat_refs);
+        // var material = new THREE.MultiMaterial(mat_refs);
         // var material = new THREE.MeshLambertMaterial({color: Math.random() * 0xffffff});
         console.log(mat_refs.length);
         mesh = new THREE.Mesh(geometry, material);
@@ -461,21 +482,7 @@
     function render() {
         rendererStats.update(renderer);
 
-        var p = camera.position;
-        for(var i = 0; i < building_parts.length; i++){
-            var me = building_parts[i].mesh;
-            var bb = building_parts[i].boundingBox.box;
-
-            //When it's not a wall, continue to next iteration
-            if($.inArray(me.name, ARC3D.modelsWalls) <= -1){
-                continue;
-            }
-
-            me.visible = false;
-            if( bb.min.x <= p.x && p.x <= bb.max.x && bb.min.y <= p.y && p.y <= bb.max.y && bb.min.z <= p.z && p.z <= bb.max.z) {
-                me.visible = true;
-            }
-        }
+        ARC3D.updateFloorCulling(camera.position, building_parts);
 
         var delta = clock.getDelta();
         controls.update( delta );

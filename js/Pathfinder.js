@@ -184,12 +184,13 @@ ARC3D.Pathfinder = function(nodes){
 
                 if(closedSet.has(neighbor_id))
                 {
-                    continue; // Break the forEach
+                    continue;
                 }
 
                 tentative_gScore = gScore.get(current_id) + this.computeDistance(current_node, neighbor_node);
 
-                if(!openSet.has(neighbor_id)){
+                if(!openSet.has(neighbor_id))
+                {
                     openSet.add(neighbor_id);
                 } else if (tentative_gScore >= gScore.get(neighbor_id)) {
                     continue;
@@ -222,5 +223,27 @@ ARC3D.Pathfinder = function(nodes){
         return total_path.reverse();
     };
 
+    this.getNearestNodeId = function(p)
+    {
+        var nearest_node_id = 0;
+        for(var i = 0; i < this.nodes.length; i++){
+            var n = this.nodes[i];
+            var np = this.getNodePosition(n.id);
+            var op = this.getNodePosition(nearest_node_id);
+            if(p.distanceTo(np) < p.distanceTo(op))
+                nearest_node_id = n.id;
+        }
+        return nearest_node_id;
+    };
+
+    this.getPathLength = function(path)
+    {
+        var distance = 0;
+        for(var i = 0; i < path.length - 1; i++)
+        {
+            distance += this.heuristic(path[i], path[i + 1]);
+        }
+        return distance;
+    };
 
 };

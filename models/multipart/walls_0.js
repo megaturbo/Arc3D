@@ -29,17 +29,16 @@
 },
 
 {
-"DbgIndex" : 1,
-"DbgName"  : "walls",
-"colorDiffuse"  : [0.7255, 0.2392, 0.0000],
-"colorSpecular"  : [0.9000, 0.9000, 0.9000],
-"opacity"  : 1.0,
-"specularCoef"  : 10.0,
-"mapDiffuse"    : "../textures/mur-orange.png",
-"mapSpecular"    : "../textures/mur-spec.png",
-"mapBump"    : "../textures/mur-normal.png",
-"vertexColors" : false,
-"mapDiffuseWrap" : ["repeat","repeat"]
+    "DbgIndex" : 1,
+    "DbgName"  : "walls",
+    "opacity"  : 1.0,
+    "specularCoef"  : 10.0,
+    "mapBumpScale": 5,
+    "mapDiffuse"    : "../textures/mur-orange.png",
+    "mapSpecular"    : "../textures/mur-spec.png",
+    "mapBump"    : "../textures/mur-normal.png",
+    "vertexColors" : false,
+    "mapDiffuseWrap" : ["repeat","repeat"]
 },
 
 {

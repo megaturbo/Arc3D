@@ -5,6 +5,7 @@
 \usepackage[T1]{fontenc} 
 \usepackage[francais,english]{babel}
 \usepackage{graphicx}
+\usepackage{biblatex}
 
 % Counters for toc and numerotation depth
 %\setcounter{tocdepth}{1}
@@ -32,10 +33,7 @@
 \chapter{Analyse}
 Présentation du problème, les solutions. Comment il a été découpé.
 Concepts et justifications.
-\section{État de l'art}
-\subsection{3D temps réel}
-\subsection{Navigation}
-\subsection{Architecture}
+\input{state_of_the_art}
 \input{localisation}
 
 \chapter{Développement}

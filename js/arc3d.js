@@ -1,5 +1,7 @@
 var ARC3D = {};
 
+ARC3D.ToiletMale = 'toilet-man';
+ARC3D.ToiletFemale = 'toilet-woman';
 
 ARC3D.ControlModes = { FLY: 0, GYRO: 1};
 ARC3D.controlMode = undefined;
@@ -83,10 +85,31 @@ THREE.JSONLoader.prototype.load = function( modelName, onLoad, onProgress, onErr
 };
 
 /**
+* p {Vector3} camera position
+* parts {Array of mesh} building_parts
+*/
+ARC3D.updateFloorCulling = function(p, parts){
+    for(var i = 0; i < parts.length; i++){
+        var me = parts[i].mesh;
+        var bb = parts[i].boundingBox.box;
+
+        //When it's not a wall, continue to next iteration
+        if($.inArray(me.name, ARC3D.modelsWalls) <= -1){
+            continue;
+        }
+
+        me.visible = false;
+        if( bb.min.x <= p.x && p.x <= bb.max.x && bb.min.y <= p.y && p.y <= bb.max.y && bb.min.z <= p.z && p.z <= bb.max.z) {
+            me.visible = true;
+        }
+    }
+};
+
+/**
 * Get url paramters. From:
 http://stackoverflow.com/questions/19491336/get-url-parameter-jquery-or-how-to-get-query-string-values-in-js
 */
-ARC3D.getUrlParameter = function getUrlParameter(sParam) {
+ARC3D.getUrlParameter = function(sParam) {
     var sPageURL = decodeURIComponent(window.location.search.substring(1)),
     sURLVariables = sPageURL.split('&'),
     sParameterName,

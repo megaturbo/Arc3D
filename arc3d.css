@@ -10,6 +10,12 @@ body input[type=range] {
     width: auto;
 }
 
+#fromto .img{
+    width: 30px;
+    height: 80px;
+    margin-right:10px;
+}
+
 #fromto{
     background: white;
     position:absolute;
