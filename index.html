@@ -25,8 +25,8 @@
         <select class="browser-default"  id="select_node_b">
         </select>
         <label>Toilets</label><br />
-        <img src="img/toilet-man.png" class="img" onclick="getNearestToilet(ARC3D.toiletMale)"/>
-        <img src="img/toilet-woman.png" class="img" onclick="getNearestToilet(ARC3D.toiletFemale)"/>
+        <img src="img/toilet-man.png" class="img" onclick="getNearestToilet(ARC3D.ToiletMale)"/>
+        <img src="img/toilet-woman.png" class="img" onclick="getNearestToilet(ARC3D.ToiletFemale)"/>
     </div>
 
     <div id="fullscreen">
@@ -132,18 +132,21 @@
 
     function getNearestToilet(toilet_style)
     {
+        console.log(toilet_style);
         var start_id = pathfinder.getNearestNodeId(camera.position);
         var path = [];
         var length = Infinity;
         for(var i = 0; i < nodes.length; i++)
         {
             var n = nodes[i];
-            if(n.name == toilet_style)
+            if(n.name === toilet_style)
             {
                 var tmpath = pathfinder.getPath(start_id, n.id);
-                if(pathfinder.getPathLength(tmpath) < length)
+                var tmplength = pathfinder.getPathLength(tmpath);
+                if(tmplength < length)
                 {
                     path = tmpath;
+                    length = tmplength;
                 }
             }
         }
@@ -307,7 +310,7 @@
 
         // Set some parameters
         mesh.name = "spline";
-        mesh.position.y -= 20;
+        mesh.position.y -= 10;
 
         // Add the TubeGeometry to the scene.
         scene.add(mesh);
@@ -409,9 +412,9 @@
 		lights[ 1 ].position.set( 100, 200, 100 );
 		lights[ 2 ].position.set( - 100, - 200, - 100 );
 
-		scene.add( lights[ 0 ] );
-		scene.add( lights[ 1 ] );
-		scene.add( lights[ 2 ] );
+		// scene.add( lights[ 0 ] );
+		// scene.add( lights[ 1 ] );
+		// scene.add( lights[ 2 ] );
     }
 
 
@@ -419,20 +422,24 @@
     {
         var mat_refs = [];
 
-        // Only create one material per different material
         for(var i = 0; i < materials.length; i++){
+            // var m = new THREE.MeshPhongMaterial(materials[i]);
+            // var m = new THREE.MeshBasicMaterial(materials[i]);
             var m = materials[i];
 
             if (!(m.name in building_materials)){
                 building_materials[m.name] = m;
             }
             mat_refs.push(building_materials[m.name]);
-            // mat_refs.push(new THREE.MeshLambertMaterial({color: Math.random() * 0xffffff}));
         }
         var material = new THREE.MeshFaceMaterial(mat_refs);
-        // var material = new THREE.MultiMaterial(mat_refs);
-        // var material = new THREE.MeshLambertMaterial({color: Math.random() * 0xffffff});
-        console.log(mat_refs.length);
+        geometry.sortFacesByMaterialIndex();
+
+        // var material = new THREE.MeshPhongMaterial();
+        // material.map = THREE.ImageUtils.loadTexture('models/textures/mur-orange.png');
+        // material.bumpMap    = THREE.ImageUtils.loadTexture('models/textures/mur-normal.png');
+        // material.bumpScale = 0.05;
+
         mesh = new THREE.Mesh(geometry, material);
         mesh.name = modelName;
         mesh.position.y -= 100;
@@ -482,7 +489,7 @@
     function render() {
         rendererStats.update(renderer);
 
-        ARC3D.updateFloorCulling(camera.position, building_parts);
+        // ARC3D.updateFloorCulling(camera.position, building_parts);
 
         var delta = clock.getDelta();
         controls.update( delta );

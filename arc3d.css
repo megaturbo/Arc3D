@@ -14,6 +14,7 @@ body input[type=range] {
     width: 30px;
     height: 80px;
     margin-right:10px;
+    border: 1px solid #bbb;
 }
 
 #fromto{
