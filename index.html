@@ -424,8 +424,8 @@
 
         for(var i = 0; i < materials.length; i++){
             // var m = new THREE.MeshPhongMaterial(materials[i]);
-            // var m = new THREE.MeshBasicMaterial(materials[i]);
-            var m = materials[i];
+            var m = new THREE.MeshLambertMaterial(materials[i]);
+            // var m = materials[i];
 
             if (!(m.name in building_materials)){
                 building_materials[m.name] = m;

@@ -212,7 +212,7 @@ ARC3D.keyEvent = function(e) {
         var cpos = camera.position;
         var point = {id:key_points.length + 3000, positiwaon:{x:cpos.x, y:cpos.y, z:cpos.z}, neighbors:[]};
         key_points.push(point);
-		pointLight = new THREE.PointLight( 0xffffff, 0.8, 100 );
+		pointLight = new THREE.PointLight( 0xffffff, 0.8, 300 );
 		pointLight.position.copy(cpos);
 		scene.add( pointLight );
 
