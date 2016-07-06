@@ -22,6 +22,7 @@
 "opacity"  : 0.2,
 "specularCoef"  : 50.0,
 "vertexColors" : false,
+"shading" : "phong",
 "mapDiffuseWrap" : ["repeat","repeat"]
 },
 
@@ -33,6 +34,7 @@
 "opacity"  : 0.2,
 "specularCoef"  : 50.0,
 "vertexColors" : false,
+"shading" : "phong",
 "mapDiffuseWrap" : ["repeat","repeat"]
 }
 

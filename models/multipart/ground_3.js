@@ -16,7 +16,7 @@
 "materials": [
 {
 "DbgIndex" : 0,
-"DbgName"  : "plafond_crépi",
+"DbgName"  : "plafond_crï¿½pi",
 "colorDiffuse"  : [0.5880, 0.5880, 0.5880],
 "colorSpecular"  : [0.9000, 0.9000, 0.9000],
 "opacity"  : 1.0,
@@ -24,6 +24,7 @@
 "mapDiffuse"    : "../textures/plafond-crepi.png",
 "mapBump"    : "../textures/plafond-crepi-normal.png",
 "vertexColors" : false,
+"shading" : "phong",
 "mapDiffuseWrap" : ["repeat","repeat"]
 },
 
@@ -38,6 +39,7 @@
 "mapSpecular"    : "../textures/couloir-sol-spec.png",
 "mapBump"    : "../textures/couloir-sol-normal.png",
 "vertexColors" : false,
+"shading" : "phong",
 "mapDiffuseWrap" : ["repeat","repeat"]
 },
 
@@ -52,6 +54,7 @@
 "mapSpecular"    : "../textures/mur-spec.png",
 "mapBump"    : "../textures/mur-normal.png",
 "vertexColors" : false,
+"shading" : "phong",
 "mapDiffuseWrap" : ["repeat","repeat"]
 },
 
@@ -65,6 +68,7 @@
 "mapDiffuse"    : "../textures/mur-blanc.png",
 "mapBump"    : "../textures/mur-normal.png",
 "vertexColors" : false,
+"shading" : "phong",
 "mapDiffuseWrap" : ["repeat","repeat"]
 },
 
@@ -78,6 +82,7 @@
 "mapDiffuse"    : "../textures/plafond-orange.png",
 "mapBump"    : "../textures/plafond-orange-normal.png",
 "vertexColors" : false,
+"shading" : "phong",
 "mapDiffuseWrap" : ["repeat","repeat"]
 }
 

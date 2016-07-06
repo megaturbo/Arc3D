@@ -25,6 +25,7 @@
 "mapSpecular"    : "../textures/couloir-sol-spec.png",
 "mapBump"    : "../textures/couloir-sol-normal.png",
 "vertexColors" : false,
+"shading" : "phong",
 "mapDiffuseWrap" : ["repeat","repeat"]
 },
 
@@ -38,6 +39,7 @@
 "mapDiffuse"    : "../textures/mur-blanc.png",
 "mapBump"    : "../textures/mur-normal.png",
 "vertexColors" : false,
+"shading" : "phong",
 "mapDiffuseWrap" : ["repeat","repeat"]
 },
 
@@ -50,6 +52,7 @@
 "mapSpecular"    : "../textures/mur-spec.png",
 "mapBump"    : "../textures/mur-normal.png",
 "vertexColors" : false,
+"shading" : "phong",
 "mapDiffuseWrap" : ["repeat","repeat"]
 }
 

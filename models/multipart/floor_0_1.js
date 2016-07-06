@@ -19,6 +19,7 @@
 "DbgName"  : "couloir-sol",
 "colorDiffuse"  : [0.1333, 0.1333, 0.1333],
 "colorSpecular"  : [0.9000, 0.9000, 0.9000],
+"shading" : "phong",
 "opacity"  : 1.0,
 "specularCoef"  : 10.0,
 "mapDiffuse"    : "../textures/couloir-sol.png",
@@ -36,6 +37,7 @@
 "opacity"  : 1.0,
 "specularCoef"  : 10.0,
 "mapDiffuse"    : "../textures/mur-blanc.png",
+"shading" : "phong",
 "mapBump"    : "../textures/mur-normal.png",
 "vertexColors" : false,
 "mapDiffuseWrap" : ["repeat","repeat"]
@@ -50,6 +52,7 @@
 "specularCoef"  : 10.0,
 "mapDiffuse"    : "../textures/mur-orange.png",
 "mapSpecular"    : "../textures/mur-spec.png",
+"shading" : "phong",
 "mapBump"    : "../textures/mur-normal.png",
 "vertexColors" : false,
 "mapDiffuseWrap" : ["repeat","repeat"]
