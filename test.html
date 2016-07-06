@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js webgl - materials - cube reflection / refraction [Walt]</title>
+		<title>TESTING</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
@@ -18,8 +18,6 @@
 			a {	color: #ff0080;	text-decoration: none; }
 			a:hover { color: #0080ff; }
 
-			canvas { pointer-events:none; z-index:10; }
-
 			#d { text-align:center; margin:1em 0 -7.5em 0; z-index:1000; position:relative; display:block }
 			.button { background:orange; color:#fff; padding:0.2em 0.5em; cursor:pointer }
 			.inactive { background:#999; color:#eee }
@@ -30,17 +28,14 @@
 
 	<body>
 		<div id="d">
-			<p><a href="http://threejs.org">Three.js</a> cube mapping demo
-
-			<p>Walt Disney head by <a href="http://davidoreilly.com/post/18087489343/disneyhead" target="_blank">David OReilly</a>
-			<p>Texture by <a href="http://www.humus.name/index.php?page=Textures" target="_blank">Humus</a>
+            pr
 		</div>
 
 		<script src="threejs/three.min.js"></script>
-		<script src="threejs/loaders/BinaryLoader.js"></script>
 
 		<script src="threejs/Detector.js"></script>
 		<script src="threejs/libs/stats.min.js"></script>
+        <script src="threejs/controls/OrbitControls.js"></script>
 
 		<script>
 
@@ -48,26 +43,21 @@
 
 			var container, stats;
 
-			var camera, scene, renderer;
+			var camera, scene, renderer, controls;
 
 			var mesh, geometry;
+            var clock = new THREE.Clock();
 
-			var loader;
-
-			var pointLight;
-
-			var mouseX = 0;
-			var mouseY = 0;
+			var directionalLight, pointLight, ambientLight;
 
 			var windowHalfX = window.innerWidth / 2;
 			var windowHalfY = window.innerHeight / 2;
-
-			document.addEventListener('mousemove', onDocumentMouseMove, false);
 
 			init();
 			animate();
 
 			function init() {
+				scene = new THREE.Scene();
 
 				container = document.createElement( 'div' );
 				document.body.appendChild( container );
@@ -75,46 +65,36 @@
 				camera = new THREE.PerspectiveCamera( 50, window.innerWidth / window.innerHeight, 1, 5000 );
 				camera.position.z = 2000;
 
-				//
-
-				var path = "models/textures/cube/";
-				var format = '.jpg';
-				var urls = [
-						path + 'px' + format, path + 'nx' + format,
-						path + 'ny' + format, path + 'py' + format,
-						path + 'pz' + format, path + 'nz' + format
-					];
-
-				var reflectionCube = new THREE.CubeTextureLoader().load( urls );
-				reflectionCube.format = THREE.RGBFormat;
-
-				scene = new THREE.Scene();
-				scene.background = reflectionCube;
 
 				// LIGHTS
 
-				var ambient = new THREE.AmbientLight( 0xffffff );
-				scene.add( ambient );
+                ambientLight = new THREE.AmbientLight( 0x444444 );
+				scene.add( ambientLight );
 
-				pointLight = new THREE.PointLight( 0xffffff, 2 );
+				pointLight = new THREE.PointLight( 0xffffff, 1.25, 1000 );
+				pointLight.position.set( 0, 0, 600 );
+
 				scene.add( pointLight );
 
-				// light representation
+				directionalLight = new THREE.DirectionalLight( 0xffffff );
+				directionalLight.position.set( 1, -0.5, -1 );
+				scene.add( directionalLight );
 
-				var sphere = new THREE.SphereGeometry( 100, 16, 8 );
 
-				var mesh = new THREE.Mesh( sphere, new THREE.MeshBasicMaterial( { color: 0xffaa00 } ) );
-				mesh.scale.set( 0.05, 0.05, 0.05 );
-				pointLight.add( mesh );
+				var textureLoader = new THREE.TextureLoader();
 
-				var refractionCube = new THREE.CubeTextureLoader().load( urls );
-				refractionCube.mapping = THREE.CubeRefractionMapping;
-				refractionCube.format = THREE.RGBFormat;
-
-				//var cubeMaterial3 = new THREE.MeshPhongMaterial( { color: 0x000000, specular:0xaa0000, envMap: reflectionCube, combine: THREE.MixOperation, reflectivity: 0.25 } );
-				var cubeMaterial3 = new THREE.MeshLambertMaterial( { color: 0xff6600, envMap: reflectionCube, combine: THREE.MixOperation, reflectivity: 0.3 } );
-				var cubeMaterial2 = new THREE.MeshLambertMaterial( { color: 0xffee00, envMap: refractionCube, refractionRatio: 0.95 } );
-				var cubeMaterial1 = new THREE.MeshLambertMaterial( { color: 0xffffff, envMap: reflectionCube } );
+				var cubeGeometry = new THREE.CubeGeometry( 100, 100, 100, 1, 1, 1 );
+                var cubeMaterial = new THREE.MeshPhongMaterial( {
+					color: 0xdddddd,
+					specular: 0x222222,
+					shininess: 35,
+					map: textureLoader.load( "models/textures/mur-orange.png" ),
+					specularMap: textureLoader.load( "models/textures/mur-spec.png"  ),
+					normalMap: textureLoader.load( "models/textures/mur-normal.png"  ),
+					normalScale: new THREE.Vector2( 0.8, 0.8 )
+				} );
+                var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+                scene.add(cube);
 
 				//
 
@@ -123,17 +103,12 @@
 				renderer.setSize( window.innerWidth, window.innerHeight );
 				container.appendChild( renderer.domElement );
 
+                controls = new THREE.OrbitControls( camera, renderer.domElement );
+
 				//
 
 				stats = new Stats();
 				container.appendChild( stats.domElement );
-
-				//
-
-
-				loader = new THREE.BinaryLoader();
-				loader.load( "models/WaltHead_bin.js", function( geometry ) { createScene( geometry, cubeMaterial1, cubeMaterial2, cubeMaterial3 ); } );
-
 				//
 
 				window.addEventListener( 'resize', onWindowResize, false );
@@ -152,36 +127,6 @@
 
 			}
 
-			function createScene( geometry, m1, m2, m3 ) {
-
-				var s = 15;
-
-				var mesh = new THREE.Mesh( geometry, m1 );
-				mesh.position.z = - 100;
-				mesh.scale.x = mesh.scale.y = mesh.scale.z = s;
-				scene.add( mesh );
-
-				mesh = new THREE.Mesh( geometry, m2 );
-				mesh.position.x = - 900;
-				mesh.position.z = - 100;
-				mesh.scale.x = mesh.scale.y = mesh.scale.z = s;
-				scene.add( mesh );
-
-				mesh = new THREE.Mesh( geometry, m3 );
-				mesh.position.x = 900;
-				mesh.position.z = - 100;
-				mesh.scale.x = mesh.scale.y = mesh.scale.z = s;
-				scene.add( mesh );
-
-			}
-
-			function onDocumentMouseMove(event) {
-
-				mouseX = ( event.clientX - windowHalfX ) * 4;
-				mouseY = ( event.clientY - windowHalfY ) * 4;
-
-			}
-
 			//
 
 			function animate() {
@@ -189,21 +134,19 @@
 				requestAnimationFrame( animate );
 
 				render();
-				stats.update();
+                update();
 
 			}
 
+            function update()
+            {
+                var delta = clock.getDelta();
+
+				controls.update();
+                stats.update();
+            }
+
 			function render() {
-
-				var timer = -0.0002 * Date.now();
-
-				pointLight.position.x = 1500 * Math.cos( timer );
-				pointLight.position.z = 1500 * Math.sin( timer );
-
-				camera.position.x += ( mouseX - camera.position.x ) * 0.05;
-				camera.position.y += ( - mouseY - camera.position.y ) * 0.05;
-
-				camera.lookAt( scene.position );
 
 				renderer.render( scene, camera );
 
