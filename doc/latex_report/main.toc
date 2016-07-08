@@ -20,19 +20,19 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{3D temps r\IeC {\'e}el}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Navigation}{5}
+\contentsline {subsection}{Navigation dans un b\IeC {\^a}timent}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Architecture}{5}
+\contentsline {subsection}{Visualisation architecturale}{5}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.2}Localisation en int\IeC {\'e}rieur}{5}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{GPS}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Triangulation Wifi}{5}
+\contentsline {subsection}{Triangulation Wifi}{6}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{Triangulation Bluetooth}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Acc\IeC {\'e}l\IeC {\'e}rom\IeC {\`e}tre et Gyroscope}{6}
+\contentsline {subsection}{Acc\IeC {\'e}l\IeC {\'e}rom\IeC {\`e}tre et Gyroscope}{7}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}D\IeC {\'e}veloppement}{8}
 \defcounter {refsection}{0}\relax 
@@ -40,19 +40,19 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{Mod\IeC {\'e}lisation g\IeC {\'e}om\IeC {\'e}trique}{8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Texturisation}{8}
+\contentsline {subsection}{Texturisation du mod\IeC {\`e}le}{8}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Import/Export}{8}
+\contentsline {subsection}{Exportation et importation}{8}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.2}Rendu graphique}{8}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Recherche de chemin}{8}
+\contentsline {section}{\numberline {3.3}Recherche de chemin}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{N\IeC {\oe }uds}{8}
+\contentsline {subsection}{N\IeC {\oe }uds et Graphe}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Algorithme}{8}
+\contentsline {subsection}{Algorithme de recherche de chemin}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Contr\IeC {\^o}les}{9}
+\contentsline {section}{\numberline {3.4}Contr\IeC {\^o}les de la cam\IeC {\'e}ra}{9}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{Ordinateur et mobile}{9}
 \defcounter {refsection}{0}\relax 
@@ -66,14 +66,20 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.6}Interface graphique}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.7}Rendu temps r\IeC {\'e}el}{9}
+\contentsline {section}{\numberline {3.7}Rendu temps r\IeC {\'e}el}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}R\IeC {\'e}sultats}{10}
+\contentsline {chapter}{\numberline {4}R\IeC {\'e}sultats}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Discussion}{11}
+\contentsline {section}{\numberline {4.1}Temps r\IeC {\'e}el}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Conclusion}{11}
+\contentsline {section}{\numberline {4.2}Mod\IeC {\'e}lisation g\IeC {\'e}om\IeC {\'e}trique}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Perspectives}{11}
+\contentsline {section}{\numberline {4.3}R\IeC {\'e}alisation des objectifs}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Bibliographie}{12}
+\contentsline {chapter}{\numberline {5}Discussion}{12}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.1}Conclusion}{12}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Perspectives}{12}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Bibliographie}{13}

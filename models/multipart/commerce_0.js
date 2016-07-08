@@ -17,8 +17,6 @@
 {
 "DbgIndex" : 0,
 "DbgName"  : "couloir-sol",
-"colorDiffuse"  : [0.1333, 0.1333, 0.1333],
-"colorSpecular"  : [0.9000, 0.9000, 0.9000],
 "opacity"  : 1.0,
 "shading" : "phong",
 "specularCoef"  : 10.0,
@@ -44,18 +42,19 @@
 },
 
 {
-"DbgIndex" : 2,
-"DbgName"  : "walls",
-"colorDiffuse"  : [0.7255, 0.2392, 0.0000],
-"colorSpecular"  : [0.9000, 0.9000, 0.9000],
-"opacity"  : 1.0,
-"specularCoef"  : 10.0,
-"shading" : "phong",
-"mapDiffuse"    : "../textures/mur-orange.png",
-"mapSpecular"    : "../textures/mur-spec.png",
-"mapBump"    : "../textures/mur-normal.png",
-"vertexColors" : false,
-"mapDiffuseWrap" : ["repeat","repeat"]
+    "DbgIndex" : 2,
+    "DbgName"  : "walls",
+    "opacity"  : 1.0,
+    "specularCoef"  : 10.0,
+    "mapBumpScale": 5,
+    "shading" : "phong",
+    "mapDiffuse"    : "../textures/mur-orange.png",
+    "mapSpecular"    : "../textures/mur-spec.png",
+    "mapBump"    : "../textures/mur-normal.png",
+    "vertexColors" : false,
+    "mapDiffuseWrap" : ["repeat","repeat"],
+    "mapSpecularWrap" : ["repeat", "repeat"],
+    "mapBumpWrap" : ["repeat", "repeat"]
 }
 
 ],

@@ -130,27 +130,12 @@
         console.log("Right side clicked");
     }
 
-    function getNearestToilet(toilet_style)
+    function getNearestToilet(toilet_name)
     {
-        console.log(toilet_style);
         var start_id = pathfinder.getNearestNodeId(camera.position);
-        var path = [];
-        var length = Infinity;
-        for(var i = 0; i < nodes.length; i++)
-        {
-            var n = nodes[i];
-            if(n.name === toilet_style)
-            {
-                var tmpath = pathfinder.getPath(start_id, n.id);
-                var tmplength = pathfinder.getPathLength(tmpath);
-                if(tmplength < length)
-                {
-                    path = tmpath;
-                    length = tmplength;
-                }
-            }
-        }
-        updatePathfinding(path[0], path[path.length - 1]);
+        var ns = pathfinder.getNodesFromName(toilet_name);
+        var p = pathfinder.getPath(start_id, ns);
+        updatePathfinding(p[0], p[p.length - 1]);
     }
 
     /**
@@ -403,18 +388,23 @@
     {
         var ambient = new THREE.AmbientLight( 0xffffff );
         scene.add( ambient );
-        var lights = [];
-		lights[ 0 ] = new THREE.PointLight( 0xffffff, 5, 1000 );
-		lights[ 1 ] = new THREE.PointLight( 0xffffff, 5, 100 );
-		lights[ 2 ] = new THREE.PointLight( 0xffffff, 5, 100 );
 
-		lights[ 0 ].position.copy(pathfinder.getNodePosition(0));
-		lights[ 1 ].position.set( 100, 200, 100 );
-		lights[ 2 ].position.set( - 100, - 200, - 100 );
+        var n = 20;
 
-		// scene.add( lights[ 0 ] );
-		// scene.add( lights[ 1 ] );
-		// scene.add( lights[ 2 ] );
+        var b_s = -3500;        // building start
+        var b_e = 3170;         // building end
+        var b_l = b_e - b_s;    // building length
+        var l_r = b_l / n;      // light ratio
+
+        var f1_y = 40;         // floor 1 hallway y coordinate
+        var f1_z = -60;         // floor 1 hallway z coordinate
+
+        for(var i = 0; i < n; i++)
+        {
+            var light = new THREE.PointLight( 0xffffff, 0.8, 300 );
+            light.position.set(b_s + i * l_r, f1_y, f1_z);
+            scene.add(light);
+        }
     }
 
 
@@ -447,7 +437,7 @@
 
         var helper = new THREE.BoundingBoxHelper(mesh, Math.random() * 0xffffff);
         helper.update();
-        scene.add(helper);
+        // scene.add(helper);
 
         building_parts.push({mesh: mesh, boundingBox: helper});
     }

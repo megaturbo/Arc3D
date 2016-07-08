@@ -5,14 +5,14 @@
 * The Node object used everywhere in this code is read from a .JSON file.
 * The class structure is:
 
-    "id": 0,
-    "name": "Node position name IRL",
-    "position": {
-        "x": 0.0,
-        "y": 0.0,
-        "z": 0.0
-    },
-    "neighbors": [1,2,3]
+"id": 0,
+"name": "Node position name IRL",
+"position": {
+"x": 0.0,
+"y": 0.0,
+"z": 0.0
+},
+"neighbors": [1,2,3]
 */
 
 /*jshint esversion: 6 */
@@ -128,6 +128,98 @@ ARC3D.Pathfinder = function(nodes){
         return this.computeDistance(node_a, node_b);
     };
 
+
+    this.getPath = function(start_id, goal)
+    {
+        console.log(goal);
+        if(goal instanceof Array){
+            console.log("goal is an array");
+            return this.getPathDijkstra(start_id, goal);
+        }else
+        {
+            console.log("goal is not an array");
+            return this.getPathAstar(start_id, goal);
+        }
+    };
+
+    /**
+    * Use Dikstra algorithm to find a path between two points of the graph.
+    *
+    * @param {number} start_id : ID of the start Node
+    * @param {number} goal_id : ID of the goal Node
+    * @return {Array} An array of Node IDs representing the path found.
+    */
+    this.getPathDijkstra = function(start_id, goal_id)
+    {
+        console.log("Go dijkstra with");
+        console.log(goal_id);
+        var closedSet = new Set();
+        var openSet = new Set([start_id]);
+        var cameFrom = new Map();
+        var gScore = new Map();
+        var fScore = new Map();
+
+        for(var i = 0; i < this.nodes.length; i++)
+        {
+            gScore.set(i, Infinity);
+            fScore.set(i, Infinity);
+        }
+
+        gScore.set(start_id, 0);
+        fScore.set(start_id, 0);
+
+        while(openSet.size !== 0)
+        {
+            // Magic line: Transform the openSet in an Array, then apply it the
+            // Math.min function
+            var min = Infinity;
+            var current_id;
+            for(let item of openSet)
+            {
+                var score = fScore.get(item);
+                if(score < min){
+                    current_id = item;
+                    min = score;
+                }
+            }
+            
+            if(goal_id.indexOf(current_id) != -1)
+            {
+                return this.reconstructPath(cameFrom, current_id);
+            }
+
+            openSet.delete(current_id);
+            closedSet.add(current_id);
+            var current_node = this.getNode(current_id);
+            var neighbors = current_node.neighbors;
+
+            for(i = 0; i < neighbors.length; i++)
+            {
+                var neighbor_id = neighbors[i];
+                var neighbor_node = this.getNode(neighbor_id);
+
+                if(closedSet.has(neighbor_id))
+                {
+                    continue;
+                }
+
+                tentative_gScore = gScore.get(current_id) + this.computeDistance(current_node, neighbor_node);
+
+                if(!openSet.has(neighbor_id))
+                {
+                    openSet.add(neighbor_id);
+                } else if (tentative_gScore >= gScore.get(neighbor_id)) {
+                    continue;
+                }
+
+                cameFrom.set(neighbor_id, current_id);
+                gScore.set(neighbor_id, tentative_gScore);
+                fScore.set(neighbor_id, gScore.get(neighbor_id));
+            }
+        }
+        console.error("Pathfinding has failed.");
+        return [];
+    };
     /**
     * Use A-star algorithm to find a path between two points of the graph.
     *
@@ -135,7 +227,7 @@ ARC3D.Pathfinder = function(nodes){
     * @param {number} goal_id : ID of the goal Node
     * @return {Array} An array of Node IDs representing the path found.
     */
-    this.getPath = function(start_id, goal_id)
+    this.getPathAstar = function(start_id, goal_id)
     {
         var closedSet = new Set();
         var openSet = new Set([start_id]);
@@ -231,7 +323,7 @@ ARC3D.Pathfinder = function(nodes){
             var np = this.getNodePosition(n.id);
             var op = this.getNodePosition(nearest_node_id);
             if(p.distanceTo(np) < p.distanceTo(op))
-                nearest_node_id = n.id;
+            nearest_node_id = n.id;
         }
         return nearest_node_id;
     };
@@ -244,6 +336,19 @@ ARC3D.Pathfinder = function(nodes){
             distance += this.heuristic(path[i], path[i + 1]);
         }
         return distance;
+    };
+
+    this.getNodesFromName = function(name)
+    {
+        node_ids = [];
+        for(var i = 0; i < this.nodes.length; i++)
+        {
+            if(this.nodes[i].name === name)
+            {
+                node_ids.push(this.nodes[i].id);
+            }
+        }
+        return node_ids;
     };
 
 };

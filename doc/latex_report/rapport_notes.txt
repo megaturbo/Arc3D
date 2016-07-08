@@ -1,0 +1,22 @@
+plus de sous sections dans résultats:
+ - temps réel
+ - modélisation géométrique 3D
+   - je voulais un bâtiment en 3D => j'en ai. Citer Kevin. (Bien définir qui a fait quoi)
+   - photos
+ - objectifs en général
+ 
+Interface utilisateur
+
+Dev:
+   i.e. UI Pourquoi j'ai mis ça là
+   Pourquoi et comment?
+   
+Résultats:
+   Montrer
+   
+   
+Introduction:
+  montrer UI et expliquer qu'on va expliquer dans le reste du rapport
+  
+
+Titres + qu'un seul mot
