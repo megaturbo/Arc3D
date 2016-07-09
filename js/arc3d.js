@@ -167,6 +167,7 @@ ARC3D.initNodes = function(){
     var box_geometry = new THREE.BoxGeometry(2, 2, 2);
     var box_mat_yellow = new THREE.MeshBasicMaterial( {color: 0xffff00 } );
     var box_mat_red = new THREE.MeshBasicMaterial( {color: 0xff0000 } );
+    var box_mat_blue = new THREE.MeshBasicMaterial( {color: 0x0000ff } );
     var lin_mat_yellow = new THREE.LineBasicMaterial( {color: 0xffff00 } );
     var lin_mat_red = new THREE.LineBasicMaterial( {color: 0xff0000 } );
 
@@ -190,7 +191,7 @@ ARC3D.initNodes = function(){
         });
 
         // Add box
-        var box_mat = path.indexOf(node.id) != -1 ? box_mat_yellow : box_mat_red;
+        var box_mat = path.indexOf(node.id) != -1 ? box_mat_yellow : node.name == 'elevator' ? box_mat_blue : box_mat_red;
         var box_mesh = new THREE.Mesh(box_geometry, box_mat);
         box_mesh.position.copy(node.position);
         box_mesh.name = node.id;

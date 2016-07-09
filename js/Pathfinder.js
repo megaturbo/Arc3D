@@ -131,13 +131,10 @@ ARC3D.Pathfinder = function(nodes){
 
     this.getPath = function(start_id, goal)
     {
-        console.log(goal);
         if(goal instanceof Array){
-            console.log("goal is an array");
             return this.getPathDijkstra(start_id, goal);
         }else
         {
-            console.log("goal is not an array");
             return this.getPathAstar(start_id, goal);
         }
     };
@@ -151,8 +148,6 @@ ARC3D.Pathfinder = function(nodes){
     */
     this.getPathDijkstra = function(start_id, goal_id)
     {
-        console.log("Go dijkstra with");
-        console.log(goal_id);
         var closedSet = new Set();
         var openSet = new Set([start_id]);
         var cameFrom = new Map();
@@ -182,7 +177,7 @@ ARC3D.Pathfinder = function(nodes){
                     min = score;
                 }
             }
-            
+
             if(goal_id.indexOf(current_id) != -1)
             {
                 return this.reconstructPath(cameFrom, current_id);

@@ -71,7 +71,7 @@
     // Check if position is defined in GET paramters
     var current_node_id = ARC3D.getUrlParameter('node_id');
     if(current_node_id !== undefined) {
-        console.log("current: " + current_node_id);
+        console.log("Redirect to node: " + current_node_id);
         ARC3D.isPositionDefined = true;
     }
 
@@ -107,7 +107,7 @@
     *
     * Synchronously asynchronous
     */
-    $.getJSON("nodes/nodes.json", function(json) {
+    $.getJSON("nodes/nodes_with_elevators.json", function(json) {
         nodes = json.nodes;
         initMenu();
         pathfinder = new ARC3D.Pathfinder(nodes);
@@ -289,7 +289,7 @@
         scene.remove(o);
 
         // Create a Tubegeometry from the spline created by the TrackingSimulation
-        var geometry = new THREE.TubeGeometry(spline, Math.floor(spline.getLength() / 10), 2, 8, false);
+        var geometry = new THREE.TubeGeometry(spline, Math.floor(spline.getLength() / 1), 2, 8, false);
         var material = new THREE.MeshPhongMaterial( {color: 0x4caf50 } );
         var mesh = new THREE.Mesh(geometry, material);
 
@@ -303,6 +303,21 @@
         // Start the tracking
         tracking.start();
     }
+
+    function checkChildren(){
+        for(var i = 0; i < nodes.length; i++)
+        {
+            var n = nodes[i];
+            for(var j = 0; j < n.neighbors.length; j++)
+            {
+                var nb = pathfinder.getNode(n.neighbors[j]);
+                if(nb.neighbors.indexOf(n.id) == -1){
+                    console.log(n.id + " and " + nb.id);
+                }
+            }
+        }
+    }
+
     function init() {
         // Create container
         container = document.createElement( 'div' );
@@ -372,7 +387,7 @@
         rendererStats.domElement.style.bottom    = '0px';
         container.appendChild( rendererStats.domElement );
 
-        // window.addEventListener('mousedown', onDocumentMouseDown, false);
+        window.addEventListener('mousedown', onDocumentMouseDown, false);
         window.addEventListener( 'resize', onWindowResize, false );
 
         render();
@@ -413,8 +428,8 @@
         var mat_refs = [];
 
         for(var i = 0; i < materials.length; i++){
-            // var m = new THREE.MeshPhongMaterial(materials[i]);
-            var m = new THREE.MeshLambertMaterial(materials[i]);
+            var m = new THREE.MeshPhongMaterial(materials[i]);
+            // var m = new THREE.MeshLambertMaterial(materials[i]);
             // var m = materials[i];
 
             if (!(m.name in building_materials)){
