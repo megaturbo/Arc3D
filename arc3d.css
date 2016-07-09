@@ -11,8 +11,8 @@ body input[type=range] {
 }
 
 #fromto .img{
-    width: 30px;
-    height: 80px;
+    width: 20px;
+    height: 50px;
     margin-right:10px;
     border: 1px solid #bbb;
 }
@@ -24,6 +24,15 @@ body input[type=range] {
     z-index: 20;
     margin: 10px;
     padding: 10px;
+}
+
+i.left{
+    margin-right: 0px;
+}
+
+#fromto .btn{
+    margin-top: -50px;
+    padding: 0px;
 }
 
 #fromto select.browser-default{

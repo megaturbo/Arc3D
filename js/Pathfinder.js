@@ -165,8 +165,6 @@ ARC3D.Pathfinder = function(nodes){
 
         while(openSet.size !== 0)
         {
-            // Magic line: Transform the openSet in an Array, then apply it the
-            // Math.min function
             var min = Infinity;
             var current_id;
             for(let item of openSet)
@@ -193,7 +191,7 @@ ARC3D.Pathfinder = function(nodes){
                 var neighbor_id = neighbors[i];
                 var neighbor_node = this.getNode(neighbor_id);
 
-                if(closedSet.has(neighbor_id))
+                if(closedSet.has(neighbor_id) || (!ARC3D.isDisabledMode && neighbor_node.name == 'elevator'))
                 {
                     continue;
                 }
@@ -241,8 +239,6 @@ ARC3D.Pathfinder = function(nodes){
 
         while(openSet.size !== 0)
         {
-            // Magic line: Transform the openSet in an Array, then apply it the
-            // Math.min function
             var min = Infinity;
             var current_id;
             for(let item of openSet)
@@ -269,7 +265,7 @@ ARC3D.Pathfinder = function(nodes){
                 var neighbor_id = neighbors[i];
                 var neighbor_node = this.getNode(neighbor_id);
 
-                if(closedSet.has(neighbor_id))
+                if(closedSet.has(neighbor_id) || (!ARC3D.isDisabledMode && neighbor_node.name == 'elevator'))
                 {
                     continue;
                 }

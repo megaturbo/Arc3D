@@ -15,6 +15,7 @@ ARC3D.defaultCameraRotation = new THREE.Vector3(-0.1076350906304018, 1.532140976
 
 ARC3D.isPositionDefined = false;
 
+ARC3D.isDisabledMode = false;
 
 raycaster = new THREE.Raycaster();
 mouse = new THREE.Vector2();

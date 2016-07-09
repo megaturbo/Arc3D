@@ -27,6 +27,7 @@
         <label>Toilets</label><br />
         <img src="img/toilet-man.png" class="img" onclick="getNearestToilet(ARC3D.ToiletMale)"/>
         <img src="img/toilet-woman.png" class="img" onclick="getNearestToilet(ARC3D.ToiletFemale)"/>
+        <a class="btn waves-effect grey lighten-5 grey-text text-darken-3" id="btn-toggle-disabled" onclick="toggleDisabledMode()"><i class="material-icons left">accessible</i></a>
     </div>
 
     <div id="fullscreen">
@@ -87,6 +88,7 @@
     var btnSimulation = document.getElementById('button-simulation');
     var btnPause = document.getElementById('button-pause');
     var btnStop = document.getElementById('button-stop');
+    var btnDisabledMode = document.getElementById('btn-toggle-disabled');
 
     var building_parts = [];
     var building_materials = {};
@@ -186,12 +188,25 @@
     }
 
 
-    function refreshPauseIcon(){
+    function refreshPauseIcon()
+    {
         var d = document.getElementById('icon-pause');
         if(tracking.isPaused){
             d.innerHTML = 'play_arrow';
         }else{
             d.innerHTML = 'pause';
+        }
+    }
+
+    function toggleDisabledMode()
+    {
+        ARC3D.isDisabledMode = !ARC3D.isDisabledMode;
+        if(ARC3D.isDisabledMode)
+        {
+            btnDisabledMode.className = ARC3D.buttonActiveClass;
+        }
+        else {
+            btnDisabledMode.className = ARC3D.buttonDefaultClass;
         }
     }
 
@@ -387,7 +402,7 @@
         rendererStats.domElement.style.bottom    = '0px';
         container.appendChild( rendererStats.domElement );
 
-        window.addEventListener('mousedown', onDocumentMouseDown, false);
+        // window.addEventListener('mousedown', onDocumentMouseDown, false);
         window.addEventListener( 'resize', onWindowResize, false );
 
         render();
