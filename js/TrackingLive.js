@@ -26,7 +26,7 @@ ARC3D.TrackingLive = function(camera) {
     * @return {Curve3} The curve created for the pathfinding.
     */
     this.setPath = function(path) {
-        this.path = path;
+        this.path = pathfinder.getPathPositions(path);
         this.spline = new THREE.CatmullRomCurve3(this.path);
         return this.spline;
     };

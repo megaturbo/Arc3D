@@ -203,9 +203,11 @@
         ARC3D.isDisabledMode = !ARC3D.isDisabledMode;
         if(ARC3D.isDisabledMode)
         {
+            Materialize.toast('Mode mobilité réduite activé', 1500);
             btnDisabledMode.className = ARC3D.buttonActiveClass;
         }
         else {
+            Materialize.toast('Mode mobilité réduite désactivé', 1500);
             btnDisabledMode.className = ARC3D.buttonDefaultClass;
         }
     }
@@ -224,7 +226,6 @@
     function toggleFullScreen(){
         ARC3D.toggleFullScreen();
         var ic = document.getElementById('icon-fullscreen');
-        console.log(ic);
         if (ic.innerHTML == 'fullscreen')
             ic.innerHTML = 'fullscreen_exit';
         else
@@ -296,25 +297,30 @@
     */
     function updatePathfinding(node_start_id, node_goal_id) {
         path = pathfinder.getPath(node_start_id, node_goal_id);
-        spline = tracking.setPath(pathfinder.getPathPositions(path));
-        console.log(spline.getLength());
+        splines = tracking.setPath(path);
 
-        // Remove old Tubegeometry if exist
+        // Remove all old Tubegeometry if exist
         var o = scene.getObjectByName("spline");
-        scene.remove(o);
+        while(o != undefined){
+            scene.remove(o);
+            o = scene.getObjectByName("spline");
+        }
 
         // Create a Tubegeometry from the spline created by the TrackingSimulation
-        var geometry = new THREE.TubeGeometry(spline, Math.floor(spline.getLength() / 1), 2, 8, false);
-        var material = new THREE.MeshPhongMaterial( {color: 0x4caf50 } );
-        var mesh = new THREE.Mesh(geometry, material);
+        for(var i = 0; i< splines.length; i++)
+        {
+            var geometry = new THREE.TubeGeometry(splines[i], Math.floor(tracking.splineLength / 10), 2, 8, false);
+            var material = new THREE.MeshPhongMaterial( {color: 0xffffff * Math.random() } );
+            var mesh = new THREE.Mesh(geometry, material);
 
-        // Set some parameters
-        mesh.name = "spline";
-        mesh.position.y -= 10;
+            // Set some parameters
+            mesh.name = "spline";
+            mesh.position.y -= 10;
 
-        // Add the TubeGeometry to the scene.
-        scene.add(mesh);
+            // Add the TubeGeometry to the scene.
+            scene.add(mesh);
 
+        }
         // Start the tracking
         tracking.start();
     }

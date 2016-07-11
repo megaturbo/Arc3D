@@ -1,6 +1,7 @@
 /*jshint esversion: 6 */
 
 var CAMERA_DEFAULT_SPEED = 50;
+var CAMERA_STATES = {GO: 0, TURN: 1, ELEVATOR: 2};
 
 /**
 * Creates a TrackingSimulation object
@@ -14,9 +15,11 @@ ARC3D.TrackingSimulation = function(camera) {
     this.isRunning = false;
     this.isPaused = false;
     this.speed = CAMERA_DEFAULT_SPEED;
+    this.state = CAMERA_STATES.GO;
 
     this.path = [];
-    this.spline = undefined;
+    this.splines = [];
+    this.splineLength = -1.0;
     this.distance = 0.0;
 
     /**
@@ -26,14 +29,54 @@ ARC3D.TrackingSimulation = function(camera) {
     * @return {Curve3} The curve created for the pathfinding.
     */
     this.setPath = function(path) {
-        this.path = path;
-        this.spline = new THREE.CatmullRomCurve3(this.path);
-        // for(var i = 0; i < path.length; i++){
-        //     var p = this.path[i];
-        //     console.log(p);
-        //     this.spline.points.push(new THREE.Vector3(i.x, i.y, i.z));
-        // }
-        return this.spline;
+        this.path = pathfinder.getPathPositions(path);
+        this.splines = [];
+
+        var fromElevator = false;
+        var curve = new THREE.CatmullRomCurve3();
+
+        // Create the curves
+        for(var i = 0; i < path.length; i++){
+            var p = this.path[i];
+            var n = pathfinder.getNode(path[i]);
+
+            // Create a new curve, and add it to the splines array
+            if((n.name == 'elevator' && !fromElevator) || (n.name != 'elevator' && fromElevator))
+            {
+                // Push it if entering elevator
+                if(n.name == 'elevator'){curve.points.push(p);}
+
+                this.splines.push(curve);
+
+                curve = new THREE.CatmullRomCurve3();
+
+                if(n.name != 'elevator'){curve.points.push(this.path[i - 1]);}
+            }
+
+            // Add the point to the current created curve
+            curve.points.push(p);
+
+            // Set past node state
+            if(n.name == 'elevator'){
+                fromElevator = true;
+            }else{
+                fromElevator = false;
+            }
+        }
+
+        // Add the remaining curve if it got at leaste one point.
+        if(curve.points.length > 0){ this.splines.push(curve); }
+
+        // Compute spline total length
+        this.splineLength = 0.0;
+        for(var i = 0; i < this.splines.length; i++)
+        {
+            this.splineLength += this.splines[i].getLength();
+        }
+
+        console.log("Spline is made of " + this.splines.length + " curves");
+
+        return this.splines;
     };
 
     /**
@@ -43,6 +86,7 @@ ARC3D.TrackingSimulation = function(camera) {
         this.isRunning = true;
         this.distance = 0.0;
         this.isPaused = false;
+        this.state = CAMERA_STATES.GO;
     };
 
     /**
@@ -71,7 +115,7 @@ ARC3D.TrackingSimulation = function(camera) {
             return;
 
         this.distance += delta * this.speed;
-        var t_camera = this.distance / this.spline.getLength();
+        var t_camera = this.distance / this.splineLength;
         var t_look = 0;
         if(t_camera < 1.0){
             t_look = t_camera <= 0.98 ? t_camera + 0.02 : 1.0;
@@ -81,10 +125,32 @@ ARC3D.TrackingSimulation = function(camera) {
             return;
         }
 
-        var p_camera = this.spline.getPointAt( t_camera );
-        var p_look = this.spline.getPointAt( t_look );
+        var p_camera = this.getPointAt( t_camera );
+        var p_look = this.getPointAt( t_camera );
         this.camera.position.copy( p_camera );
         this.camera.lookAt( p_look );
+    };
+
+    this.getPointAt = function(t)
+    {
+        var distanceCurrentSpline = t * this.splineLength;
+        var currentSplineId;
+
+        for(var i = 0; i < this.splines.length; i++)
+        {
+            var sl = this.splines[i].getLength();
+            if (distanceCurrentSpline - sl < 0.0)
+            {
+                currentSplineId = i;
+                break;
+            }
+            distanceCurrentSpline -= sl;
+        }
+
+        var currentSpline = this.splines[currentSplineId];
+        var currentSplineLength = currentSpline.getLength();
+        var to01 = distanceCurrentSpline / currentSplineLength;
+        return currentSpline.getPointAt(to01);
     };
 
     /**
