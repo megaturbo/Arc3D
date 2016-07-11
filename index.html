@@ -267,9 +267,11 @@
             if(!node.name)
                 continue;
 
-            if (node.name.split('-')[0] == 'room'){
+            var tag = node.name.split('-')[0];
+            if (tag == 'room' || tag == 'secretariat'){
+                var d = tag == 'room' ? "Salle" : "Secrétariat";
                 var option_a = document.createElement("option");
-                option_a.text = "Salle " + node.name.split('-')[1];
+                option_a.text = d + " " + node.name.split('-')[1];
                 option_a.value = node.id;
                 var option_b = option_a.cloneNode(true);
                 select_node_a.options.add(option_a, node.id);
@@ -301,7 +303,7 @@
 
         // Remove all old Tubegeometry if exist
         var o = scene.getObjectByName("spline");
-        while(o != undefined){
+        while(o !== undefined){
             scene.remove(o);
             o = scene.getObjectByName("spline");
         }
@@ -309,8 +311,8 @@
         // Create a Tubegeometry from the spline created by the TrackingSimulation
         for(var i = 0; i< splines.length; i++)
         {
-            var geometry = new THREE.TubeGeometry(splines[i], Math.floor(tracking.splineLength / 10), 2, 8, false);
-            var material = new THREE.MeshPhongMaterial( {color: 0xffffff * Math.random() } );
+            var geometry = new THREE.TubeGeometry(splines[i].curve, Math.floor(tracking.splineLength / 10), 2, 8, false);
+            var material = new THREE.MeshPhongMaterial( {color: 0x76FF03 } );
             var mesh = new THREE.Mesh(geometry, material);
 
             // Set some parameters
@@ -425,7 +427,7 @@
         var ambient = new THREE.AmbientLight( 0xffffff );
         scene.add( ambient );
 
-        var n = 20;
+        var n = 2;
 
         var b_s = -3500;        // building start
         var b_e = 3170;         // building end
@@ -437,9 +439,9 @@
 
         for(var i = 0; i < n; i++)
         {
-            var light = new THREE.PointLight( 0xffffff, 0.8, 300 );
+            var light = new THREE.PointLight( 0xffffff, 0.8, 1200 );
             light.position.set(b_s + i * l_r, f1_y, f1_z);
-            scene.add(light);
+            // scene.add(light);
         }
     }
 
@@ -449,8 +451,8 @@
         var mat_refs = [];
 
         for(var i = 0; i < materials.length; i++){
-            var m = new THREE.MeshPhongMaterial(materials[i]);
-            // var m = new THREE.MeshLambertMaterial(materials[i]);
+            // var m = new THREE.MeshPhongMaterial(materials[i]);
+            var m = new THREE.MeshLambertMaterial(materials[i]);
             // var m = materials[i];
 
             if (!(m.name in building_materials)){

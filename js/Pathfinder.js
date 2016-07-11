@@ -191,7 +191,9 @@ ARC3D.Pathfinder = function(nodes){
                 var neighbor_id = neighbors[i];
                 var neighbor_node = this.getNode(neighbor_id);
 
-                if(closedSet.has(neighbor_id) || (!ARC3D.isDisabledMode && neighbor_node.name == 'elevator'))
+                console.log(neighbor_node.name);
+
+                if(closedSet.has(neighbor_id) || (!ARC3D.isDisabledMode && neighbor_node.name == 'elevator') || (ARC3D.isDisabledMode && neighbor_node.name == 'staircase'))
                 {
                     continue;
                 }
@@ -265,7 +267,7 @@ ARC3D.Pathfinder = function(nodes){
                 var neighbor_id = neighbors[i];
                 var neighbor_node = this.getNode(neighbor_id);
 
-                if(closedSet.has(neighbor_id) || (!ARC3D.isDisabledMode && neighbor_node.name == 'elevator'))
+                if(closedSet.has(neighbor_id) || (!ARC3D.isDisabledMode && neighbor_node.name == 'elevator') || (ARC3D.isDisabledMode && neighbor_node.name == 'staircase'))
                 {
                     continue;
                 }
