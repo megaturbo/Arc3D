@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.6.28)  7 JUL 2016 13:31
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.6.28)  10 JUL 2016 13:56
 entering extended mode
 **./main.tex
 (main.tex
@@ -667,6 +667,56 @@ Package biblatex Info: ... file 'biblatex.cfg' found.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\biblatex\biblatex.cfg"
 File: biblatex.cfg 
 ))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\adjustbox\adjustbox.sty"
+Package: adjustbox 2012/05/21 v1.0 Adjusting TeX boxes (trim, clip, ...)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty"
+Package: xkeyval 2014/12/03 v2.7a package option processing (HA)
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex"
+("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\xkeyval\xkvutils.tex"
+\XKV@toks=\toks18
+\XKV@tempa@toks=\toks19
+)
+\XKV@depth=\count280
+File: xkeyval.tex 2014/12/03 v2.7a key=value parser (HA)
+))
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\adjustbox\adjcalc.sty"
+Package: adjcalc 2012/05/16 v1.1 Provides advanced setlength with multiple back
+-ends (calc, etex, pgfmath)
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\adjustbox\trimclip.sty"
+Package: trimclip 2012/05/16 v1.0 Trim and clip general TeX material
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\collectbox\collectbox.sty"
+Package: collectbox 2012/05/17 v0.4b Collect macro arguments as boxes
+\collectedbox=\box26
+)
+\tc@llx=\dimen108
+\tc@lly=\dimen109
+\tc@urx=\dimen110
+\tc@ury=\dimen111
+Package trimclip Info: Using driver 'tc-pdftex.def'.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\adjustbox\tc-pdftex.def"
+File: tc-pdftex.def 2012/05/13 v1.0 Clipping driver for pdftex
+))
+\adjbox@Width=\dimen112
+\adjbox@Height=\dimen113
+\adjbox@Depth=\dimen114
+\adjbox@Totalheight=\dimen115
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ifoddpage\ifoddpage.sty"
+Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
+\c@checkoddpage=\count281
+)
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\ltxmisc\varwidth.sty"
+Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
+\@vwid@box=\box27
+\sift@deathcycles=\count282
+\@vwid@loff=\dimen116
+\@vwid@roff=\dimen117
+))
 Package biblatex Info: Trying to load language 'english'...
 Package biblatex Info: ... file 'english.lbx' found.
 
@@ -678,45 +728,45 @@ Package biblatex Info: ... file 'francais.lbx' not found.
 
 
 Package biblatex Warning: Language 'francais' not supported.
-(biblatex)                Using fallback language 'english' on input line 16.
+(biblatex)                Using fallback language 'english' on input line 17.
 
 
 Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 (biblatex)                Loading 'csquotes' recommended.
 
-\@quotelevel=\count280
-\@quotereset=\count281
+\@quotelevel=\count283
+\@quotereset=\count284
 (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 16.
-LaTeX Font Info:    ... okay on input line 16.
-LaTeX Info: Redefining \degres on input line 16.
-LaTeX Info: Redefining \dots on input line 16.
-LaTeX Info: Redefining \up on input line 16.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 17.
+LaTeX Font Info:    ... okay on input line 17.
+LaTeX Info: Redefining \degres on input line 17.
+LaTeX Info: Redefining \dots on input line 17.
+LaTeX Info: Redefining \up on input line 17.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count282
-\scratchdimen=\dimen108
-\scratchbox=\box26
-\nofMPsegments=\count283
-\nofMParguments=\count284
-\everyMPshowfont=\toks18
-\MPscratchCnt=\count285
-\MPscratchDim=\dimen109
-\MPnumerator=\count286
-\makeMPintoPDFobject=\count287
-\everyMPtoPDFconversion=\toks19
+\scratchcounter=\count285
+\scratchdimen=\dimen118
+\scratchbox=\box28
+\nofMPsegments=\count286
+\nofMParguments=\count287
+\everyMPshowfont=\toks20
+\MPscratchCnt=\count288
+\MPscratchDim=\dimen119
+\MPnumerator=\count289
+\makeMPintoPDFobject=\count290
+\everyMPtoPDFconversion=\toks21
 ) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -740,8 +790,8 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
 
 (main.bbl)
-Package biblatex Info: Reference section=0 on input line 16.
-Package biblatex Info: Reference segment=0 on input line 16.
+Package biblatex Info: Reference section=0 on input line 17.
+Package biblatex Info: Reference segment=0 on input line 17.
  (titlepage.tex
 <images/hearc_logo.jpg, id=1, 1164.7515pt x 166.4619pt>
 File: images/hearc_logo.jpg Graphic file (type jpg)
@@ -817,13 +867,13 @@ Package logreq Info: Writing requests to 'main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 9019 strings out of 493335
- 147152 string characters out of 3136665
- 563849 words of memory out of 3000000
- 12405 multiletter control sequences out of 15000+200000
+ 9747 strings out of 493335
+ 158814 string characters out of 3136665
+ 579091 words of memory out of 3000000
+ 13098 multiletter control sequences out of 15000+200000
  16135 words of font info for 36 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,5n,30p,795b,1716s stack positions out of 5000i,500n,10000p,200000b,50000s
+ 36i,7n,43p,825b,1718s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\ikonoklast\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dp
 i600\ecti1200.pk> <C:\Users\ikonoklast\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour
 \jknappen\ec\dpi600\ecbx1440.pk> <C:\Users\ikonoklast\AppData\Local\MiKTeX\2.9\
@@ -839,9 +889,9 @@ MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\eccc1728.pk> <C:\Users\ikonoklast
 sers\ikonoklast\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecr
 m1095.pk> <C:\Users\ikonoklast\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
 n\ec\dpi600\ecbx2488.pk>
-Output written on main.pdf (14 pages, 615329 bytes).
+Output written on main.pdf (14 pages, 615064 bytes).
 PDF statistics:
- 457 PDF objects out of 1000 (max. 8388607)
+ 456 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
