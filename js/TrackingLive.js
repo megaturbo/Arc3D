@@ -1,9 +1,7 @@
-/*jshint esversion: 6 */
-
 var CAMERA_DEFAULT_SPEED = 50;
 
 /**
-* Creates a TrackingSimulation object
+* Creates a TrackingLive object
 *
 * @constructor
 * @this {CameraTracking}
@@ -16,8 +14,12 @@ ARC3D.TrackingLive = function(camera) {
     this.speed = CAMERA_DEFAULT_SPEED;
 
     this.path = [];
-    this.spline = undefined;
+    this.splines = [];
+    this.splineLength = -1.0;
     this.distance = 0.0;
+
+    this.fromQuaternion = undefined;
+    this.elevatorQuaternion = undefined;
 
     /**
     * Set the path the camera shall follow.
@@ -27,8 +29,62 @@ ARC3D.TrackingLive = function(camera) {
     */
     this.setPath = function(path) {
         this.path = pathfinder.getPathPositions(path);
-        this.spline = new THREE.CatmullRomCurve3(this.path);
-        return this.spline;
+        this.splines = [];
+
+        var fromElevator = false;
+        var curve = new THREE.CatmullRomCurve3();
+        var curvename = 'normal';
+
+        // Create the curves
+        for(var i = 0; i < path.length; i++){
+            var p = this.path[i];
+            var n = pathfinder.getNode(path[i]);
+            var on = pathfinder.getNode(path[i - 1]);
+
+            if(i > 1)
+                curvename = on.name == 'elevator' ? 'elevator' : 'normal';
+
+            // Create a new curve, and add it to the splines array
+            if((n.name == 'elevator' && !fromElevator) || (n.name != 'elevator' && fromElevator))
+            {
+                // Push it if entering elevator
+                if(n.name == 'elevator'){curve.points.push(p);}
+
+                this.splines.push({curve: curve, curvename: curvename});
+
+                curve = new THREE.CatmullRomCurve3();
+
+                if(n.name != 'elevator'){curve.points.push(this.path[i - 1]);}
+            }
+
+            // Add the point to the current created curve
+            curve.points.push(p);
+
+            // Set past node state
+            if(n.name == 'elevator'){
+                fromElevator = true;
+            }else{
+                fromElevator = false;
+            }
+        }
+
+        // Add the remaining curve if it got at leaste one point.
+        if(curve.points.length > 0)
+        {
+            console.log("yup but: " + curvename);
+            this.splines.push({curve: curve, curvename: curvename});
+        }
+
+        // Compute spline total length
+        this.splineLength = 0.0;
+        for(i = 0; i < this.splines.length; i++)
+        {
+            this.splineLength += this.splines[i].curve.getLength();
+        }
+
+        console.log("Spline is made of " + this.splines.length + " curves");
+
+        return this.splines;
     };
 
     /**
@@ -38,8 +94,11 @@ ARC3D.TrackingLive = function(camera) {
         this.isRunning = true;
         this.distance = 0.0;
         this.isPaused = false;
-        this.camera.position.copy( 0.0 );
-        this.camera.lookAt(this.spline.getPointAt(0.01));
+
+        this.camera.position.copy(this.splines[0].curve.getPointAt(0.0));
+
+        this.fromQuaternion = undefined;
+        this.elevatorQuaternion = undefined;
     };
 
     /**
@@ -67,23 +126,47 @@ ARC3D.TrackingLive = function(camera) {
         if(!this.isRunning || this.isPaused)
             return;
 
-        // Distance = t * v
-        var d = this.distance;
-        d += delta * this.speed;
-        var t_camera = d / this.spline.getLength();
-        var t_look = 0;
-        if(t_camera < 1.0){
-            t_look = t_camera <= 0.98 ? t_camera + 0.02 : 1.0;
-        }
-        else {
+        this.distance += delta * this.speed;
+
+        if(this.distance > this.splineLength){
             this.stop();
             return;
         }
 
+        if(!this.setCameraAt(this.distance)){
+            this.distance -= delta * this.speed;
+        }
+    };
 
-        // Point on the spline
-        var p_camera = this.spline.getPointAt( t_camera );
-        var p_look = this.spline.getPointAt( t_look );
+    this.setCameraAt = function(t)
+    {
+        var distanceCurrentSpline = t;
+        var currentSplineId;
+
+        for(var i = 0; i < this.splines.length; i++)
+        {
+            var sl = this.splines[i].curve.getLength();
+            if (distanceCurrentSpline - sl < 0.0)
+            {
+                currentSplineId = i;
+                break;
+            }
+            distanceCurrentSpline -= sl;
+        }
+
+        var currentSpline = this.splines[currentSplineId].curve;
+        var currentSplineName = this.splines[currentSplineId].curvename;
+        var currentSplineLength = currentSpline.getLength();
+
+        var distanceLookat = distanceCurrentSpline + 100.0;
+        distanceLookat = distanceLookat < currentSplineLength ? distanceLookat : currentSplineLength;
+
+        // t belongs to [0,1]
+        var t_position = distanceCurrentSpline / currentSplineLength;
+        var t_lookat = distanceLookat / currentSplineLength;
+
+        var p_position = currentSpline.getPointAt(t_position);
+        var p_lookat = currentSpline.getPointAt(t_lookat);
 
         var frustum = new THREE.Frustum();
         var projScreenMatrix = new THREE.Matrix4();
@@ -92,10 +175,13 @@ ARC3D.TrackingLive = function(camera) {
         frustum.setFromMatrix( new THREE.Matrix4().multiplyMatrices( camera.projectionMatrix, camera.matrixWorldInverse ) );
 
         // Only move the camera if the user is aiming at the path.
-        if(frustum.containsPoint(p_look)){
-            this.camera.position.copy( p_camera );
-            this.distance = d;
+        if(frustum.containsPoint(p_lookat)){
+            this.camera.position.copy(p_position);
+            return true;
+        }else{
+            return false;
         }
+
 
     };
 
