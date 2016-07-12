@@ -1,10 +1,22 @@
 \section{État de l'art}
-Avant de démarrer le développement il est important de se renseigner sur les travaux qui ont déjà été effectués concernant des objectifs du projet.
-\subsection{3D temps réel}
+Avant de démarrer le développement il est important de se renseigner sur les travaux qui ont déjà été effectués concernant différents objectifs du projet. Le but est de voir si des recherches ou outils déjà créés pourraient nous aider à développer notre projet.
+
+
+\subsection{3D temps réel en navigateur}
+Dans le cadre ce projet il n'est pas possible de pré-rendre les différents chemins imaginables. C'est pourquoi nous devons nous orienter vers la 3D en temps réel. Le but de cette dernière est de pouvoir rendre des images assez vite pour que l'œil humain ait l'impression que ce soit fluide. Ceci implique de rendre au minimum 30 images par seconde, voir 60 au mieux, plus n'est pas utile.
+
+La technologie propice WebGL est maintenant supportée par la majorité des navigateurs, mobile compris \cite{caniuse-webgl}. Elle offre un pont entre notre page internet et la carte graphique de l'utilisateur, c'est grâce à cela qu'il est possible d'offrir ce nombre d'images par seconde. 
+
+Cependant le langage a utiliser est très primitif, c'est pourquoi il est intéressant d'avoir une architecture permettant de gérer notre scène. Plusieurs bibliothèques WebGL offrent déjà des infrastructures ainsi que différents outils qui simplifient des tâches qui seraient redondantes et n'apporteraient rien au projet.
+
+Le choix de la bibliothèque s'est porté sur \emph{three.js}\cite{threejs-website} car c'est celle qui est la plus développée et mise à jour tout en offrant un grand nombre de fonctionnalités. Elle gère notamment le chargement de modèles et permet aussi d'effectuer par exemple du \textit{Back-face culling} et du \textit{Frustum culling}\cite{wiki-HiddenSurfaceDetermination}.
 
 
 \subsection{Navigation dans un bâtiment}
-http://www.gizmag.com/indoor-gps/22528/
-http://www.gizmag.com/unloc-indoor-navigation-app/23106/
-http://www.gizmag.com/navvis-indoor-navigation/24186/
+La navigation en intérieur alimente bon nombre de recherche, c'est un sujet sur lequel il n'y a pas de solution parfaite. Il y a plusieurs manières d'offrir des résultats plus ou moins précis pour répondre à ce problème. La section \ref{sec:localisation} parle plus en profondeur de ce thème et décrit les différentes approches expérimentées.
+
+
 \subsection{Visualisation architecturale}
+Beaucoup de visualisations architecturale existantes se contentent de pré-générer une vidéo dans un bâtiment. De ce fait, les technologies utilisées ne sont pas les mêmes, ce n'est pas du temps réel. D'autres optent pour une série de photographies parmi lesquelles il est possible de naviguer. 
+
+Il existe malgré tout plusieurs produits de visualisation en temps réel. Cependant la plupart de ces derniers demandent un logiciel installé sur le client et de plus ne sont pas utilisable sur mobile. Dans les rares qui utilisent WebGL il y a par exemple Shapespark \cite{architecture-shapespark}, qui n'est encore qu'au stade de \emph{pre-release} et a plutôt l'air d'un service qui offre un produit fini utilisable en navigateur, donc rien d'utilisable pour le développement. PlayCanvas \cite{playcanvas-architecture} permet aussi d'avoir une application en navigateur, cependant l'outil est un moteur 3D qui propose bien plus de fonctionnalités que nous avons besoin et surtout est payant.

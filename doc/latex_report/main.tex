@@ -5,10 +5,31 @@
 \usepackage[T1]{fontenc} 
 \usepackage[francais,english]{babel}
 \usepackage{graphicx}
-\usepackage{biblatex}
 \usepackage[export]{adjustbox}
+\usepackage[babel]{csquotes}
 
-% Counters for toc and numerotation depth
+ \usepackage[%
+	 backend=bibtex      % biber or bibtex
+	 %,style=authoryear    % Alphabeticalsch
+	 ,style=numeric-comp  % numerical-compressed
+	 ,sorting=none        % no sorting
+	 ,sortcites=true      % some other example options ...
+	 ,block=none
+	 ,indexing=false
+	 ,citereset=none
+	 ,isbn=true
+	 ,url=true
+	 ,doi=true            % prints doi
+	 ,natbib=true         % if you need natbib functions
+	 ]{biblatex}
+	 
+\makeatletter
+\def\blx@maxline{77}
+\makeatother
+	
+\addbibresource{biblio.bib}
+
+
 %\setcounter{tocdepth}{1}
 \setcounter{secnumdepth}{1}
 
@@ -17,7 +38,6 @@
 \begin{document}
 
 \input{titlepage}
-
 % Abstract in both languages
 \vspace*{\fill}
 \input{abstract}
@@ -30,10 +50,7 @@
 % Content
 \input{introduction}
 
-
 \chapter{Analyse}
-Présentation du problème, les solutions. Comment il a été découpé.
-Concepts et justifications.
 \input{state_of_the_art}
 \input{localisation}
 
@@ -68,5 +85,8 @@ Pas de perspectives faciles.
 
 
 \chapter{Bibliographie}
+\nocite{*} %Even non-cited BibTeX-Entries will be shown.
+\printbibliography
+
 
 \end{document}

@@ -1,0 +1,93 @@
+% $ biblatex auxiliary file $
+% $ biblatex bbl format version 2.7 $
+% Do not modify the above lines!
+%
+% This is an auxiliary file used by the 'biblatex' package.
+% This file may safely be deleted. It will be recreated as
+% required.
+%
+\begingroup
+\makeatletter
+\@ifundefined{ver@biblatex.sty}
+  {\@latex@error
+     {Missing 'biblatex' package}
+     {The bibliography requires the 'biblatex' package.}
+      \aftergroup\endinput}
+  {}
+\endgroup
+
+\sortlist[entry]{none/global/}
+  \entry{caniuse-webgl}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Support of HTML5/CSS3 features.%
+    }
+    \field{title}{Can I Use - WebGL}
+    \verb{url}
+    \verb http://caniuse.com/#feat=webgl
+    \endverb
+    \field{journaltitle}{CanIUse}
+    \field{urlday}{12}
+    \field{urlmonth}{07}
+    \field{urlyear}{2016}
+  \endentry
+
+  \entry{threejs-website}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Javascript 3D library%
+    }
+    \field{title}{three.js}
+    \verb{url}
+    \verb http://threejs.org/
+    \endverb
+    \field{urlday}{12}
+    \field{urlmonth}{07}
+    \field{urlyear}{2016}
+  \endentry
+
+  \entry{wiki-HiddenSurfaceDetermination}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Wikipedia page on Hidden surface determination%
+    }
+    \field{title}{Hidden surface determination}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Hidden_surface_determination
+    \endverb
+    \field{urlday}{12}
+    \field{urlmonth}{07}
+    \field{urlyear}{2016}
+  \endentry
+
+  \entry{architecture-shapespark}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Real-time architectural visualizations in a browser%
+    }
+    \field{title}{Shapespark}
+    \verb{url}
+    \verb http://www.architectureanddesign.com.au/news/industry-news/architects
+    \verb -gear-up-for-real-time-visualisation
+    \endverb
+    \field{journaltitle}{Architecture}
+    \field{urlday}{12}
+    \field{urlmonth}{07}
+    \field{urlyear}{2016}
+  \endentry
+
+  \entry{playcanvas-architecture}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Playcanvas on Architecture%
+    }
+    \field{title}{Playcanvas}
+    \verb{url}
+    \verb https://playcanvas.com/industries/architecture
+    \endverb
+    \field{urlday}{12}
+    \field{urlmonth}{04}
+    \field{urlyear}{2016}
+  \endentry
+\endsortlist
+\endinput

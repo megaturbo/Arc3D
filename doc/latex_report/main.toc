@@ -18,68 +18,68 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {2.1}\IeC {\'E}tat de l'art}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{3D temps r\IeC {\'e}el}{5}
+\contentsline {subsection}{3D temps r\IeC {\'e}el en navigateur}{5}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Navigation dans un b\IeC {\^a}timent}{5}
+\contentsline {subsection}{Navigation dans un b\IeC {\^a}timent}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Visualisation architecturale}{5}
+\contentsline {subsection}{Visualisation architecturale}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {2.2}Localisation en int\IeC {\'e}rieur}{5}
+\contentsline {section}{\numberline {2.2}Localisation en int\IeC {\'e}rieur}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{GPS}{5}
+\contentsline {subsection}{GPS}{6}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Triangulation Wifi}{6}
+\contentsline {subsection}{Triangulation Wifi}{7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Triangulation Bluetooth}{6}
+\contentsline {subsection}{Triangulation Bluetooth}{7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Acc\IeC {\'e}l\IeC {\'e}rom\IeC {\`e}tre et Gyroscope}{7}
+\contentsline {subsection}{Acc\IeC {\'e}l\IeC {\'e}rom\IeC {\`e}tre et Gyroscope}{8}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {3}D\IeC {\'e}veloppement}{8}
+\contentsline {chapter}{\numberline {3}D\IeC {\'e}veloppement}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.1}Mod\IeC {\`e}le 3D}{8}
+\contentsline {section}{\numberline {3.1}Mod\IeC {\`e}le 3D}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Mod\IeC {\'e}lisation g\IeC {\'e}om\IeC {\'e}trique}{8}
+\contentsline {subsection}{Mod\IeC {\'e}lisation g\IeC {\'e}om\IeC {\'e}trique}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Texturisation du mod\IeC {\`e}le}{8}
+\contentsline {subsection}{Texturisation du mod\IeC {\`e}le}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Exportation et importation}{8}
+\contentsline {subsection}{Exportation et importation}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Rendu graphique}{8}
+\contentsline {section}{\numberline {3.2}Rendu graphique}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Recherche de chemin}{9}
+\contentsline {section}{\numberline {3.3}Recherche de chemin}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{N\IeC {\oe }uds et Graphe}{9}
+\contentsline {subsection}{N\IeC {\oe }uds et Graphe}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Algorithme de recherche de chemin}{9}
+\contentsline {subsection}{Algorithme de recherche de chemin}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Contr\IeC {\^o}les de la cam\IeC {\'e}ra}{9}
+\contentsline {section}{\numberline {3.4}Contr\IeC {\^o}les de la cam\IeC {\'e}ra}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Ordinateur et mobile}{9}
+\contentsline {subsection}{Ordinateur et mobile}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Orientation mobile}{9}
+\contentsline {subsection}{Orientation mobile}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Suivi cam\IeC {\'e}ra}{9}
+\contentsline {section}{\numberline {3.5}Suivi cam\IeC {\'e}ra}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Lissage du chemin}{9}
+\contentsline {subsection}{Lissage du chemin}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Regard de la cam\IeC {\'e}ra}{9}
+\contentsline {subsection}{Regard de la cam\IeC {\'e}ra}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.6}Interface graphique}{9}
+\contentsline {section}{\numberline {3.6}Interface graphique}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.7}Rendu temps r\IeC {\'e}el}{10}
+\contentsline {section}{\numberline {3.7}Rendu temps r\IeC {\'e}el}{11}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}R\IeC {\'e}sultats}{11}
+\contentsline {chapter}{\numberline {4}R\IeC {\'e}sultats}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Temps r\IeC {\'e}el}{11}
+\contentsline {section}{\numberline {4.1}Temps r\IeC {\'e}el}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Mod\IeC {\'e}lisation g\IeC {\'e}om\IeC {\'e}trique}{11}
+\contentsline {section}{\numberline {4.2}Mod\IeC {\'e}lisation g\IeC {\'e}om\IeC {\'e}trique}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}R\IeC {\'e}alisation des objectifs}{11}
+\contentsline {section}{\numberline {4.3}R\IeC {\'e}alisation des objectifs}{12}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Discussion}{12}
+\contentsline {chapter}{\numberline {5}Discussion}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Conclusion}{12}
+\contentsline {section}{\numberline {5.1}Conclusion}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Perspectives}{12}
+\contentsline {section}{\numberline {5.2}Perspectives}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Bibliographie}{13}
+\contentsline {chapter}{\numberline {6}Bibliographie}{14}
