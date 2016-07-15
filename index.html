@@ -14,6 +14,46 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>
+
+
+		<script id="fragment_shader1" type="x-shader/x-fragment">
+
+			uniform vec2 resolution;
+			uniform float time;
+
+			varying vec2 vUv;
+
+			void main(void)
+			{
+
+				vec2 p = -1.0 + 2.0 * vUv;
+				float a = time*40.0;
+				float d,e,f,g=1.0/40.0,h,i,r,q;
+
+				e=400.0*(p.x*0.5+0.5);
+				f=400.0*(p.y*0.5+0.5);
+				i=200.0+sin(e*g+a/150.0)*20.0;
+				d=200.0+cos(f*g/2.0)*18.0+cos(e*g)*7.0;
+				r=sqrt(pow(i-e,2.0)+pow(d-f,2.0));
+				q=f/r;
+				e=(r*cos(q))-a/2.0;f=(r*sin(q))-a/2.0;
+				d=sin(e*g)*176.0+sin(e*g)*164.0+r;
+				h=((f+d)+a/2.0)*g;
+				i=cos(h+r*p.x/1.3)*(e+e+a)+cos(q*g*6.0)*(r+h/3.0);
+				h=sin(f*g)*144.0-sin(e*g)*212.0*p.x;
+				h=(h+(f-e)*q+sin(r-(a+h)/7.0)*10.0+i/4.0)*g;
+				i+=cos(h*2.3*sin(a/350.0-q))*184.0*sin(q-(r*4.3+a/12.0)*g)+tan(r*g+h)*184.0*cos(r*g+h);
+				i=mod(i/5.6,256.0)/64.0;
+				if(i<0.0) i+=4.0;
+				if(i>=2.0) i=4.0-i;
+				d=r/350.0;
+				d+=sin(d*d*8.0)*0.52;
+				f=(sin(a*g)+1.0)/2.0;
+				gl_FragColor=vec4(vec3(f*i/1.6,i/2.0+d/13.0,i)*d*p.x+vec3(i/1.3+d/8.0,i/2.0+d/18.0,i)*d*(1.0-p.x),1.0);
+
+			}
+
+		</script>
 </head>
 
 <body>
@@ -125,11 +165,15 @@
     * Not yet used, but should be for orientation calibration
     */
     function clickLeft(){
-        console.log("Left side clicked");
+        if(ARC3D.controlMode == ARC3D.ControlModes.GYRO){
+            controls.addOffset(10);
+        }
     }
 
     function clickRight(){
-        console.log("Right side clicked");
+        if(ARC3D.controlMode == ARC3D.ControlModes.GYRO){
+            controls.addOffset(-10);
+        }
     }
 
     function getNearestToilet(toilet_name)
@@ -268,8 +312,8 @@
                 continue;
 
             var tag = node.name.split('-')[0];
-            if (tag == 'room' || tag == 'secretariat'){
-                var d = tag == 'room' ? "Salle" : "Secrétariat";
+            if (tag == 'room' || tag == 'secretariat' || tag == 'misc'){
+                var d = tag == 'room' ? "Salle" : tag == 'misc' ? "" : "Secrétariat";
                 var option_a = document.createElement("option");
                 option_a.text = d + " " + node.name.split('-')[1];
                 option_a.value = node.id;
@@ -348,9 +392,10 @@
         document.onkeydown = ARC3D.keyEvent;
 
         //	PerspectiveCamera( fov, aspect, near, far )
-        camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 10000 );
+        camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 0.1, 20000 );
         if(!ARC3D.isPositionDefined){
             camera.position.copy(ARC3D.defaultCameraPosition);
+            camera.rotation.copy(ARC3D.defaultCameraRotation);
         }else{
             camera.position.copy(pathfinder.getNodePosition(current_node_id));
         }
@@ -360,6 +405,22 @@
 
         // scene
         scene = new THREE.Scene();
+
+        // skybox
+        var imagePrefix = "img/skybox-";
+    	var directions  = ["posx", "negx", "posy", "negy", "posz", "negz"];
+    	var imageSuffix = ".png";
+    	var skyGeometry = new THREE.CubeGeometry( 20000, 20000, 20000 );
+
+    	var materialArray = [];
+    	for (var i = 0; i < 6; i++)
+    		materialArray.push( new THREE.MeshBasicMaterial({
+    			map: THREE.ImageUtils.loadTexture( imagePrefix + directions[i] + imageSuffix ),
+    			side: THREE.BackSide
+    		}));
+    	var skyMaterial = new THREE.MeshFaceMaterial( materialArray );
+    	var skyBox = new THREE.Mesh( skyGeometry, skyMaterial );
+    	scene.add( skyBox );
 
         // Lights
         initLights();
@@ -378,7 +439,7 @@
         // JSON LOADER
         var jsonLoader = new THREE.JSONLoader();
         var models = ARC3D.models;
-        for(var i = 0; i < models.length; i++)
+        for(i = 0; i < models.length; i++)
         {
             jsonLoader.load(models[i], addModelToScene);
         }
@@ -402,13 +463,13 @@
         stats.domElement.style.position = 'absolute';
         stats.domElement.style.top = '0px';
         stats.domElement.style.zIndex = 100;
-        container.appendChild( stats.domElement );
+        // container.appendChild( stats.domElement );
 
         rendererStats = new THREEx.RendererStats();
         rendererStats.domElement.style.position   = 'absolute';
         rendererStats.domElement.style.left  = '0px';
         rendererStats.domElement.style.bottom    = '0px';
-        container.appendChild( rendererStats.domElement );
+        // container.appendChild( rendererStats.domElement );
 
         // window.addEventListener('mousedown', onDocumentMouseDown, false);
         window.addEventListener( 'resize', onWindowResize, false );
@@ -424,8 +485,17 @@
     */
     function initLights()
     {
+        // Ambient lighting
         var ambient = new THREE.AmbientLight( 0xffffff );
         scene.add( ambient );
+
+        // Directional lighting
+        var dir1 = new THREE.DirectionalLight( 0xffffff, 0.2 );
+        dir1.position.set( -0.5, 1, 0.5 );
+        var dir2 = new THREE.DirectionalLight( 0xffffff, 0.1 );
+        dir2.position.set( -0.5, 1, 0.5 );
+        scene.add( dir1 );
+        scene.add( dir2 );
 
         var n = 2;
 
@@ -439,7 +509,7 @@
 
         for(var i = 0; i < n; i++)
         {
-            var light = new THREE.PointLight( 0xffffff, 0.8, 1200 );
+            var light = new THREE.PointLight( 0xffffff, 0.3, 100 );
             light.position.set(b_s + i * l_r, f1_y, f1_z);
             // scene.add(light);
         }
@@ -453,7 +523,11 @@
         for(var i = 0; i < materials.length; i++){
             // var m = new THREE.MeshPhongMaterial(materials[i]);
             var m = new THREE.MeshLambertMaterial(materials[i]);
-            // var m = materials[i];
+
+            // Correct a texture misplacement
+            if(m.name == 'gravel'){
+                m.side = THREE.DoubleSide;
+            }
 
             if (!(m.name in building_materials)){
                 building_materials[m.name] = m;
@@ -461,6 +535,9 @@
             mat_refs.push(building_materials[m.name]);
         }
         var material = new THREE.MeshFaceMaterial(mat_refs);
+
+
+
         geometry.sortFacesByMaterialIndex();
 
         // var material = new THREE.MeshPhongMaterial();
@@ -476,6 +553,7 @@
         var helper = new THREE.BoundingBoxHelper(mesh, Math.random() * 0xffffff);
         helper.update();
         // scene.add(helper);
+
 
         building_parts.push({mesh: mesh, boundingBox: helper});
     }

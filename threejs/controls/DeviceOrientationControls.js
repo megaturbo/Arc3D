@@ -57,8 +57,9 @@ THREE.DeviceOrientationControls = function ( object ) {
 
 	}();
 
-    this.setNorth = function(){
-        this.offset = 270 - scope.deviceOrientation.alpha;
+    this.addOffset = function(value){
+        this.offset += value;
+        console.log("of: " + this.offset);
     };
 
 	this.connect = function() {

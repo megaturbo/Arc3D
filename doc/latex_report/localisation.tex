@@ -27,8 +27,6 @@ Malheureusement, la mise en place de cette infrastructure est un désavantage à
 \subsection{Accéléromètre et Gyroscope}
 L'approche par accéléromètre et gyroscope est différente, car elle implique d'utiliser les capteurs internes du smartphone pour calculer une position. HTML5 fournit une API pour détecter l'orientation et les déplacements du dispositif. Autrement dit, l'accès à l'accéléromètre et au gyroscope est possible depuis un navigateur Internet.
 
-A l'aide de l'accélération, il est théoriquement possible de calculer une position. Cependant, les valeurs de ces capteurs comportent un bruit et, pour calculer une position, il faut double-intégrer l'accélération. Cela implique qu'il faut double-intégrer le bruit et cela va créer un \textit{drift}. En quelques secondes, l'erreur peut s'élever à une vingtaine de centimètres. En outre, le gyroscope peut avoir une valeur erronée, due à la suppression de la gravité. En d'autres termes, une erreur d'un degré sur la valeur du gyroscope représente plusieurs mètres d'erreur en quelques secondes. 
-
-Citer https://youtu.be/C7JQ7Rpwn2k?t=23m22s
+A l'aide de l'accélération, il est théoriquement possible de calculer une position. Cependant, les valeurs de ces capteurs comportent un bruit et, pour calculer une position, il faut double-intégrer l'accélération. Cela implique qu'il faut double-intégrer le bruit et cela va créer un \textit{drift}. En quelques secondes, l'erreur peut s'élever à une vingtaine de centimètres. En outre, le gyroscope peut avoir une valeur erronée, due à la suppression de la gravité. En d'autres termes, une erreur d'un degré sur la valeur du gyroscope représente plusieurs mètres d'erreur en quelques secondes \cite{google-SensorFusion}. 
 
 Le but de cette approche était fondamentalement d'estimer la position de l'utilisateur, sans pour autant connaître la valeur exacte. Les démarches et réflexions prouvent qu'une approximation n'est pas envisageable avec ces capteurs.

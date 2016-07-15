@@ -167,7 +167,7 @@ ARC3D.Pathfinder = function(nodes){
         {
             var min = Infinity;
             var current_id;
-            for(let item of openSet)
+            for(var item of openSet)
             {
                 var score = fScore.get(item);
                 if(score < min){
@@ -243,7 +243,7 @@ ARC3D.Pathfinder = function(nodes){
         {
             var min = Infinity;
             var current_id;
-            for(let item of openSet)
+            for(var item of openSet)
             {
                 var score = fScore.get(item);
                 if(score < min){

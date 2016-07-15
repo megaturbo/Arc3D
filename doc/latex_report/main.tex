@@ -7,8 +7,9 @@
 \usepackage{graphicx}
 \usepackage[export]{adjustbox}
 \usepackage[babel]{csquotes}
+\usepackage{enumitem}
 
- \usepackage[%
+\usepackage[%
 	 backend=bibtex      % biber or bibtex
 	 %,style=authoryear    % Alphabeticalsch
 	 ,style=numeric-comp  % numerical-compressed
@@ -56,17 +57,12 @@
 
 \chapter{Développement}
 \input{modele}
-\section{Rendu graphique}
-Matériaux de Lambert
-Éclairage.
-
+\input{rendu_graphique}
 \input{pathfinding}
 \input{controles}
 \input{suivi_camera}
 \input{interface}
-
-\section{Rendu temps réel}
-je l'ai testé sur 3 trucs. minimum 30 fps
+\input{rendu_temps_reel}
 
 \chapter{Résultats}
 Lister les objectifs, lesquels sont réussi, pourquoi les autres le sont pas...

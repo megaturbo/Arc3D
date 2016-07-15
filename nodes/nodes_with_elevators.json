@@ -39,7 +39,6 @@
     },
     {
       "id": 3,
-      "name": "Entrée ouest",
       "position": {
         "x": -1960,
         "y": -50,
@@ -48,7 +47,8 @@
       "neighbors": [
         1,
         4,
-        4019
+        4019,
+        4032
       ]
     },
     {
@@ -268,7 +268,7 @@
     },
     {
       "id": 21,
-      "name": "Entrée principale",
+      "name": "misc-Entrée principale",
       "position": {
         "x": -299.03463567364423,
         "y": -50,
@@ -2143,7 +2143,7 @@
     },
     {
       "id": 2002,
-      "name": "secretariat-Ingénierie/Conservation",
+      "name": "secretariat-Ingénierie",
       "position": {
         "x": -1980,
         "y": 110,
@@ -3129,6 +3129,55 @@
         1084,
         4024
       ]
-    }
+  },
+  {
+      "id":4029,
+      "name": "misc-Place de la gare",
+      "position": {
+          "x": -6000,
+          "y":-66,
+          "z": 322
+      },
+      "neighbors": [
+          4030
+      ]
+  },
+  {
+      "id": 4030,
+      "position":{
+          "x":-5407.116994291533,
+          "y":-66,
+          "z":413.9058880623962
+          },
+          "neighbors":[
+              4029,
+              4031
+              ]
+  },
+  {
+      "id":4031,
+      "position":{
+          "x":-3848.477215424697,
+          "y":-66,
+          "z":404.3178657348853
+          },
+          "neighbors":[
+              4030,
+              4032
+              ]
+  },
+  {
+      "id":4032,
+      "name": "misc-Entrée ouest",
+      "position":{
+          "x":-1967.8767613631192,
+          "y":-52.37200000000302,
+          "z":246.90919859681512
+          },
+          "neighbors":[
+              3,
+              4031
+              ]
+  }
   ]
 }

@@ -37,7 +37,7 @@
     \field{abstract}{%
     Javascript 3D library%
     }
-    \field{title}{three.js}
+    \field{title}{three.js library}
     \verb{url}
     \verb http://threejs.org/
     \endverb
@@ -81,13 +81,189 @@
     \field{abstract}{%
     Playcanvas on Architecture%
     }
-    \field{title}{Playcanvas}
+    \field{title}{Playcanvas - Architecture}
     \verb{url}
     \verb https://playcanvas.com/industries/architecture
     \endverb
     \field{urlday}{12}
     \field{urlmonth}{04}
     \field{urlyear}{2016}
+  \endentry
+
+  \entry{google-SensorFusion}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Google Tech Talks on Sensor Fusion.%
+    }
+    \field{title}{Double integration with Sensor Fusion}
+    \verb{url}
+    \verb https://youtu.be/C7JQ7Rpwn2k?t=23m22s
+    \endverb
+    \field{urlday}{29}
+    \field{urlmonth}{06}
+    \field{urlyear}{2016}
+  \endentry
+
+  \entry{blender-website}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Blender website%
+    }
+    \field{title}{Blender website}
+    \verb{url}
+    \verb https://www.blender.org/
+    \endverb
+    \field{journaltitle}{Blender}
+    \field{urlday}{12}
+    \field{urlmonth}{04}
+    \field{urlyear}{2016}
+  \endentry
+
+  \entry{autodesk-3dsmax}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Autodesk 3ds Max's overview%
+    }
+    \field{title}{Autodesk 3ds Max website}
+    \verb{url}
+    \verb http://www.autodesk.fr/products/3ds-max/overview
+    \endverb
+    \field{journaltitle}{Autodesk}
+    \field{urlday}{03}
+    \field{urlmonth}{06}
+    \field{urlyear}{2016}
+  \endentry
+
+  \entry{wiki-json}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Wiki page on JSON%
+    }
+    \field{title}{JSON - JavaScript Object Notation}
+    \verb{url}
+    \verb https://fr.wikipedia.org/wiki/JavaScript_Object_Notation
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{autodesk-maxscript}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Autodesk 3ds max Maxscript introduction%
+    }
+    \field{title}{Maxscript Introduction}
+    \verb{url}
+    \verb http://docs.autodesk.com/3DSMAX/14/ENU/MAXScript%20Help%202012/
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{wiki-shader}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Wiki page on Shader%
+    }
+    \field{title}{Shader}
+    \verb{url}
+    \verb https://fr.wikipedia.org/wiki/Shader
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{wiki-gouraud}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Wiki page on Gouraud Shading%
+    }
+    \field{title}{Gouraud Shading}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Gouraud_shading
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{wiki-lambert}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Wiki page on Lambert reflectance%
+    }
+    \field{title}{Lambert reflectance}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Lambertian_reflectance
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{wiki-phong-shading}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Wiki page on Phong Shading%
+    }
+    \field{title}{Phong Shading}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Phong_shading
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{wiki-phong-reflectance}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Wiki page on Phong Reflectance%
+    }
+    \field{title}{Phong reflectance}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Phong_reflection_model
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{wiki-graph}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Wiki page on Graph%
+    }
+    \field{title}{Graph (Abstract Data Type)}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Graph_(abstract_data_type)
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{wiki-astar}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Wiki page on A*%
+    }
+    \field{title}{A* search algorithm}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/A*_search_algorithm
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{wiki-dijkstra}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Wiki page on Dijkstra's algorithm%
+    }
+    \field{title}{Dijkstra's algorithm}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Dijkstra%27s_algorithm
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{wiki-useragent}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Wiki page on User agent%
+    }
+    \field{title}{User agent}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/User_agent
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
   \endentry
 \endsortlist
 \endinput

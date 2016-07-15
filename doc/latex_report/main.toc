@@ -38,48 +38,52 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.1}Mod\IeC {\`e}le 3D}{9}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Mod\IeC {\'e}lisation g\IeC {\'e}om\IeC {\'e}trique}{9}
+\contentsline {subsection}{Mod\IeC {\'e}lisation g\IeC {\'e}om\IeC {\'e}trique}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Texturisation du mod\IeC {\`e}le}{9}
+\contentsline {subsection}{Texturisation du mod\IeC {\`e}le}{10}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Exportation et importation}{9}
+\contentsline {subsection}{Exportation et importation}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.2}Rendu graphique}{9}
+\contentsline {section}{\numberline {3.2}Rendu graphique}{13}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.3}Recherche de chemin}{10}
+\contentsline {subsection}{Type de mat\IeC {\'e}riaux}{14}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{N\IeC {\oe }uds et Graphe}{10}
+\contentsline {subsection}{\IeC {\'E}clairage}{14}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Algorithme de recherche de chemin}{10}
+\contentsline {section}{\numberline {3.3}Recherche de chemin}{15}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.4}Contr\IeC {\^o}les de la cam\IeC {\'e}ra}{10}
+\contentsline {subsection}{N\IeC {\oe }uds et Graphe}{15}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Ordinateur et mobile}{10}
+\contentsline {subsection}{Algorithme de recherche de chemin}{16}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Orientation mobile}{10}
+\contentsline {section}{\numberline {3.4}Contr\IeC {\^o}les de la cam\IeC {\'e}ra}{16}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.5}Suivi cam\IeC {\'e}ra}{10}
+\contentsline {subsection}{Ordinateur et mobile}{16}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Lissage du chemin}{10}
+\contentsline {subsection}{Orientation mobile}{16}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Regard de la cam\IeC {\'e}ra}{10}
+\contentsline {section}{\numberline {3.5}Suivi cam\IeC {\'e}ra}{16}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.6}Interface graphique}{10}
+\contentsline {subsection}{Lissage du chemin}{16}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.7}Rendu temps r\IeC {\'e}el}{11}
+\contentsline {subsection}{Regard de la cam\IeC {\'e}ra}{17}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {4}R\IeC {\'e}sultats}{12}
+\contentsline {section}{\numberline {3.6}Interface graphique}{17}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.1}Temps r\IeC {\'e}el}{12}
+\contentsline {section}{\numberline {3.7}Rendu temps r\IeC {\'e}el}{17}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.2}Mod\IeC {\'e}lisation g\IeC {\'e}om\IeC {\'e}trique}{12}
+\contentsline {chapter}{\numberline {4}R\IeC {\'e}sultats}{18}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}R\IeC {\'e}alisation des objectifs}{12}
+\contentsline {section}{\numberline {4.1}Temps r\IeC {\'e}el}{18}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Discussion}{13}
+\contentsline {section}{\numberline {4.2}Mod\IeC {\'e}lisation g\IeC {\'e}om\IeC {\'e}trique}{18}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Conclusion}{13}
+\contentsline {section}{\numberline {4.3}R\IeC {\'e}alisation des objectifs}{18}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Perspectives}{13}
+\contentsline {chapter}{\numberline {5}Discussion}{19}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {6}Bibliographie}{14}
+\contentsline {section}{\numberline {5.1}Conclusion}{19}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {5.2}Perspectives}{19}
+\defcounter {refsection}{0}\relax 
+\contentsline {chapter}{\numberline {6}Bibliographie}{20}

@@ -10,8 +10,8 @@ ARC3D.TrackingModes = {WAITING: 0, SIM: 1, LIVE: 2};
 ARC3D.trackingMode = ARC3D.TrackingModes.WAITING;
 
 // ARC3D.defaultCameraPosition = new THREE.Vector3(518.1343902256439, 179.21829815866715, -204.30850284213201);
-ARC3D.defaultCameraPosition = new THREE.Vector3(-256, -66, 322);
-ARC3D.defaultCameraRotation = new THREE.Vector3(-0.1076350906304018, 1.5321409768616594, 0.07200147984575293);
+ARC3D.defaultCameraPosition = new THREE.Vector3(-6000, -66, 322);
+ARC3D.defaultCameraRotation = new THREE.Euler(Math.PI, -1.1414, Math.PI, "XYZ");
 
 ARC3D.isPositionDefined = false;
 
@@ -27,9 +27,9 @@ ARC3D.buttonActiveClass = 'btn waves-effect';
 //Models
 ARC3D.modelsWalls = ["walls_0", "walls_1", "walls_2", "walls_3"];
 ARC3D.modelsWindows = ["window_0", "window_1", "window_2", "window_3"];
-ARC3D.modelsGrounds = ["ground_1", "ground_2", "ground_3", "ground_4"];
+ARC3D.modelsGrounds = ["ground_0", "ground_1", "ground_2", "ground_3", "ground_4"];
 ARC3D.modelsStairs = ["stairs"];
-ARC3D.modelsMisc = ["commerce_0"];
+ARC3D.modelsMisc = ["commerce_0", "environnement"];
 
 ARC3D.models = [].concat(ARC3D.modelsWalls, ARC3D.modelsWindows, ARC3D.modelsGrounds, ARC3D.modelsStairs, ARC3D.modelsMisc);
 
@@ -210,19 +210,19 @@ ARC3D.initNodes = function(){
 *   Log some informations on key press
 */
 ARC3D.keyEvent = function(e) {
-    var event = window.event ? window.event : e;
-    if(event.keyCode == 32){
-        var cpos = camera.position;
-        var point = {id:key_points.length + 3000, positiwaon:{x:cpos.x, y:cpos.y, z:cpos.z}, neighbors:[]};
-        key_points.push(point);
-		pointLight = new THREE.PointLight( 0xffffff, 0.8, 300 );
-		pointLight.position.copy(cpos);
-		scene.add( pointLight );
-
-        var object;
-
-        console.log(JSON.stringify(key_points));
-    }
+    // var event = window.event ? window.event : e;
+    // if(event.keyCode == 32){
+    //     var cpos = camera.position;
+    //     var point = {id:key_points.length + 3000, positiwaon:{x:cpos.x, y:cpos.y, z:cpos.z}, neighbors:[]};
+    //     key_points.push(point);
+	// 	pointLight = new THREE.PointLight( 0xffffff, 0.8, 300 );
+	// 	pointLight.position.copy(cpos);
+	// 	scene.add( pointLight );
+    //
+    //     var object;
+    //
+    //     console.log(JSON.stringify(key_points));
+    // }
 };
 
 ARC3D.mobileCheck = function() {

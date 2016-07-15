@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.6.28)  12 JUL 2016 23:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (MiKTeX 2.9) (preloaded format=pdflatex 2016.6.28)  14 JUL 2016 11:21
 entering extended mode
 **./main.tex
 (main.tex
@@ -499,6 +499,14 @@ Package csquotes Info: Option 'babel' depreciated.
 (csquotes)             Using 'autostyle'.
 Package csquotes Info: Enabling multilingual quotes.
 )
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\enumitem\enumitem.sty"
+Package: enumitem 2011/09/28 v3.5.2 Customized lists
+\labelindent=\skip50
+\enit@outerparindent=\dimen118
+\enit@toks=\toks21
+\enit@inbox=\box28
+\enitdp@description=\count104
+)
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\biblatex\biblatex.sty"
 Package: biblatex 2016/05/14 v3.4 programmable bibliographies (PK/JW/AB)
 
@@ -537,7 +545,7 @@ Package etexcmds Info: Could not find \expanded.
 )))
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\logreq\logreq.sty"
 Package: logreq 2010/08/04 v1.0 xml request logger
-\lrq@indent=\count104
+\lrq@indent=\count105
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\logreq\logreq.def"
 File: logreq.def 2010/08/04 v1.0 logreq spec v1.0
@@ -552,62 +560,62 @@ Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\xstring\xstring.sty"
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\generic\xstring\xstring.tex"
 \@xs@message=\write3
-\integerpart=\count105
-\decimalpart=\count106
+\integerpart=\count106
+\decimalpart=\count107
 )
 Package: xstring 2013/10/13  v1.7c  String manipulations (C Tellechea)
 )
-\c@tabx@nest=\count107
-\c@listtotal=\count108
-\c@listcount=\count109
-\c@liststart=\count110
-\c@liststop=\count111
-\c@citecount=\count112
-\c@citetotal=\count113
-\c@multicitecount=\count114
-\c@multicitetotal=\count115
-\c@instcount=\count116
-\c@maxnames=\count117
-\c@minnames=\count118
-\c@maxitems=\count119
-\c@minitems=\count120
-\c@citecounter=\count121
-\c@savedcitecounter=\count122
-\c@uniquelist=\count123
-\c@uniquename=\count124
-\c@refsection=\count125
-\c@refsegment=\count126
-\c@maxextratitle=\count127
-\c@maxextratitleyear=\count128
-\c@maxextrayear=\count129
-\c@maxextraalpha=\count130
-\c@abbrvpenalty=\count131
-\c@highnamepenalty=\count132
-\c@lownamepenalty=\count133
-\c@maxparens=\count134
-\c@parenlevel=\count135
-\blx@tempcnta=\count136
-\blx@tempcntb=\count137
-\blx@tempcntc=\count138
-\blx@maxsection=\count139
-\blx@maxsegment@0=\count140
-\blx@notetype=\count141
-\blx@parenlevel@text=\count142
-\blx@parenlevel@foot=\count143
-\blx@sectionciteorder@0=\count144
-\labelnumberwidth=\skip50
-\labelalphawidth=\skip51
-\biblabelsep=\skip52
-\bibitemsep=\skip53
-\bibnamesep=\skip54
-\bibinitsep=\skip55
-\bibparsep=\skip56
-\bibhang=\skip57
+\c@tabx@nest=\count108
+\c@listtotal=\count109
+\c@listcount=\count110
+\c@liststart=\count111
+\c@liststop=\count112
+\c@citecount=\count113
+\c@citetotal=\count114
+\c@multicitecount=\count115
+\c@multicitetotal=\count116
+\c@instcount=\count117
+\c@maxnames=\count118
+\c@minnames=\count119
+\c@maxitems=\count120
+\c@minitems=\count121
+\c@citecounter=\count122
+\c@savedcitecounter=\count123
+\c@uniquelist=\count124
+\c@uniquename=\count125
+\c@refsection=\count126
+\c@refsegment=\count127
+\c@maxextratitle=\count128
+\c@maxextratitleyear=\count129
+\c@maxextrayear=\count130
+\c@maxextraalpha=\count131
+\c@abbrvpenalty=\count132
+\c@highnamepenalty=\count133
+\c@lownamepenalty=\count134
+\c@maxparens=\count135
+\c@parenlevel=\count136
+\blx@tempcnta=\count137
+\blx@tempcntb=\count138
+\blx@tempcntc=\count139
+\blx@maxsection=\count140
+\blx@maxsegment@0=\count141
+\blx@notetype=\count142
+\blx@parenlevel@text=\count143
+\blx@parenlevel@foot=\count144
+\blx@sectionciteorder@0=\count145
+\labelnumberwidth=\skip51
+\labelalphawidth=\skip52
+\biblabelsep=\skip53
+\bibitemsep=\skip54
+\bibnamesep=\skip55
+\bibinitsep=\skip56
+\bibparsep=\skip57
+\bibhang=\skip58
 \blx@bcfin=\read1
 \blx@bcfout=\write4
-\c@mincomprange=\count145
-\c@maxcomprange=\count146
-\c@mincompwidth=\count147
+\c@mincomprange=\count146
+\c@maxcomprange=\count147
+\c@mincompwidth=\count148
 Package biblatex Info: Trying to load biblatex default data model...
 Package biblatex Info: ... file 'blx-dm.def' found.
 
@@ -616,78 +624,78 @@ Package biblatex Info: Trying to load biblatex style data model...
 Package biblatex Info: ... file 'numeric-comp.dbx' not found.
 Package biblatex Info: Trying to load biblatex custom data model...
 Package biblatex Info: ... file 'biblatex-dm.cfg' not found.
-\c@afterword=\count148
-\c@savedafterword=\count149
-\c@annotator=\count150
-\c@savedannotator=\count151
-\c@author=\count152
-\c@savedauthor=\count153
-\c@bookauthor=\count154
-\c@savedbookauthor=\count155
-\c@commentator=\count156
-\c@savedcommentator=\count157
-\c@editor=\count158
-\c@savededitor=\count159
-\c@editora=\count160
-\c@savededitora=\count161
-\c@editorb=\count162
-\c@savededitorb=\count163
-\c@editorc=\count164
-\c@savededitorc=\count165
-\c@foreword=\count166
-\c@savedforeword=\count167
-\c@holder=\count168
-\c@savedholder=\count169
-\c@introduction=\count170
-\c@savedintroduction=\count171
-\c@namea=\count172
-\c@savednamea=\count173
-\c@nameb=\count174
-\c@savednameb=\count175
-\c@namec=\count176
-\c@savednamec=\count177
-\c@translator=\count178
-\c@savedtranslator=\count179
-\c@shortauthor=\count180
-\c@savedshortauthor=\count181
-\c@shorteditor=\count182
-\c@savedshorteditor=\count183
-\c@labelname=\count184
-\c@savedlabelname=\count185
-\c@institution=\count186
-\c@savedinstitution=\count187
-\c@lista=\count188
-\c@savedlista=\count189
-\c@listb=\count190
-\c@savedlistb=\count191
-\c@listc=\count192
-\c@savedlistc=\count193
-\c@listd=\count194
-\c@savedlistd=\count195
-\c@liste=\count196
-\c@savedliste=\count197
-\c@listf=\count198
-\c@savedlistf=\count199
-\c@location=\count266
-\c@savedlocation=\count267
-\c@organization=\count268
-\c@savedorganization=\count269
-\c@origlocation=\count270
-\c@savedoriglocation=\count271
-\c@origpublisher=\count272
-\c@savedorigpublisher=\count273
-\c@publisher=\count274
-\c@savedpublisher=\count275
-\c@language=\count276
-\c@savedlanguage=\count277
-\c@pageref=\count278
-\c@savedpageref=\count279
-\shorthandwidth=\skip58
-\shortjournalwidth=\skip59
-\shortserieswidth=\skip60
-\shorttitlewidth=\skip61
-\shortauthorwidth=\skip62
-\shorteditorwidth=\skip63
+\c@afterword=\count149
+\c@savedafterword=\count150
+\c@annotator=\count151
+\c@savedannotator=\count152
+\c@author=\count153
+\c@savedauthor=\count154
+\c@bookauthor=\count155
+\c@savedbookauthor=\count156
+\c@commentator=\count157
+\c@savedcommentator=\count158
+\c@editor=\count159
+\c@savededitor=\count160
+\c@editora=\count161
+\c@savededitora=\count162
+\c@editorb=\count163
+\c@savededitorb=\count164
+\c@editorc=\count165
+\c@savededitorc=\count166
+\c@foreword=\count167
+\c@savedforeword=\count168
+\c@holder=\count169
+\c@savedholder=\count170
+\c@introduction=\count171
+\c@savedintroduction=\count172
+\c@namea=\count173
+\c@savednamea=\count174
+\c@nameb=\count175
+\c@savednameb=\count176
+\c@namec=\count177
+\c@savednamec=\count178
+\c@translator=\count179
+\c@savedtranslator=\count180
+\c@shortauthor=\count181
+\c@savedshortauthor=\count182
+\c@shorteditor=\count183
+\c@savedshorteditor=\count184
+\c@labelname=\count185
+\c@savedlabelname=\count186
+\c@institution=\count187
+\c@savedinstitution=\count188
+\c@lista=\count189
+\c@savedlista=\count190
+\c@listb=\count191
+\c@savedlistb=\count192
+\c@listc=\count193
+\c@savedlistc=\count194
+\c@listd=\count195
+\c@savedlistd=\count196
+\c@liste=\count197
+\c@savedliste=\count198
+\c@listf=\count199
+\c@savedlistf=\count266
+\c@location=\count267
+\c@savedlocation=\count268
+\c@organization=\count269
+\c@savedorganization=\count270
+\c@origlocation=\count271
+\c@savedoriglocation=\count272
+\c@origpublisher=\count273
+\c@savedorigpublisher=\count274
+\c@publisher=\count275
+\c@savedpublisher=\count276
+\c@language=\count277
+\c@savedlanguage=\count278
+\c@pageref=\count279
+\c@savedpageref=\count280
+\shorthandwidth=\skip59
+\shortjournalwidth=\skip60
+\shortserieswidth=\skip61
+\shorttitlewidth=\skip62
+\shortauthorwidth=\skip63
+\shorteditorwidth=\skip64
 Package biblatex Info: Trying to load compatibility code...
 Package biblatex Info: ... file 'blx-compat.def' found.
 
@@ -709,13 +717,13 @@ Package biblatex Info: Trying to load generic definitions...
 Package biblatex Info: ... file 'biblatex.def' found.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\biblatex\biblatex.def"
 File: biblatex.def 2016/05/14 v3.4 biblatex compatibility (PK/JW/AB)
-\c@textcitecount=\count280
-\c@textcitetotal=\count281
-\c@textcitemaxnames=\count282
-\c@biburlnumpenalty=\count283
-\c@biburlucpenalty=\count284
-\c@biburllcpenalty=\count285
-\c@smartand=\count286
+\c@textcitecount=\count281
+\c@textcitetotal=\count282
+\c@textcitemaxnames=\count283
+\c@biburlnumpenalty=\count284
+\c@biburlucpenalty=\count285
+\c@biburllcpenalty=\count286
+\c@smartand=\count287
 )
 Package biblatex Info: Trying to load natbib compatibility...
 Package biblatex Info: ... file 'blx-natbib.def' found.
@@ -738,16 +746,16 @@ Package biblatex Info: ... file 'standard.bbx' found.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\biblatex\bbx\standard.bbx"
 File: standard.bbx 2016/05/14 v3.4 biblatex bibliography style (PK/JW/AB)
-\c@bbx:relatedcount=\count287
-\c@bbx:relatedtotal=\count288
+\c@bbx:relatedcount=\count288
+\c@bbx:relatedtotal=\count289
 )))
 Package biblatex Info: Trying to load citation style 'numeric-comp'...
 Package biblatex Info: ... file 'numeric-comp.cbx' found.
 
 ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\biblatex\cbx\numeric-comp.cbx"
 File: numeric-comp.cbx 2016/05/14 v3.4 biblatex citation style (PK/JW/AB)
-\c@cbx@tempcnta=\count289
-\c@cbx@tempcntb=\count290
+\c@cbx@tempcnta=\count290
+\c@cbx@tempcntb=\count291
 Package biblatex Info: Redefining '\cite'.
 Package biblatex Info: Redefining '\parencite'.
 Package biblatex Info: Redefining '\footcite'.
@@ -779,39 +787,39 @@ Package biblatex Info: ... file 'francais.lbx' not found.
 
 
 Package biblatex Warning: Language 'francais' not supported.
-(biblatex)                Using fallback language 'english' on input line 38.
+(biblatex)                Using fallback language 'english' on input line 39.
 
 (main.aux)
 \openout1 = `main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 38.
-LaTeX Font Info:    ... okay on input line 38.
-LaTeX Info: Redefining \degres on input line 38.
-LaTeX Info: Redefining \dots on input line 38.
-LaTeX Info: Redefining \up on input line 38.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 39.
+LaTeX Font Info:    ... okay on input line 39.
+LaTeX Info: Redefining \degres on input line 39.
+LaTeX Info: Redefining \dots on input line 39.
+LaTeX Info: Redefining \up on input line 39.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\context\base\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count291
-\scratchdimen=\dimen118
-\scratchbox=\box28
-\nofMPsegments=\count292
-\nofMParguments=\count293
-\everyMPshowfont=\toks21
-\MPscratchCnt=\count294
-\MPscratchDim=\dimen119
-\MPnumerator=\count295
-\makeMPintoPDFobject=\count296
-\everyMPtoPDFconversion=\toks22
+\scratchcounter=\count292
+\scratchdimen=\dimen119
+\scratchbox=\box29
+\nofMPsegments=\count293
+\nofMParguments=\count294
+\everyMPshowfont=\toks22
+\MPscratchCnt=\count295
+\MPscratchDim=\dimen120
+\MPnumerator=\count296
+\makeMPintoPDFobject=\count297
+\everyMPtoPDFconversion=\toks23
 ) ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\oberdiek\epstopdf-base.sty"
 Package: epstopdf-base 2016/05/15 v2.6 Base part for package epstopdf
 
@@ -837,11 +845,66 @@ Package biblatex Info: Data encoding 'utf8' specified.
 Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'main.bbl' found.
 
-(main.bbl)
-Package biblatex Info: Reference section=0 on input line 38.
-Package biblatex Info: Reference segment=0 on input line 38.
- (titlepage.tex
-<images/hearc_logo.jpg, id=1, 1164.7515pt x 166.4619pt>
+(main.bbl
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'wiki-json':
+(biblatex)                - Invalid format of field 'urldate'.
+
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'autodesk-maxscript':
+(biblatex)                - Invalid format of field 'urldate'.
+
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'wiki-shader':
+(biblatex)                - Invalid format of field 'urldate'.
+
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'wiki-gouraud':
+(biblatex)                - Invalid format of field 'urldate'.
+
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'wiki-lambert':
+(biblatex)                - Invalid format of field 'urldate'.
+
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'wiki-phong-shading':
+(biblatex)                - Invalid format of field 'urldate'.
+
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'wiki-phong-reflectance':
+(biblatex)                - Invalid format of field 'urldate'.
+
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'wiki-graph':
+(biblatex)                - Invalid format of field 'urldate'.
+
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'wiki-astar':
+(biblatex)                - Invalid format of field 'urldate'.
+
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'wiki-dijkstra':
+(biblatex)                - Invalid format of field 'urldate'.
+
+
+Package biblatex Warning: Biber reported the following issues
+(biblatex)                with 'wiki-useragent':
+(biblatex)                - Invalid format of field 'urldate'.
+
+)
+Package biblatex Info: Reference section=0 on input line 39.
+Package biblatex Info: Reference segment=0 on input line 39.
+ (titlepage.tex <images/hearc_logo.jpg, id=1, 1164.7515pt x 166.4619pt>
 File: images/hearc_logo.jpg Graphic file (type jpg)
 
 <use images/hearc_logo.jpg>
@@ -882,43 +945,141 @@ Package pdftex.def Info: images/caniuse_bluetooth.png used on input line 22.
  [7 <./images/caniuse_bluetooth.png>])
 [8]
 Chapitre 3.
-(modele.tex) (pathfinding.tex [9
+(modele.tex
+<images/model-TooManyPolygons.png, id=46, 1184.92688pt x 528.47438pt>
+File: images/model-TooManyPolygons.png Graphic file (type png)
 
-]) (controles.tex) (suivi_camera.tex)
-(interface.tex) [10] [11]
+<use images/model-TooManyPolygons.png>
+Package pdftex.def Info: images/model-TooManyPolygons.png used on input line 6.
+
+(pdftex.def)             Requested size: 350.99762pt x 156.54369pt.
+ [9
+
+ <./images/model-TooManyPolygons.png>] <images/model-FormeMur.png, id=50, 660.2
+1657pt x 227.34938pt>
+File: images/model-FormeMur.png Graphic file (type png)
+
+<use images/model-FormeMur.png>
+Package pdftex.def Info: images/model-FormeMur.png used on input line 23.
+(pdftex.def)             Requested size: 350.99762pt x 120.87271pt.
+
+<images/model-FormeMurAutodesk.png, id=51, 920.68968pt x 286.82156pt>
+File: images/model-FormeMurAutodesk.png Graphic file (type png)
+
+<use images/model-FormeMurAutodesk.png>
+Package pdftex.def Info: images/model-FormeMurAutodesk.png used on input line 3
+0.
+(pdftex.def)             Requested size: 350.99762pt x 109.34781pt.
+
+<images/model-MurExtrude.png, id=52, 809.27344pt x 570.63188pt>
+File: images/model-MurExtrude.png Graphic file (type png)
+
+<use images/model-MurExtrude.png>
+Package pdftex.def Info: images/model-MurExtrude.png used on input line 37.
+(pdftex.def)             Requested size: 350.99762pt x 247.50017pt.
+
+<images/model-OneFloor.png, id=53, 743.02594pt x 460.72125pt>
+File: images/model-OneFloor.png Graphic file (type png)
+
+<use images/model-OneFloor.png>
+Package pdftex.def Info: images/model-OneFloor.png used on input line 44.
+(pdftex.def)             Requested size: 350.99762pt x 217.64273pt.
+
+<images/model-OneStairs.png, id=54, 516.42938pt x 408.02437pt>
+File: images/model-OneStairs.png Graphic file (type png)
+
+<use images/model-OneStairs.png>
+Package pdftex.def Info: images/model-OneStairs.png used on input line 51.
+(pdftex.def)             Requested size: 350.99762pt x 277.32838pt.
+
+<images/model-All.png, id=55, 867.99281pt x 332.74312pt>
+File: images/model-All.png Graphic file (type png)
+
+<use images/model-All.png>
+Package pdftex.def Info: images/model-All.png used on input line 58.
+(pdftex.def)             Requested size: 350.99762pt x 134.55713pt.
+ [10 <./images/model-FormeMur.png (PNG copy)>]
+[11 <./images/model-FormeMurAutodesk.png (PNG copy)> <./images/model-MurExtrude
+.png>] [12 <./images/model-OneFloor.png> <./images/model-OneStairs.png>]
+<images/import-ObjFail.png, id=69, 1252.68pt x 848.4197pt>
+File: images/import-ObjFail.png Graphic file (type png)
+
+<use images/import-ObjFail.png>
+Package pdftex.def Info: images/import-ObjFail.png used on input line 73.
+(pdftex.def)             Requested size: 350.99762pt x 237.72418pt.
+) (rendu_graphique.tex [13 <./images/model-All.png>]) (pathfinding.tex [14 <./i
+mages/import-ObjFail.png>]
+<images/pathfinding-Nodes.png, id=78, 782.925pt x 465.23813pt>
+File: images/pathfinding-Nodes.png Graphic file (type png)
+
+<use images/pathfinding-Nodes.png>
+Package pdftex.def Info: images/pathfinding-Nodes.png used on input line 9.
+(pdftex.def)             Requested size: 350.99762pt x 208.57433pt.
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 16.
+
+("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\omscmr.fd"
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <12> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 16.
+ [15 <./images/pathfinding-Nodes.png>]) (controles.tex) (suivi_camera.tex) (int
+erface.tex
+[16]) (rendu_temps_reel.tex) [17]
 Chapitre 4.
-[12
+[18
 
 ]
 Chapitre 5.
-[13
+[19
 
 ]
 Chapitre 6.
-[14
+[20
 
 ]
-LaTeX Font Info:    Try loading font information for T1+cmtt on input line 89.
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 85.
  ("C:\Program Files (x86)\MiKTeX 2.9\tex\latex\base\t1cmtt.fd"
 File: t1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
 )
-Overfull \hbox (7.10893pt too wide) in paragraph at lines 90--90
-[]\T1/cmr/m/it/12 Playcanvas\T1/cmr/m/n/12 . \T1/cmr/m/sc/12 url\T1/cmr/m/n/12 
-: $\T1/cmtt/m/n/12 https : / / playcanvas . com / industries / architecture$
+Overfull \hbox (10.90521pt too wide) in paragraph at lines 86--86
+[]\T1/cmr/m/it/12 Playcanvas - Ar-chi-tec-ture\T1/cmr/m/n/12 . \T1/cmr/m/sc/12 
+url\T1/cmr/m/n/12 : $\T1/cmtt/m/n/12 https : / / playcanvas . com / industries 
+/
  []
 
-[15
 
-] (main.aux)
+Overfull \hbox (24.8518pt too wide) in paragraph at lines 86--86
+[]\T1/cmr/m/it/12 Blender web-site\T1/cmr/m/n/12 . \T1/cmr/m/sc/12 url\T1/cmr/m
+/n/12 : $\T1/cmtt/m/n/12 https : / / www . blender . org/$ \T1/cmr/m/n/12 (vi-s
+i-ted on 04/12/2016). 
+ []
+
+
+Overfull \hbox (23.80486pt too wide) in paragraph at lines 86--86
+[]\T1/cmr/m/it/12 Lambert re-flec-tance\T1/cmr/m/n/12 . \T1/cmr/m/sc/12 url\T1/
+cmr/m/n/12 : $\T1/cmtt/m/n/12 https : / / en . wikipedia . org / wiki / Lambert
+ian _
+ []
+
+[21
+
+]
+Overfull \hbox (13.85728pt too wide) in paragraph at lines 86--86
+[]\T1/cmr/m/it/12 Dijkstra's al-go-rithm\T1/cmr/m/n/12 . \T1/cmr/m/sc/12 url\T1
+/cmr/m/n/12 : $\T1/cmtt/m/n/12 https : / / en . wikipedia . org / wiki / Dijkst
+ra %
+ []
+
+[22] (main.aux)
 Package logreq Info: Writing requests to 'main.run.xml'.
 \openout1 = `main.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 10524 strings out of 493335
- 172613 string characters out of 3136665
- 574454 words of memory out of 3000000
- 13852 multiletter control sequences out of 15000+200000
+ 10907 strings out of 493335
+ 180377 string characters out of 3136665
+ 580602 words of memory out of 3000000
+ 14213 multiletter control sequences out of 15000+200000
  16448 words of font info for 37 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  36i,7n,63p,926b,1716s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -937,10 +1098,11 @@ MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecrm1200.pk> <C:\Users\ikonoklast
 sers\ikonoklast\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappen\ec\dpi600\ecr
 m1728.pk> <C:\Users\ikonoklast\AppData\Local\MiKTeX\2.9\fonts\pk\ljfour\jknappe
 n\ec\dpi600\ecrm1095.pk> <C:\Users\ikonoklast\AppData\Local\MiKTeX\2.9\fonts\pk
-\ljfour\jknappen\ec\dpi600\ecbx2488.pk>
-Output written on main.pdf (16 pages, 636045 bytes).
+\ljfour\jknappen\ec\dpi600\ecbx2488.pk><C:/Program Files (x86)/MiKTeX 2.9/fonts
+/type1/public/amsfonts/cm/cmsy10.pfb>
+Output written on main.pdf (23 pages, 2178272 bytes).
 PDF statistics:
- 517 PDF objects out of 1000 (max. 8388607)
+ 603 PDF objects out of 1000 (max. 8388607)
  0 named destinations out of 1000 (max. 500000)
- 11 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 56 words of extra memory for PDF output out of 10000 (max. 10000000)
 
