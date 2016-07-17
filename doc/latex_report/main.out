@@ -3,9 +3,9 @@
 \BOOKMARK [1][-]{section.1.2}{Contextualisation}{chapter.1}% 3
 \BOOKMARK [0][-]{chapter.2}{Analyse}{}% 4
 \BOOKMARK [1][-]{section.2.1}{\311tat de l'art}{chapter.2}% 5
-\BOOKMARK [2][-]{section*.2}{3D temps r\351el}{section.2.1}% 6
-\BOOKMARK [2][-]{section*.3}{Navigation}{section.2.1}% 7
-\BOOKMARK [2][-]{section*.4}{Architecture}{section.2.1}% 8
+\BOOKMARK [2][-]{section*.2}{3D temps r\351el en navigateur}{section.2.1}% 6
+\BOOKMARK [2][-]{section*.3}{Navigation dans un b\342timent}{section.2.1}% 7
+\BOOKMARK [2][-]{section*.4}{Visualisation architecturale}{section.2.1}% 8
 \BOOKMARK [1][-]{section.2.2}{Localisation en int\351rieur}{chapter.2}% 9
 \BOOKMARK [2][-]{section*.5}{GPS}{section.2.2}% 10
 \BOOKMARK [2][-]{section*.6}{Triangulation Wifi}{section.2.2}% 11
@@ -14,22 +14,26 @@
 \BOOKMARK [0][-]{chapter.3}{D\351veloppement}{}% 14
 \BOOKMARK [1][-]{section.3.1}{Mod\350le 3D}{chapter.3}% 15
 \BOOKMARK [2][-]{section*.9}{Mod\351lisation g\351om\351trique}{section.3.1}% 16
-\BOOKMARK [2][-]{section*.10}{Texturisation}{section.3.1}% 17
-\BOOKMARK [2][-]{section*.11}{Import/Export}{section.3.1}% 18
+\BOOKMARK [2][-]{section*.10}{Texturisation du mod\350le}{section.3.1}% 17
+\BOOKMARK [2][-]{section*.11}{Exportation et importation}{section.3.1}% 18
 \BOOKMARK [1][-]{section.3.2}{Rendu graphique}{chapter.3}% 19
-\BOOKMARK [1][-]{section.3.3}{Recherche de chemin}{chapter.3}% 20
-\BOOKMARK [2][-]{section*.12}{N\234uds}{section.3.3}% 21
-\BOOKMARK [2][-]{section*.13}{Algorithme}{section.3.3}% 22
-\BOOKMARK [1][-]{section.3.4}{Contr\364les}{chapter.3}% 23
-\BOOKMARK [2][-]{section*.14}{Ordinateur et mobile}{section.3.4}% 24
-\BOOKMARK [2][-]{section*.15}{Orientation mobile}{section.3.4}% 25
-\BOOKMARK [1][-]{section.3.5}{Suivi cam\351ra}{chapter.3}% 26
-\BOOKMARK [2][-]{section*.16}{Lissage du chemin}{section.3.5}% 27
-\BOOKMARK [2][-]{section*.17}{Regard de la cam\351ra}{section.3.5}% 28
-\BOOKMARK [1][-]{section.3.6}{Interface graphique}{chapter.3}% 29
-\BOOKMARK [1][-]{section.3.7}{Rendu temps r\351el}{chapter.3}% 30
-\BOOKMARK [0][-]{chapter.4}{R\351sultats}{}% 31
-\BOOKMARK [0][-]{chapter.5}{Discussion}{}% 32
-\BOOKMARK [1][-]{section.5.1}{Conclusion}{chapter.5}% 33
-\BOOKMARK [1][-]{section.5.2}{Perspectives}{chapter.5}% 34
-\BOOKMARK [0][-]{chapter.6}{Bibliographie}{}% 35
+\BOOKMARK [2][-]{section*.12}{Type de mat\351riaux}{section.3.2}% 20
+\BOOKMARK [2][-]{section*.13}{\311clairage}{section.3.2}% 21
+\BOOKMARK [1][-]{section.3.3}{Recherche de chemin}{chapter.3}% 22
+\BOOKMARK [2][-]{section*.14}{N\234uds et Graphe}{section.3.3}% 23
+\BOOKMARK [2][-]{section*.15}{Algorithme de recherche de chemin}{section.3.3}% 24
+\BOOKMARK [1][-]{section.3.4}{Contr\364les de la cam\351ra}{chapter.3}% 25
+\BOOKMARK [2][-]{section*.16}{Orientation mobile}{section.3.4}% 26
+\BOOKMARK [2][-]{section*.17}{Suivi du chemin}{section.3.4}% 27
+\BOOKMARK [1][-]{section.3.5}{Interface graphique}{chapter.3}% 28
+\BOOKMARK [1][-]{section.3.6}{Rendu temps r\351el}{chapter.3}% 29
+\BOOKMARK [2][-]{section*.19}{Textures index\351es}{section.3.6}% 30
+\BOOKMARK [2][-]{section*.20}{Mat\351riel utilis\351}{section.3.6}% 31
+\BOOKMARK [0][-]{chapter.4}{R\351sultats}{}% 32
+\BOOKMARK [1][-]{section.4.1}{Mod\351lisation g\351om\351trique}{chapter.4}% 33
+\BOOKMARK [1][-]{section.4.2}{Temps r\351el}{chapter.4}% 34
+\BOOKMARK [1][-]{section.4.3}{Balade de navigation}{chapter.4}% 35
+\BOOKMARK [1][-]{section.4.4}{R\351alisation des objectifs}{chapter.4}% 36
+\BOOKMARK [0][-]{chapter.5}{Discussion}{}% 37
+\BOOKMARK [1][-]{section.5.1}{Conclusion}{chapter.5}% 38
+\BOOKMARK [1][-]{section.5.2}{Perspectives}{chapter.5}% 39

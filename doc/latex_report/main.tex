@@ -8,6 +8,10 @@
 \usepackage[export]{adjustbox}
 \usepackage[babel]{csquotes}
 \usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage{float}
+\usepackage{geometry}
+\geometry{left=2in, right=1in}
 
 \usepackage[%
 	 backend=bibtex      % biber or bibtex
@@ -60,14 +64,23 @@
 \input{rendu_graphique}
 \input{pathfinding}
 \input{controles}
-\input{suivi_camera}
 \input{interface}
 \input{rendu_temps_reel}
 
 \chapter{Résultats}
-Lister les objectifs, lesquels sont réussi, pourquoi les autres le sont pas...
-\section{Temps réel}
+Ici nous discuterons des différents objectifs et de leur réussite ou non. Ceci dans le but de comprendre pourquoi certains objectifs ont abouti contrairement à d'autres.
+
 \section{Modélisation géométrique}
+
+
+\section{Temps réel}
+Un des points importants d'une visualisation dans le genre d'Arc3D est d'avoir une certaine fluidité. Il a fallu faire attention aux calculs envoyés à la carte graphique afin que l'œil humain ne voit pas de coupure entre deux images rendues. Grâce à différentes astuces présentées dans le chapitre \emph{Développement}, le produit final offre au minimum, sur le matériel utilisé, 30 images par secondes, ce qui remplit l'objectif.
+
+\section{Balade de navigation}
+Plusieurs mécanique rentre en compte sur ce point, premièrement Arc3D offre une recherche de chemin optimal entre deux endroits du bâtiment ainsi que depuis la gare.
+Durant la balade qui parcourt le chemin trouvé il est important que l'utilisateur ait l'impression de se déplacer dans le bâtiment. La caméra effectue des mouvements qui sont linéaires et pourraient ressembler au déplacement d'un humain. Le caméra regarde quelques mètres devant elle afin que l'utilisateur puisse anticiper le chemin.
+
+
 \section{Réalisation des objectifs}
 
 \chapter{Discussion}
@@ -80,9 +93,8 @@ Améliorations possibles.
 Pas de perspectives faciles.
 
 
-\chapter{Bibliographie}
+%\chapter{Bibliographie}
 \nocite{*} %Even non-cited BibTeX-Entries will be shown.
 \printbibliography
-
 
 \end{document}

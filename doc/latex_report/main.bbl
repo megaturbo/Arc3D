@@ -265,5 +265,41 @@
     \endverb
     \warn{\item Invalid format of field 'urldate'}
   \endentry
+
+  \entry{w3c-orientation}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    W3C Documentation on the Orientation API%
+    }
+    \field{title}{W3C - Orientation events}
+    \verb{url}
+    \verb https://www.w3.org/TR/2011/WD-orientation-event-20111201/
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{caniuse-DeviceMotion}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Support tables for DeviceMotion API%
+    }
+    \field{title}{Can I Use - DeviceMotion}
+    \verb{url}
+    \verb http://caniuse.com/#search=devicemotion
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
+
+  \entry{wiki-lod}{misc}{}
+    \field{labeltitlesource}{title}
+    \field{abstract}{%
+    Wiki page on LoD%
+    }
+    \field{title}{Level of Detail}
+    \verb{url}
+    \verb https://en.wikipedia.org/wiki/Level_of_detail
+    \endverb
+    \warn{\item Invalid format of field 'urldate'}
+  \endentry
 \endsortlist
 \endinput
