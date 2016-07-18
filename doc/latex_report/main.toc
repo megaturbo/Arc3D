@@ -32,7 +32,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{Triangulation Bluetooth}{7}{section*.7}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{Acc\IeC {\'e}l\IeC {\'e}rom\IeC {\`e}tre et Gyroscope}{8}{section*.8}
+\contentsline {subsection}{Acc\IeC {\'e}l\IeC {\'e}rom\IeC {\`e}tre et Gyroscope}{7}{section*.8}
 \defcounter {refsection}{0}\relax 
 \contentsline {chapter}{\numberline {3}D\IeC {\'e}veloppement}{9}{chapter.3}
 \defcounter {refsection}{0}\relax 
@@ -66,7 +66,7 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {3.5}Interface graphique}{18}{section.3.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {3.6}Rendu temps r\IeC {\'e}el}{21}{section.3.6}
+\contentsline {section}{\numberline {3.6}Rendu en temps r\IeC {\'e}el}{21}{section.3.6}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{Textures index\IeC {\'e}es}{21}{section*.19}
 \defcounter {refsection}{0}\relax 
@@ -78,12 +78,12 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {4.2}Temps r\IeC {\'e}el}{23}{section.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.3}Balade de navigation}{23}{section.4.3}
+\contentsline {section}{\numberline {4.3}Balade de navigation}{24}{section.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {4.4}R\IeC {\'e}alisation des objectifs}{24}{section.4.4}
+\contentsline {section}{\numberline {4.4}Localisation de l'utilisateur}{24}{section.4.4}
 \defcounter {refsection}{0}\relax 
-\contentsline {chapter}{\numberline {5}Discussion}{25}{chapter.5}
+\contentsline {chapter}{\numberline {5}Discussion}{26}{chapter.5}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.1}Conclusion}{25}{section.5.1}
+\contentsline {section}{\numberline {5.1}Conclusion}{26}{section.5.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {5.2}Perspectives}{25}{section.5.2}
+\contentsline {section}{\numberline {5.2}Perspectives}{26}{section.5.2}
