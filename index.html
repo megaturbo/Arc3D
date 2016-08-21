@@ -288,7 +288,7 @@
             var node = nodes[i];
             if(!node.name)
                 continue;
-
+				
             var tag = node.name.split('-')[0];
             if (tag == 'room' || tag == 'secretariat' || tag == 'misc'){
                 var d = tag == 'room' ? "Salle" : tag == 'misc' ? "" : "Secrétariat";
@@ -299,6 +299,11 @@
                 select_node_a.options.add(option_a, node.id);
                 select_node_b.options.add(option_b, node.id);
             }
+				
+			//place de la gare
+			if(node.id == 4029){
+				select_node_a.selectedIndex = select_node_a.length - 1;
+			}
         }
     }
 
